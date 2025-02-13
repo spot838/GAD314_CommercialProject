@@ -1,9 +1,10 @@
 using NUnit.Framework.Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_TopBar : MonoBehaviour
+public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TMP_Text moneyText;
     [SerializeField] TMP_Text ratingText;
@@ -25,6 +26,8 @@ public class UI_TopBar : MonoBehaviour
     private void OnBuildFloorButtonPress()
     {
         Debug.Log("Build Floor button pressed");
+
+        Game.FloorBuilder.StartPlacingFloor();
     }
 
     private void OnPlaceObjectButtonPress()
@@ -40,5 +43,15 @@ public class UI_TopBar : MonoBehaviour
     public void UpdateRaitingText()
     {
         ratingText.text = Game.Rating.Raiting.ToString();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UI.MouseOverUI = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI.MouseOverUI = false;
     }
 }

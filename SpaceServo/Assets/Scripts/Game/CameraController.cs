@@ -7,19 +7,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Camera _camera;
-    [SerializeField] float distanceToGround;
+    [field: SerializeField] public Camera Camera { get; private set; }
+    [field: SerializeField] public float DistanceToGround { get; private set; }
     [SerializeField] float angle;
     [SerializeField, Tooltip("Units/Second")] float panSpeed; 
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         KeyboardPan();
@@ -28,10 +20,10 @@ public class CameraController : MonoBehaviour
 
     private void SetCameraPosition()
     {
-        float y = Mathf.Cos(angle) * distanceToGround; 
-        float z = Mathf.Sin(angle) * distanceToGround;
-        _camera.transform.localPosition = new Vector3(0, y, z);
-        _camera.transform.localEulerAngles = new Vector3(angle, 0, 0);
+        float y = Mathf.Cos(angle) * DistanceToGround; 
+        float z = Mathf.Sin(angle) * DistanceToGround;
+        Camera.transform.localPosition = new Vector3(0, y, z);
+        Camera.transform.localEulerAngles = new Vector3(angle, 0, 0);
     }
 
     private void KeyboardPan()

@@ -9,6 +9,8 @@ public class UI : MonoBehaviour
     public static UI Instance;
     [SerializeField] private UI_TopBar topBar;
 
+    public static bool MouseOverUI;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;

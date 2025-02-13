@@ -9,10 +9,18 @@ public class Game : MonoBehaviour
     [SerializeField] private InputReader inputReader;
     [SerializeField] private StationMoney stationMoney;
     [SerializeField] private StationRating stationRating;
+    [SerializeField] private StationFloorBuilder floorBuilder;
+    [SerializeField] private StationPlaceableBuilder placeableBuilder;
+    [SerializeField] private CameraController cameraController;
+    [SerializeField] private LayerMask staionLayer;
 
     public static InputReader Input => Instance.inputReader;
     public static StationMoney Money => Instance.stationMoney;
     public static StationRating Rating => Instance.stationRating;
+    public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
+    public static StationPlaceableBuilder PlaceableBuilder => Instance.placeableBuilder;
+    public static CameraController CameraController => Instance.cameraController;
+    public static LayerMask StationLayer => Instance.staionLayer;
 
     private void Awake()
     {

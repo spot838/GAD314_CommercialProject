@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad5354402a288c4ca7cfa6447fbde8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 8059209024477120814}
-  distanceToGround: 60
+  <Camera>k__BackingField: {fileID: 8059209024477120814}
+  <DistanceToGround>k__BackingField: 50
   angle: 75
   panSpeed: 10
 --- !u!1 &9126886652360770247
