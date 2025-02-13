@@ -4,5 +4,73 @@ using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
 {
+    [SerializeField] Material validPlacementMat;
+    [SerializeField] Material invalidPlacementMat;
+    [SerializeField] Material placedMat;
+    [SerializeField] MeshRenderer[] meshes;
 
+    public bool IsPlaced;
+
+    public bool HasValidPlacement;
+
+    private void Start()
+    {
+        SetInvalidPlacementMaterial();
+    }
+
+    private void Update()
+    {
+        if (!IsPlaced)
+        {
+            if (ValidPlacement) SetValidPlacementMaterial();
+            else SetInvalidPlacementMaterial();
+        }
+    }
+
+    public void SetValidPlacementMaterial()
+    {
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.material = validPlacementMat;
+        }
+        HasValidPlacement = true;
+    }
+
+    public void SetInvalidPlacementMaterial()
+    {
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.material = invalidPlacementMat;
+        }
+        HasValidPlacement = false;
+    }
+
+    public void SetPlaced()
+    {
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.material = placedMat;
+        }
+        IsPlaced = true;
+    }
+
+    private bool ValidPlacement
+    {
+        get
+        {
+            Vector3 origin = transform.position;
+            origin.y += 5;
+            Vector3 direction = new Vector3(0, -1, 0);
+            RaycastHit[] hits = Physics.RaycastAll(origin, direction, 10);
+            //print(hits.Length + " hits");
+            foreach (RaycastHit hit in hits)
+            {
+                //print("hit " + hit.collider.name);
+                FloorTile floorTile = hit.collider.GetComponent<FloorTile>();
+                if (floorTile != null) return true;
+            }
+            
+            return false;
+        }
+    }
 }

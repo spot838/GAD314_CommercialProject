@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2280874409225999461}
   - component: {fileID: 4224927295571912372}
   - component: {fileID: 5923553441290665978}
-  - component: {fileID: 7748777770555107114}
-  - component: {fileID: 1577370294570548182}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -50,8 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 5923553441290665978}
-  stationMoney: {fileID: 7748777770555107114}
-  stationRating: {fileID: 1577370294570548182}
   floorBuilder: {fileID: 1901601020629953635}
   placeableBuilder: {fileID: 8042250192982299063}
   cameraController: {fileID: 0}
@@ -74,32 +70,6 @@ MonoBehaviour:
   <PrimaryButtonDown>k__BackingField: 0
   <SecondaryButtonDown>k__BackingField: 0
   <CameraMove>k__BackingField: {x: 0, y: 0}
---- !u!114 &7748777770555107114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8548087345918562935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 499516e19dd6089489e46f21eeed92ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Amount>k__BackingField: 5000
---- !u!114 &1577370294570548182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8548087345918562935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d99d9b2d65c544cac2a7a15d4f1e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Raiting>k__BackingField: 50
 --- !u!1001 &1558756099592416410
 PrefabInstance:
   m_ObjectHideFlags: 0

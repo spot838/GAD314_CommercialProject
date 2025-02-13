@@ -45,7 +45,7 @@ public class StationFloorBuilder : MonoBehaviour
 
                 foreach (FloorTile tile in currentPlacement.ToArray())
                 {
-                    print("Destroying " + tile.transform.position.ToString());
+                    //print("Destroying " + tile.transform.position.ToString());
                     Destroy(tile.gameObject);
                 }
                 currentPlacement.Clear();
@@ -102,7 +102,7 @@ public class StationFloorBuilder : MonoBehaviour
             }
 
             Ray ray = Game.CameraController.Camera.ScreenPointToRay(Game.Input.MousePosition);
-            float rayCastDistance = Game.CameraController.DistanceToGround + 20;
+            float rayCastDistance = Game.CameraController.DistanceToGround + 50;
 
             if (Physics.Raycast(ray, out RaycastHit hit, rayCastDistance, Game.StationLayer))
             {
@@ -110,7 +110,7 @@ public class StationFloorBuilder : MonoBehaviour
             }
 
             if (UI.MouseOverUI) Debug.LogWarning("Mouse over UI");
-            else Debug.LogWarning("RayCast fail, no ground position under mouse");
+            //else Debug.LogWarning("RayCast fail, no ground position under mouse");
             return new Vector3(0, 500, 0);
         }
     }
@@ -132,6 +132,7 @@ public class StationFloorBuilder : MonoBehaviour
     private void CompletePlacement()
     {
         Game.Input.OnPrimaryRelease -= CompletePlacement;
+        Game.Input.OnSecondaryPress -= CancelPlacement;
 
         firstTile.SwitchToBuitMaterial();
         firstTile.transform.parent = Station.Instance.transform;
@@ -156,9 +157,9 @@ public class StationFloorBuilder : MonoBehaviour
         firstTile = null;
 
         if (Game.Input.PrimaryButtonDown)
-        {
             Game.Input.OnPrimaryRelease -= CompletePlacement;
-        }
+        else
+            Game.Input.OnPrimaryPress -= PlaceFirstTile;
 
         foreach (FloorTile tile in currentPlacement.ToArray())
             Destroy(tile.gameObject);

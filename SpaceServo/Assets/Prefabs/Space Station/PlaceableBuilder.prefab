@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6367a4aa1b6f54346b19bf872910939f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Placeables>k__BackingField:
+  - {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
+  - {fileID: 11400000, guid: 167894b9be14d7a429ca486c17b8f3e8, type: 2}

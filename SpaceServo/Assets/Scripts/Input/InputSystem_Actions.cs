@@ -62,6 +62,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""bea4394d-8c40-4eed-b75f-8fbe70cae5e5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd11b622-25d1-4968-955e-fa2d9e2f24db"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -785,6 +805,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_PrimaryClick = m_Player.FindAction("PrimaryClick", throwIfNotFound: true);
         m_Player_SecondaryClick = m_Player.FindAction("SecondaryClick", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -868,6 +889,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PrimaryClick;
     private readonly InputAction m_Player_SecondaryClick;
     private readonly InputAction m_Player_MousePosition;
+    private readonly InputAction m_Player_Zoom;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -876,6 +898,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @PrimaryClick => m_Wrapper.m_Player_PrimaryClick;
         public InputAction @SecondaryClick => m_Wrapper.m_Player_SecondaryClick;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -897,6 +920,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -913,6 +939,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1099,6 +1128,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnPrimaryClick(InputAction.CallbackContext context);
         void OnSecondaryClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

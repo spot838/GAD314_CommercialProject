@@ -25,24 +25,26 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void OnBuildFloorButtonPress()
     {
-        Debug.Log("Build Floor button pressed");
+        //Debug.Log("Build Floor button pressed");
 
         Game.FloorBuilder.StartPlacingFloor();
     }
 
     private void OnPlaceObjectButtonPress()
     {
-        Debug.Log("Place Object button pressed");
+        //Debug.Log("Place Object button pressed");
+
+        UI.ShowPlaceablesMenu();
     }
 
     public void UpdateMoneyText()
     {
-        moneyText.text = "$" + Game.Money.Amount.ToString();
+        moneyText.text = "$" + Station.Money.Amount.ToString();
     }
 
     public void UpdateRaitingText()
     {
-        ratingText.text = Game.Rating.Raiting.ToString();
+        ratingText.text = Station.Rating.Value.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

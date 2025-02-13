@@ -10,10 +10,14 @@ public class CameraController : MonoBehaviour
     [field: SerializeField] public Camera Camera { get; private set; }
     [field: SerializeField] public float DistanceToGround { get; private set; }
     [SerializeField] float angle;
-    [SerializeField, Tooltip("Units/Second")] float panSpeed; 
+    [SerializeField, Tooltip("Units/Second")] float panSpeed;
+
+    [Header("Zoom")]
+    [SerializeField] float zoomSpeed;
 
     void Update()
     {
+        Zoom();
         KeyboardPan();
         SetCameraPosition();
     }
@@ -34,6 +38,14 @@ public class CameraController : MonoBehaviour
             position.x += Game.Input.CameraMove.x * panSpeed * Time.deltaTime;
             position.z += Game.Input.CameraMove.y * panSpeed * Time.deltaTime;
             transform.position = position;
+        }
+    }
+
+    private void Zoom()
+    {
+        if (Game.Input.CameraZoom.y != 0)
+        {
+            DistanceToGround += zoomSpeed * Game.Input.CameraZoom.y * Time.deltaTime;
         }
     }
 }

@@ -14,6 +14,7 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     [field: SerializeField] public bool PrimaryButtonDown { get; private set; }
     [field: SerializeField] public bool SecondaryButtonDown { get; private set; }
     [field: SerializeField] public Vector2 CameraMove { get; private set; }
+    [field: SerializeField] public Vector2 CameraZoom { get; private set; }
 
     public event Action OnPrimaryPress;
     public event Action OnPrimaryRelease;
@@ -63,5 +64,10 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     public void OnMousePosition(InputAction.CallbackContext context)
     {
         MousePosition = context.ReadValue<Vector2>();
+    }
+
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        CameraZoom = context.ReadValue<Vector2>();
     }
 }

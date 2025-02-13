@@ -8,6 +8,7 @@ public class UI : MonoBehaviour
 {
     public static UI Instance;
     [SerializeField] private UI_TopBar topBar;
+    [SerializeField] private UI_AddPlaceablesMenu placeablesMenu;
 
     public static bool MouseOverUI;
 
@@ -20,6 +21,8 @@ public class UI : MonoBehaviour
     private void Start()
     {
         if (topBar == null) Debug.LogError("UI is missing referance to top bar");
+
+        ShowPlaceablesMenu(false);
     }
 
     public static void UpdateMoneyText()
@@ -30,5 +33,10 @@ public class UI : MonoBehaviour
     public static void UpdateRatingText()
     {
         Instance.topBar.UpdateRaitingText();
+    }
+
+    public static void ShowPlaceablesMenu(bool show = true)
+    {
+        Instance.placeablesMenu.gameObject.SetActive(show);
     }
 }
