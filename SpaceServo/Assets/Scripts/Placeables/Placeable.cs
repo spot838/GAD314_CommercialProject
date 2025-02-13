@@ -1,0 +1,11 @@
+using UnityEngine;
+
+// this is the idea of a placeable object not the physical object itself. this contains info like how much it costs, it's icon, etc.
+
+[CreateAssetMenu(menuName = "SpaceServo/New Placeable")]
+public class Placeable : ScriptableObject
+{
+    [field: SerializeField] public PlaceableObject Prefab { get; private set; }
+    [field: SerializeField] public string Name { get; private set; } = "NewPlaceableObject";
+    [field: SerializeField] public int Cost { get; private set; } = 10;
+}

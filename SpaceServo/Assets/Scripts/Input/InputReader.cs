@@ -1,0 +1,67 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+// this script is like the bridge between the input system and all the other game's scripts
+
+// TODO: camera zooming in/out controlls
+
+public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
+{
+    InputSystem_Actions actions;
+
+    [field: SerializeField] public Vector2 MousePosition { get; private set; }
+    [field: SerializeField] public bool PrimaryButtonDown { get; private set; }
+    [field: SerializeField] public bool SecondaryButtonDown { get; private set; }
+    [field: SerializeField] public Vector2 CameraMove { get; private set; }
+
+    public event Action OnPrimaryPress;
+    public event Action OnPrimaryRelease;
+    public event Action OnSecondaryPress;
+    public event Action OnSecondaryRelease;
+
+    private void Awake()
+    {
+        actions = new InputSystem_Actions();
+        actions.Player.AddCallbacks(this);
+        actions.Player.Enable();
+    }
+
+    public void OnMoveCamera(InputAction.CallbackContext context)
+    {
+        CameraMove = context.ReadValue<Vector2>();
+    }
+
+    public void OnPrimaryClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            PrimaryButtonDown = true;
+            OnPrimaryPress?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            PrimaryButtonDown = false;
+            OnPrimaryRelease?.Invoke();
+        }
+    }
+
+    public void OnSecondaryClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SecondaryButtonDown = true;
+            OnSecondaryPress?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            SecondaryButtonDown = false;
+            OnSecondaryRelease?.Invoke();
+        }
+    }
+
+    public void OnMousePosition(InputAction.CallbackContext context)
+    {
+        MousePosition = context.ReadValue<Vector2>();
+    }
+}
