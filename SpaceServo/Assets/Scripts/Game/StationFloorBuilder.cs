@@ -134,6 +134,15 @@ public class StationFloorBuilder : MonoBehaviour
         Game.Input.OnPrimaryRelease -= CompletePlacement;
         Game.Input.OnSecondaryPress -= CancelPlacement;
 
+        if (Station.NavMeshSurface == null)
+        {
+            firstTile.NavMeshSurface.enabled = true;
+            Station.SetNavMeshSurface(firstTile.NavMeshSurface);
+            Station.NavMeshSurface.BuildNavMesh();
+        }
+        else
+            Station.NavMeshSurface.BuildNavMesh();
+
         firstTile.SwitchToBuitMaterial();
         firstTile.transform.parent = Station.Instance.transform;
         firstTile = null;

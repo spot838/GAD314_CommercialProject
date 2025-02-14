@@ -13,12 +13,12 @@ public class PlaceableObject : MonoBehaviour
 
     public bool HasValidPlacement;
 
-    private void Start()
+    protected virtual void Start()
     {
         SetInvalidPlacementMaterial();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (!IsPlaced)
         {
@@ -52,6 +52,8 @@ public class PlaceableObject : MonoBehaviour
             mesh.material = placedMat;
         }
         IsPlaced = true;
+        Station.AddPlaceable(this);
+        Station.NavMeshSurface.BuildNavMesh();
     }
 
     private bool ValidPlacement

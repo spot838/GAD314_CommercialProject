@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4125b164d580f2b439b0d71bc5c714c4
+timeCreated: 1552435361
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 51599
+  packageName: 'MOBILITY STARTER: MoCap Animation Pack'
+  packageVersion: 2.7B1
+  assetPath: Assets/Mobility_Starter/Demo_Scene_Animation_README.txt
+  uploadId: 326362

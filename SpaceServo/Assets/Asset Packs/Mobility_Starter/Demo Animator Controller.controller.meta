@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 41d1aade839758c4b98aac0f51f332d4
+timeCreated: 1552435923
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 51599
+  packageName: 'MOBILITY STARTER: MoCap Animation Pack'
+  packageVersion: 2.7B1
+  assetPath: Assets/Mobility_Starter/Demo Animator Controller.controller
+  uploadId: 326362

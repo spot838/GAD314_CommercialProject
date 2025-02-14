@@ -11,12 +11,17 @@ public class Game : MonoBehaviour
     [SerializeField] private StationPlaceableBuilder placeableBuilder;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private LayerMask staionLayer;
+    
+    [SerializeField] private ShipManager shipManager;
+    [SerializeField] private CustomerManager customerManager;
 
     public static InputReader Input => Instance.inputReader;
     public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
     public static StationPlaceableBuilder PlaceableBuilder => Instance.placeableBuilder;
     public static CameraController CameraController => Instance.cameraController;
     public static LayerMask StationLayer => Instance.staionLayer;
+    public static ShipManager ShipManager => Instance.shipManager;
+    public static CustomerManager CustomerManager => Instance.customerManager;
 
     private void Awake()
     {

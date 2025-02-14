@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3901c3b33535d3744aa4c8432d989a61
+timeCreated: 1564458224
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 51599
+  packageName: 'MOBILITY STARTER: MoCap Animation Pack'
+  packageVersion: 2.7B1
+  assetPath: Assets/Mobility_Starter/Animation/Root_Motion/Materials/MCG_diff.mat
+  uploadId: 326362
