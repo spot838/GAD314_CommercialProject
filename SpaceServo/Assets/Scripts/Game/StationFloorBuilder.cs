@@ -61,7 +61,7 @@ public class StationFloorBuilder : MonoBehaviour
                 if (botttomRightPoint.z < topLeftPoint.z)
                     rows = (int)((topLeftPoint.z - botttomRightPoint.z) / tileSize.y);
                 else
-                    rows = (int)((topLeftPoint.z - botttomRightPoint.z) / tileSize.y);
+                    rows = (int)((botttomRightPoint.z - topLeftPoint.z) / tileSize.y);
 
                 for (int currentCol = 0;  currentCol <= columns; currentCol++)
                 {
