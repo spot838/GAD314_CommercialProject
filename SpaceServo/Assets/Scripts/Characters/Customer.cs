@@ -8,6 +8,7 @@ public class Customer : Character
     bool hasBoughtFuel;
     Transform target;
     public bool KeepIdle;
+    [field: SerializeField] public EntityStat Satisfaction { get; private set; } = new();
 
     protected override void Update()
     {
