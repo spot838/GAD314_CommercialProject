@@ -66,6 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f57ecdd85d67f94b9d0ed5a903818f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modifierValue: 1
+  modifierTimerCurrent: 2
+  modifierTimerMax: 2
 --- !u!135 &1216801618726897933
 SphereCollider:
   m_ObjectHideFlags: 0

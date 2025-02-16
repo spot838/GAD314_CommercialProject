@@ -5440,6 +5440,9 @@ MonoBehaviour:
   stoppingDistanceAnimationOffset: 0.2
   <Ship>k__BackingField: {fileID: 0}
   KeepIdle: 0
+  <Satisfaction>k__BackingField:
+    ValueBase: 100
+    ValueCurrentVisual: 0
 --- !u!54 &4754598165708015693
 Rigidbody:
   m_ObjectHideFlags: 0

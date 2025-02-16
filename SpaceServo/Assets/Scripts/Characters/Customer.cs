@@ -36,6 +36,19 @@ public class Customer : Character
         else if (hasBoughtFuel && !IsMoving && HasArrivedAtNavMeshDestination && target == Ship.LandingPad.CustomerSpawnPoint)
         {
             // apply customer satisfaction to station rating
+            float custStatisfactionDifference = Satisfaction.ValueCurrent - Satisfaction.ValueBase;
+            if (custStatisfactionDifference > 0)
+            {
+                Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Positive by {custStatisfactionDifference}");
+            }
+            else if (custStatisfactionDifference < 0)
+            {
+                Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Negative by {custStatisfactionDifference}");
+            }
+            else
+            {
+                Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Neutral");
+            }
             Ship.BeginTakeOff();
             Destroy(this.gameObject);
         }
