@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        //Animator.SetBool("moving", IsMoving);
+        Animator.SetBool("moving", IsMoving);
 
         if (State != null) State.StateTick();
     }
