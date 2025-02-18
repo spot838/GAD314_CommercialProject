@@ -79,7 +79,7 @@ public class Ship : MonoBehaviour
             transform.position = position;
 
             State = EState.Idle;
-            Customer = Game.CustomerManager.SpawnCustomer(LandingPad.CustomerSpawnPoint, this);
+            Customer = Station.CustomerManager.SpawnCustomer(LandingPad.CustomerSpawnPoint, this);
         }
     }
 
@@ -95,7 +95,7 @@ public class Ship : MonoBehaviour
         else
         {
             transform.position = LandingPad.ArivalPosition;
-            transform.LookAt(Game.ShipManager.DeparturePoint);
+            transform.LookAt(Station.ShipManager.DeparturePoint);
             State = EState.Leaving;
             LandingPad.CurrentShip = null;
             LandingPad = null;
@@ -105,7 +105,7 @@ public class Ship : MonoBehaviour
     private void LeavingUpdate()
     {
         Vector3 step = transform.forward * speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, Game.ShipManager.DeparturePoint) > Vector3.Distance(transform.position, transform.position + step))
+        if (Vector3.Distance(transform.position, Station.ShipManager.DeparturePoint) > Vector3.Distance(transform.position, transform.position + step))
         {
             transform.position += step;
         }
@@ -117,7 +117,7 @@ public class Ship : MonoBehaviour
 
     private void OnDestroy()
     {
-        Game.ShipManager.ShipDespawn(this);
+        Station.ShipManager.ShipDespawn(this);
     }
 
     public void BeginTakeOff()

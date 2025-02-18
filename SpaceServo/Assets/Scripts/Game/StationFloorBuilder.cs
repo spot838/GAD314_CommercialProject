@@ -8,19 +8,23 @@ using UnityEngine;
 
 public class StationFloorBuilder : MonoBehaviour
 {
-    [SerializeField] FloorTile floorTilePrefab;
     [SerializeField] Vector2 tileSize = new Vector2(5,5);
     [SerializeField] MeshRenderer plane; // this is something for raycast to hit
+    [SerializeField] RoomObject roomPrefab;
+    [field: SerializeField] public Room[] RoomConfigs {  get; private set; }
 
-    bool placing;
+    //bool placing;
     Vector3 topLeftPoint;
     Vector3 botttomRightPoint;
     FloorTile firstTile;
     [SerializeField] List<FloorTile> currentPlacement = new List<FloorTile>();
 
+    RoomObject currentRoom;
+
     private void Update()
     {
-        if (!placing || UI.MouseOverUI) return;
+
+        if (currentRoom == null || UI.MouseOverUI) return;
 
         if (!Game.Input.PrimaryButtonDown) // player is indicating where the floor starts
         {
@@ -29,7 +33,7 @@ public class StationFloorBuilder : MonoBehaviour
 
             if (firstTile == null )
             {
-                firstTile = Instantiate(floorTilePrefab, topLeftPoint, Quaternion.identity);
+                firstTile = Instantiate(currentRoom.Config.FloorTilePrefab, topLeftPoint, Quaternion.identity);
                 firstTile.SwitchToBuildingMaterial();
             }
 
@@ -75,7 +79,7 @@ public class StationFloorBuilder : MonoBehaviour
                         if (botttomRightPoint.z < topLeftPoint.z) position.z -= tileSize.y * currentRow;
                         else position.z += tileSize.y * currentRow;
 
-                        FloorTile newTile = Instantiate(floorTilePrefab, position, Quaternion.identity);
+                        FloorTile newTile = Instantiate(currentRoom.Config.FloorTilePrefab, position, Quaternion.identity);
                         newTile.SwitchToBuildingMaterial();
                         currentPlacement.Add(newTile);
                     }
@@ -84,11 +88,14 @@ public class StationFloorBuilder : MonoBehaviour
         }
     }
 
-    public void StartPlacingFloor()
+    public void StartPlacingFloor(Room config)
     {
-        placing = true;
+        //placing = true;
         Game.Input.OnPrimaryPress += PlaceFirstTile;
         Game.Input.OnSecondaryPress += CancelPlacement;
+
+        currentRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
+        currentRoom.Initialize(config);
     }
 
     private Vector3 GroundLocationUnderMouse
@@ -132,38 +139,67 @@ public class StationFloorBuilder : MonoBehaviour
     private void CompletePlacement()
     {
         Game.Input.OnPrimaryRelease -= CompletePlacement;
-        Game.Input.OnSecondaryPress -= CancelPlacement;
 
-        if (Station.NavMeshSurface == null)
+
+        if (PlacementIsValid)
         {
-            firstTile.NavMeshSurface.enabled = true;
-            Station.SetNavMeshSurface(firstTile.NavMeshSurface);
-            Station.NavMeshSurface.BuildNavMesh();
+            Game.Input.OnSecondaryPress -= CancelPlacement;
+
+            if (Station.NavMeshSurface == null)
+            {
+                firstTile.NavMeshSurface.enabled = true;
+                Station.SetNavMeshSurface(firstTile.NavMeshSurface);
+                Station.NavMeshSurface.BuildNavMesh();
+            }
+            else
+                Station.NavMeshSurface.BuildNavMesh();
+
+            firstTile.SwitchToBuitMaterial();
+            //firstTile.transform.parent = Station.Instance.transform;
+            currentRoom.AddFloorTile(firstTile);
+            firstTile = null;
+
+            foreach (FloorTile tile in currentPlacement)
+            {
+                tile.SwitchToBuitMaterial();
+                //tile.transform.parent = Station.Instance.transform;
+                currentRoom.AddFloorTile(tile);
+            }
+            currentPlacement.Clear();
+
+            Station.AddRoom(currentRoom);
+            currentRoom = null;
+            //placing = false;
         }
+
         else
-            Station.NavMeshSurface.BuildNavMesh();
-
-        firstTile.SwitchToBuitMaterial();
-        firstTile.transform.parent = Station.Instance.transform;
-        firstTile = null;
-
-        foreach(FloorTile tile in currentPlacement)
         {
-            tile.SwitchToBuitMaterial();
-            tile.transform.parent = Station.Instance.transform;
-        }
-            
-        currentPlacement.Clear();
+            if (firstTile != null)
+            {
+                Destroy(firstTile.gameObject);
+                firstTile = null;
+            }
 
-        placing = false;
+            foreach (FloorTile tile in currentPlacement.ToArray())
+            {
+                Destroy(tile.gameObject);
+            }
+            currentPlacement.Clear();
+
+            Game.Input.OnPrimaryPress += PlaceFirstTile;
+        }
+        
     }
 
     private void CancelPlacement()
     {
         Game.Input.OnSecondaryPress -= CancelPlacement;
 
-        Destroy(firstTile.gameObject);
-        firstTile = null;
+        if (firstTile != null)
+        {
+            Destroy(firstTile.gameObject);
+            firstTile = null;
+        }
 
         if (Game.Input.PrimaryButtonDown)
             Game.Input.OnPrimaryRelease -= CompletePlacement;
@@ -174,6 +210,130 @@ public class StationFloorBuilder : MonoBehaviour
             Destroy(tile.gameObject);
         currentPlacement.Clear();
 
-        placing = false;
+        currentRoom = null;
+        //placing = false;
+    }
+
+    private List<RoomObject> RoomsTouchingTile(FloorTile tile)
+    {
+        List<RoomObject> list = new List<RoomObject>();
+
+        Vector3 up = tile.transform.position;
+        up.z += tileSize.y;
+        FloorTile upTile = Station.TileAtLocation(up);
+        if (upTile != null && upTile.Room != null)
+            list.Add(upTile.Room);
+
+        Vector3 down = tile.transform.position;
+        down.z -= tileSize.y;
+        FloorTile downTile = Station.TileAtLocation(down);
+        if (downTile != null && downTile.Room != null)
+            list.Add(downTile.Room);
+
+        Vector3 left = tile.transform.position;
+        left.x -= tileSize.x;
+        FloorTile leftTile = Station.TileAtLocation(left);
+        if (leftTile != null && leftTile.Room != null)
+            list.Add(leftTile.Room);
+
+        Vector3 right = tile.transform.position;
+        right.x += tileSize.x;
+        FloorTile rightTile = Station.TileAtLocation(right);
+        if (rightTile != null && rightTile.Room != null)
+            list.Add(rightTile.Room);
+
+        return list;
+    }
+
+    private List<RoomObject> roomsTouchingPlacement
+    {
+        get
+        {
+            List<RoomObject> list = new List<RoomObject>();
+
+            foreach (RoomObject room in RoomsTouchingTile(firstTile).ToArray())
+            {
+                if (!list.Contains(room)) list.Add(room);
+            }
+
+            foreach (FloorTile tile in currentPlacement)
+            {
+                foreach (RoomObject room in RoomsTouchingTile(tile).ToArray())
+                {
+                    if (!list.Contains(room)) list.Add(room);
+                }
+            }
+
+            return list;
+        }
+    }
+
+    private bool PlacementIsValid
+    {
+        get
+        {
+            if (firstTile == null || currentPlacement.Count == 0) return false;
+
+            // TODO: add size requirement
+
+            // check current Placement is not overlapping
+            if (Station.TileAtLocation(firstTile.transform.position))
+            {
+                Debug.LogWarning("First tile overlapping");
+                return false;
+            }
+
+            foreach (FloorTile tile in currentPlacement.ToArray())
+            {
+                if (Station.TileAtLocation(tile.transform.position))
+                {
+                    Debug.LogWarning("Placement overlapping");
+                    return false;
+                }
+                    
+            }
+
+
+            // check that room is touching hallway
+            if (Station.HasRooms) // if the station has rooms check that current placement is touching a hallway or the currently-being-placed hallway is touching another room
+            {
+                if (currentRoom.Config.Type != Room.EType.Hallway) // not placing a hallway
+                {
+                    bool containsAHallway = false;
+
+                    foreach (RoomObject room in roomsTouchingPlacement)
+                    {
+                        if (room.Config.Type == Room.EType.Hallway)
+                        {
+                            containsAHallway = true;
+                        }
+                    }
+
+                    if (!containsAHallway)
+                    {
+                        Debug.LogWarning("Placement not touching hallway");
+                        return false;
+                    }
+                }
+                else // placing a hallway
+                {
+                    bool touchingSomeOtherRoom = false;
+
+                    foreach (RoomObject room in roomsTouchingPlacement)
+                    {
+                        if (room.Config.Type != Room.EType.Hallway)
+                            touchingSomeOtherRoom = true;
+                    }
+
+                    if (!touchingSomeOtherRoom)
+                    {
+                        Debug.LogWarning("Hallway not touching any rooms");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }

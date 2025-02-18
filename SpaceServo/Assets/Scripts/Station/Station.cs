@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor;
 using UnityEngine;
 
 public class Station : MonoBehaviour
@@ -8,11 +9,15 @@ public class Station : MonoBehaviour
 
     [SerializeField] private StationMoney stationMoney;
     [SerializeField] private StationRating stationRating;
+    [SerializeField] private ShipManager shipManager;
+    [SerializeField] private CustomerManager customerManager;
+    [SerializeField] private Transform roomTransform;
 
     [Header("DEBUG")]
     [SerializeField] List<PlaceableObject> placeableObjects;
     [SerializeField] List<LandingPad> landingPads;
     [SerializeField] List<TransactionDesk> transactionDesks;
+    [SerializeField] List<RoomObject> rooms = new List<RoomObject>();
     
     NavMeshSurface navMeshSurface;
 
@@ -22,6 +27,10 @@ public class Station : MonoBehaviour
     public static List<LandingPad> LandingPads => Instance.landingPads;
     public static List<TransactionDesk> TransactionDesks => Instance.transactionDesks;
     public static NavMeshSurface NavMeshSurface => Instance.navMeshSurface;
+    public static List<RoomObject> Rooms => Instance.rooms;
+    public static ShipManager ShipManager => Instance.shipManager;
+    public static CustomerManager CustomerManager => Instance.customerManager;
+    public static bool HasRooms => Instance.rooms.Count > 0;
 
     private void Awake()
     {
@@ -65,5 +74,32 @@ public class Station : MonoBehaviour
 
         transactionDesk = null;
         return false;
+    }
+
+    public static void AddRoom(RoomObject room)
+    {
+        Instance.rooms.Add(room);
+        room.transform.parent = Instance.roomTransform.transform;
+    }
+
+    public static void RemoveRoom(RoomObject room)
+    {
+        Instance.rooms.Remove(room);
+    }
+
+    public static FloorTile TileAtLocation(Vector3 location)
+    {
+        foreach(RoomObject room in Instance.rooms)
+        {
+            foreach(FloorTile tile in room.Floor)
+            {
+                if (tile.transform.position == location)
+                {
+                    return tile;
+                }
+            }
+        }
+
+        return null;
     }
 }

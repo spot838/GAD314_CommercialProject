@@ -25,15 +25,11 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void OnBuildFloorButtonPress()
     {
-        //Debug.Log("Build Floor button pressed");
-
-        Game.FloorBuilder.StartPlacingFloor();
+        UI.ShowRoomsMenu();
     }
 
     private void OnPlaceObjectButtonPress()
     {
-        //Debug.Log("Place Object button pressed");
-
         UI.ShowPlaceablesMenu();
     }
 

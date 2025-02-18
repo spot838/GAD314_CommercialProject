@@ -7,6 +7,12 @@ public class FloorTile : MonoBehaviour
     [SerializeField] Material built; // the material once the player has confirmed placement, what it normally looks like
     [SerializeField] MeshRenderer[] meshes;
     [field: SerializeField] public NavMeshSurface NavMeshSurface {  get; private set; }
+    public RoomObject Room {  get; private set; }
+
+    public void SetRoom(RoomObject room)
+    {
+        this.Room = room;
+    }
 
 
     public void SwitchToBuildingMaterial()
@@ -23,5 +29,10 @@ public class FloorTile : MonoBehaviour
         {
             meshRenderer.material = built;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Room?.RemoveTile(this);
     }
 }

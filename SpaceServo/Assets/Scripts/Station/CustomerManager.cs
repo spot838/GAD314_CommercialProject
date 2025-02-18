@@ -13,6 +13,7 @@ public class CustomerManager : MonoBehaviour
         if (customerPrefab == null) return null;
 
         Customer customer = Instantiate(customerPrefab, customerSpawn.position, customerSpawn.rotation);
+        customer.transform.parent = transform;
         customer.Initilize(ship);
         Customers.Add(customer);
         return customer;

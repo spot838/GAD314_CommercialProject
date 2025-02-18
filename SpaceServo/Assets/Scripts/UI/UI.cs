@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     public static UI Instance;
     [SerializeField] private UI_TopBar topBar;
     [SerializeField] private UI_AddPlaceablesMenu placeablesMenu;
+    [SerializeField] private UI_AddRoomMenu roomsMenu;
 
     public static bool MouseOverUI;
 
@@ -37,6 +38,19 @@ public class UI : MonoBehaviour
 
     public static void ShowPlaceablesMenu(bool show = true)
     {
+        if (show) CloseMenus();
         Instance.placeablesMenu.gameObject.SetActive(show);
+    }
+
+    public static void ShowRoomsMenu(bool show = true)
+    {
+        if (show) CloseMenus();
+        Instance.roomsMenu.gameObject.SetActive(show);
+    }
+
+    public static void CloseMenus()
+    {
+        Instance.placeablesMenu.gameObject.SetActive(false);
+        Instance.roomsMenu.gameObject.SetActive(false);
     }
 }

@@ -61,7 +61,7 @@ public class Customer : Character
 
     private void OnDestroy()
     {
-        Game.CustomerManager.CustomerDespawn(this);
+        Station.CustomerManager.CustomerDespawn(this);
     }
 
     public void CompleteFuelPurchase()

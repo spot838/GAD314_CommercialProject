@@ -15,7 +15,7 @@ public class LandingPad : PlaceableObject
         get
         {
             Vector3 position = transform.position;
-            position.y = Game.ShipManager.FlightLevel;
+            position.y = Station.ShipManager.FlightLevel;
             return position;
         }
     }

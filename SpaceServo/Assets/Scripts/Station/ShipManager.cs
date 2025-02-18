@@ -40,6 +40,7 @@ public class ShipManager : MonoBehaviour
         Ship newShip = Instantiate(shipPrefab, spawnPoint, Quaternion.identity);
         newShip.Initilize(targetLandingPad);
         ships.Add(newShip);
+        newShip.transform.parent = transform;
     }
 
     private Ship shipPrefab { get { return shipPrefabs[Random.Range(0, shipPrefabs.Length)]; } }
