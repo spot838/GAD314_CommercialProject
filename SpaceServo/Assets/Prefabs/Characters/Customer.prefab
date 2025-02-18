@@ -2937,6 +2937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6388939034004660146}
   - component: {fileID: 9072436437327014884}
+  - component: {fileID: 2418180206208018983}
   m_Layer: 0
   m_Name: SM_Chr_Junker_Male_01
   m_TagString: Untagged
@@ -2982,7 +2983,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
+  - {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3064,6 +3065,32 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0008869767, y: 0.8425818, z: -0.05384189}
     m_Extent: {x: 1.0254519, y: 0.94546896, z: 0.27861837}
   m_DirtyAABB: 0
+--- !u!114 &2418180206208018983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4091824717195543332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1c511f674d8c04186e1e76330baf4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 9072436437327014884}
+  materials:
+  - {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
+  - {fileID: 2100000, guid: 82a7ccffd2fed3e47ae444f4d5b0e027, type: 2}
+  - {fileID: 2100000, guid: 73847fc4fb99162448a1fe0fd636c712, type: 2}
+  - {fileID: 2100000, guid: d8dfda64987cff5419b3497636a384d6, type: 2}
+  - {fileID: 2100000, guid: ed3bd972f89e47e42843b13fe786b1bc, type: 2}
+  - {fileID: 2100000, guid: 8a6d64850f424d3419b8d9df49078ff4, type: 2}
+  - {fileID: 2100000, guid: 0c673a34921a40e41a11b1f96f70b371, type: 2}
+  - {fileID: 2100000, guid: 0c12261101fafa741904eae00d611c84, type: 2}
+  - {fileID: 2100000, guid: 880f2e8ae8117924d96d9b5e1d9bb8a9, type: 2}
+  - {fileID: 2100000, guid: e871de2d3a078f445b028b75b70ee154, type: 2}
+  - {fileID: 2100000, guid: ae5678c8e76ecae4fbb0afcbe88edd33, type: 2}
 --- !u!1 &4122865351795838265
 GameObject:
   m_ObjectHideFlags: 0
@@ -5437,8 +5464,8 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 4754598165708015693}
   <NavMeshAgent>k__BackingField: {fileID: 2856724377718483318}
   <Animator>k__BackingField: {fileID: 8562108716953317336}
-  stoppingDistanceAnimationOffset: 0.2
   <Ship>k__BackingField: {fileID: 0}
+  HasBoughtFuel: 0
   KeepIdle: 0
   <Satisfaction>k__BackingField:
     ValueBase: 100
@@ -5467,9 +5494,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7346465842681101320
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5502,7 +5529,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8572862996899951423}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -5511,7 +5538,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

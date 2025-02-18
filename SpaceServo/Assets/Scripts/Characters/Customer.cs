@@ -5,7 +5,7 @@ public class Customer : Character
 {
     [field: SerializeField] public Ship Ship { get; private set; }
 
-    bool hasBoughtFuel;
+    public bool HasBoughtFuel; // this is to be replaced once fuel system is in
     Transform target;
     public bool KeepIdle;
     [field: SerializeField] public EntityStat Satisfaction { get; private set; } = new();
@@ -13,6 +13,8 @@ public class Customer : Character
     protected override void Update()
     {
         base.Update();
+
+        /**
         if (KeepIdle) return;
 
         else if (!IsMoving && target == null)
@@ -52,11 +54,14 @@ public class Customer : Character
             Ship.BeginTakeOff();
             Destroy(this.gameObject);
         }
+
+        */
     }
 
     public void Initilize(Ship ship)
     {
         Ship = ship;
+        SetNewState(new CS_CustomerIdle(this));
     }
 
     private void OnDestroy()
@@ -64,10 +69,26 @@ public class Customer : Character
         Station.CustomerManager.CustomerDespawn(this);
     }
 
-    public void CompleteFuelPurchase()
+    public void DestoryCustomer()
     {
-        hasBoughtFuel = true;
-        target = null;
-        KeepIdle = false;
+        Ship.BeginTakeOff();
+
+        // TODO: replace this with adding to station rating
+        // apply customer satisfaction to station rating
+        float custStatisfactionDifference = Satisfaction.ValueCurrent - Satisfaction.ValueBase;
+        if (custStatisfactionDifference > 0)
+        {
+            Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Positive by {custStatisfactionDifference}");
+        }
+        else if (custStatisfactionDifference < 0)
+        {
+            Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Negative by {custStatisfactionDifference}");
+        }
+        else
+        {
+            Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Neutral");
+        }
+
+        Destroy(this.gameObject);
     }
 }

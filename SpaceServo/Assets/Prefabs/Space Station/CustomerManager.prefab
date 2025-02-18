@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0edeffa4d145a1429b906a576bf52d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefab: {fileID: 980252076677616278, guid: b7b5f2807cfac78429b764f0d731a520, type: 3}
+  customerPrefabs:
+  - {fileID: 980252076677616278, guid: b7b5f2807cfac78429b764f0d731a520, type: 3}
+  - {fileID: 2556878773116223235, guid: 4b75534e51891d846bfc0aba70aa3661, type: 3}
+  - {fileID: 4813273065400141072, guid: 37f1f218582f77946a23b61b11cd977f, type: 3}
   <Customers>k__BackingField: []

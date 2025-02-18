@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8672c4bbcb03bb4887eaee418f4b8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <FlightLevel>k__BackingField: 10
   shipPrefabs:
   - {fileID: 3331962439624897126, guid: b2ca6a0578a961042a82fc3996fbcaff, type: 3}
+  - {fileID: 8032930591200117600, guid: 4a7427b3d7d52b641aa042fb5207b834, type: 3}
+  - {fileID: 8032930591200117600, guid: b80dfb505dee7494bbe814bb659e5d33, type: 3}
   spawnPoint: {x: -85.3, y: 20, z: 145.2}
   DeparturePoint: {x: 85.3, y: 20, z: 145.2}

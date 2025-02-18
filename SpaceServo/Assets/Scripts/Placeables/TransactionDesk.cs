@@ -3,7 +3,7 @@ using UnityEngine;
 public class TransactionDesk : PlaceableObject
 {
     [field: SerializeField] public Transform CustomerPosition {  get; private set; }
-    [SerializeField] float transactionBaseTime = 0.5f;
+    [field: SerializeField] public float TransactionBaseTime { get; private set; } = 1.5f;
     [field: SerializeField] public Customer CurrentCustomer;
     float timer;
 
@@ -13,13 +13,13 @@ public class TransactionDesk : PlaceableObject
     {
         base.Update();
 
-        if (CurrentCustomer != null)
+        /*if (CurrentCustomer != null)
         {
-            if (!CurrentCustomer.IsMoving && CurrentCustomer.HasArrivedAtNavMeshDestination && !CurrentCustomer.KeepIdle)
+            if (!CurrentCustomer.IsMoving && CurrentCustomer.ArrivedAtDestination && !CurrentCustomer.KeepIdle)
             {
                 //print("begining transaction");
                 CurrentCustomer.KeepIdle = true;
-                timer = transactionBaseTime;
+                timer = TransactionBaseTime;
                 CurrentCustomer.transform.rotation = CustomerPosition.rotation;
             }
 
@@ -39,6 +39,6 @@ public class TransactionDesk : PlaceableObject
             }
 
             
-        }
+        }*/
     }
 }

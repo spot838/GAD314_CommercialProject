@@ -20,6 +20,8 @@ public class UI_AddPlaceablesItem : MonoBehaviour
         icon.texture = config.Icon;
         nameText.text = config.Name;
         costText.text = "$" + config.Cost;
+
+        button.interactable = Station.Money.CanAfford(config.Cost);
     }
 
     private void OnButtonPress()

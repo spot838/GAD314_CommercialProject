@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
@@ -5,9 +6,11 @@ public class Ship : MonoBehaviour
     [field: SerializeField] public EState State { get; private set; } = EState.Idle;
     [SerializeField] float speed;
     [SerializeField] float verticalSpeed;
+    [SerializeField] float rotationSpeed = 10;
 
     public LandingPad LandingPad { get; private set; }
     public Customer Customer { get; private set; }
+    private Quaternion targetRotation;
 
     public enum EState
     {
@@ -16,6 +19,11 @@ public class Ship : MonoBehaviour
         Landing,
         TakingOff,
         Leaving
+    }
+
+    private void Start()
+    {
+        targetRotation = transform.rotation;
     }
 
     private void Update()
@@ -38,6 +46,47 @@ public class Ship : MonoBehaviour
                 LeavingUpdate();
                 break;
         }
+
+        RotationUpdate();
+    }
+
+    private void RotationUpdate()
+    {
+        if (transform.eulerAngles.y < targetRotation.eulerAngles.y)
+        {
+            float step = rotationSpeed * Time.deltaTime;
+            Vector3 euler = transform.eulerAngles;
+
+            if (targetRotation.eulerAngles.y - transform.eulerAngles.y > step)
+            {
+                euler.y += step;
+            }
+
+            else
+            {
+                euler.y = targetRotation.eulerAngles.y;
+            }
+
+            transform.eulerAngles = euler;
+        }
+
+        else if (transform.eulerAngles.y > targetRotation.eulerAngles.y)
+        {
+            float step = rotationSpeed * Time.deltaTime;
+            Vector3 euler = transform.eulerAngles;
+
+            if (transform.eulerAngles.y - targetRotation.eulerAngles.y > step)
+            {
+                euler.y -= step;
+            }
+
+            else
+            {
+                euler.y = targetRotation.eulerAngles.y;
+            }
+
+            transform.eulerAngles = euler;
+        }
     }
 
     public void Initilize(LandingPad landingPad)
@@ -58,7 +107,8 @@ public class Ship : MonoBehaviour
         else
         {
             transform.position = LandingPad.ArivalPosition;
-            transform.rotation = LandingPad.transform.rotation;
+            //transform.rotation = LandingPad.transform.rotation;
+            targetRotation = LandingPad.transform.rotation;
             State = EState.Landing;
         }
     }
@@ -95,7 +145,7 @@ public class Ship : MonoBehaviour
         else
         {
             transform.position = LandingPad.ArivalPosition;
-            transform.LookAt(Station.ShipManager.DeparturePoint);
+            //transform.LookAt(Station.ShipManager.DeparturePoint);
             State = EState.Leaving;
             LandingPad.CurrentShip = null;
             LandingPad = null;
@@ -124,5 +174,7 @@ public class Ship : MonoBehaviour
     {
         State = EState.TakingOff;
         Customer = null;
+
+        targetRotation = Quaternion.LookRotation(Station.ShipManager.DeparturePoint - transform.position, transform.up);
     }
 }

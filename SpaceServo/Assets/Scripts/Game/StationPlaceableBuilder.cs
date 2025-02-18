@@ -68,6 +68,7 @@ public class StationPlaceableBuilder : MonoBehaviour
         Game.Input.OnSecondaryPress -= CancelPlacement;
 
         currentPlaceableObject.SetPlaced();
+        Station.Money.Remove(currentPlaceable.Cost);
 
         currentPlaceable = null;
         currentPlaceableObject = null;

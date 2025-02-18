@@ -102,4 +102,25 @@ public class Station : MonoBehaviour
 
         return null;
     }
+
+    public static RoomObject RandomHallway
+    {
+        get
+        {
+            List<RoomObject> hallways = new List<RoomObject>();
+
+            foreach (RoomObject room in Instance.rooms)
+            {
+                if (room.Config.Type == Room.EType.Hallway)
+                {
+                    hallways.Add(room);
+                }
+            }
+
+            if (hallways.Count > 0)
+                return hallways[Random.Range(0, hallways.Count)];
+
+            return null;
+        }
+    }
 }

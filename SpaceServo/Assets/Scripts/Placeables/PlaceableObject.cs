@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
 {
+    [field: SerializeField] public Placeable Config { get; private set; }
     [SerializeField] Material validPlacementMat;
     [SerializeField] Material invalidPlacementMat;
     [SerializeField] Material placedMat;
