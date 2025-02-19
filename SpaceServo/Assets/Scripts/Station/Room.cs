@@ -8,6 +8,7 @@ public class Room : ScriptableObject
     [field: SerializeField] public EType Type { get; private set; }
     [field: SerializeField] public Texture Icon { get; private set; }
     [field: SerializeField] public FloorTile FloorTilePrefab {  get; private set; }
+    [field: SerializeField] public Placeable[] Placeables { get; private set; }
 
     public enum EType
     {
