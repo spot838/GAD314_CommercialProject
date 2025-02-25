@@ -1,32 +1,30 @@
 using UnityEngine;
 
-public class CS_CustomerWonderingHallway : CharacterState
+public class CS_WonderingHallway : CustomerState
 {
-    Customer customer;
     float CrossFadeTime = 0.1f;
 
-    public CS_CustomerWonderingHallway(Character character) : base(character)
+    public CS_WonderingHallway(Customer customer) : base(customer)
     {
-        this.character = character;
-        customer = character.GetComponent<Customer>();
+        this.customer = customer;
     }
 
     public override void StateStart()
     {
         customer.Animator.CrossFade("Walk", CrossFadeTime);
-        customer.NavMeshAgent.SetDestination(RandomHallwayPosition);
+        customer.NavMeshAgent.SetDestination(randomHallwayPosition);
     }
 
     public override void StateTick()
     {
         if (customer.ArrivedAtDestination)
         {
-            customer.NavMeshAgent.SetDestination(RandomHallwayPosition);
+            customer.NavMeshAgent.SetDestination(randomHallwayPosition);
         }
 
         else if (!customer.HasBoughtFuel && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
         {
-            customer.SetNewState(new CS_CustomerMovingToTransactionDesk(customer, desk));
+            customer.SetNewState(new CS_MovingToTransactionDesk(customer, desk));
         }
     }
 
@@ -34,7 +32,7 @@ public class CS_CustomerWonderingHallway : CharacterState
     {
     }
 
-    private Vector3 RandomHallwayPosition
+    private Vector3 randomHallwayPosition
     {
         get
         {

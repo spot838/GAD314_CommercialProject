@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class CS_CustomerReturningToShip : CharacterState
+public class CS_ReturningToShip : CustomerState
 {
-    Customer customer;
     float CrossFadeTime = 0.1f;
 
-    public CS_CustomerReturningToShip(Character character) : base(character)
+    public CS_ReturningToShip(Customer customer) : base(customer)
     {
-        this.character = character;
-        customer = character.GetComponent<Customer>();
+        this.customer = customer;
     }
 
     public override void StateStart()

@@ -61,7 +61,7 @@ public class Customer : Character
     public void Initilize(Ship ship)
     {
         Ship = ship;
-        SetNewState(new CS_CustomerIdle(this));
+        SetNewState(new CS_Idle(this));
     }
 
     private void OnDestroy()

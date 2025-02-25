@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class CS_CustomerMovingToTransactionDesk : CharacterState
+public class CS_MovingToTransactionDesk : CustomerState
 {
-    Customer customer;
     float CrossFadeTime = 0.1f;
     TransactionDesk desk;
 
-    public CS_CustomerMovingToTransactionDesk(Character character, TransactionDesk desk) : base(character)
+    public CS_MovingToTransactionDesk(Customer customer, TransactionDesk desk) : base(customer)
     {
-        customer = character.GetComponent<Customer>();
+        this.customer = customer;
         this.desk = desk;
-        desk.CurrentCustomer = customer;
     }
 
     public override void StateStart()
     {
+        desk.CurrentCustomer = customer;
+
+
         customer.Animator.CrossFade("Walk", CrossFadeTime);
         customer.NavMeshAgent.SetDestination(desk.CustomerPosition.position);
     }
@@ -23,7 +24,7 @@ public class CS_CustomerMovingToTransactionDesk : CharacterState
     {
         if (customer.ArrivedAtDestination)
         {
-            customer.SetNewState(new CS_CustomerCompletingTransaction(customer, desk));
+            customer.SetNewState(new CS_CompletingTransaction(customer, desk));
         }
     }
 

@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class CS_CustomerCompletingTransaction : CharacterState
+public class CS_CompletingTransaction : CustomerState
 {
-    Customer customer;
     float CrossFadeTime = 0.1f;
     TransactionDesk desk;
 
     float timer;
 
-    public CS_CustomerCompletingTransaction(Character character, TransactionDesk desk) : base(character)
+    public CS_CompletingTransaction(Customer customer, TransactionDesk desk) : base(customer)
     {
-        customer = character.GetComponent<Customer>();
+        this.customer = customer;
         this.desk = desk;
-        desk.CurrentCustomer = customer;
-        customer.transform.rotation = desk.CustomerPosition.rotation;
     }
 
     public override void StateStart()
     {
+        desk.CurrentCustomer = customer;
+        customer.transform.rotation = desk.CustomerPosition.rotation;
+
         customer.Animator.CrossFade("Idle", CrossFadeTime);
         timer = desk.TransactionBaseTime;
     }
@@ -29,7 +29,7 @@ public class CS_CustomerCompletingTransaction : CharacterState
 
         else // timer reached zero
         {
-            customer.SetNewState(new CS_CustomerIdle(character));
+            customer.SetNewState(new CS_Idle(customer));
         }
     }
 
