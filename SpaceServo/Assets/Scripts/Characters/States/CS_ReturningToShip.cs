@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CS_ReturningToShip : CustomerState
 {
-    float CrossFadeTime = 0.1f;
+    float crossFadeTime = 0.1f;
 
     public CS_ReturningToShip(Customer customer) : base(customer)
     {
@@ -11,7 +11,7 @@ public class CS_ReturningToShip : CustomerState
 
     public override void StateStart()
     {
-        customer.Animator.CrossFade("Walk", CrossFadeTime);
+        customer.Animator.CrossFade("Walk", crossFadeTime);
         customer.NavMeshAgent.SetDestination(customer.Ship.LandingPad.CustomerSpawnPoint.position);
     }
 

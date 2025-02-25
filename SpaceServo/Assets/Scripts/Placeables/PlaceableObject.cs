@@ -46,7 +46,7 @@ public class PlaceableObject : MonoBehaviour
         HasValidPlacement = false;
     }
 
-    public void SetPlaced()
+    public virtual void SetPlaced()
     {
         foreach (MeshRenderer mesh in meshes)
         {

@@ -10,6 +10,7 @@ public class Station : MonoBehaviour
     [SerializeField] private StationMoney stationMoney;
     [SerializeField] private StationRating stationRating;
     [SerializeField] private ShipManager shipManager;
+    [SerializeField] private StationStaffManager staffManager;
     [SerializeField] private CustomerManager customerManager;
     [SerializeField] private Transform roomTransform;
 
@@ -24,6 +25,7 @@ public class Station : MonoBehaviour
     public static GameObject Object => Instance.gameObject;
     public static StationMoney Money => Instance.stationMoney;
     public static StationRating Rating => Instance.stationRating;
+    public static StationStaffManager Staff => Instance.staffManager;
     public static List<LandingPad> LandingPads => Instance.landingPads;
     public static List<TransactionDesk> TransactionDesks => Instance.transactionDesks;
     public static NavMeshSurface NavMeshSurface => Instance.navMeshSurface;

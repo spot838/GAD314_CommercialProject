@@ -54,8 +54,15 @@ MonoBehaviour:
   staionLayer:
     serializedVersion: 2
     m_Bits: 64
-  shipManager: {fileID: 0}
-  customerManager: {fileID: 0}
+  placeablesLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  staionFloorLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  roomLayer:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &5923553441290665978
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,14 +11,18 @@ public class Game : MonoBehaviour
     [SerializeField] private StationPlaceableBuilder placeableBuilder;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private LayerMask staionLayer;
-    
-    
+    [SerializeField] private LayerMask placeablesLayer;
+    [SerializeField] private LayerMask staionFloorLayer;
+    [SerializeField] private LayerMask roomLayer;
 
     public static InputReader Input => Instance.inputReader;
     public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
     public static StationPlaceableBuilder PlaceableBuilder => Instance.placeableBuilder;
     public static CameraController CameraController => Instance.cameraController;
     public static LayerMask StationLayer => Instance.staionLayer;
+    public static LayerMask PlaceableLayer => Instance.placeablesLayer;
+    public static LayerMask StationFloorLayer => Instance.staionFloorLayer;
+    public static LayerMask RoomLayer => Instance.roomLayer;
 
     private void Awake()
     {

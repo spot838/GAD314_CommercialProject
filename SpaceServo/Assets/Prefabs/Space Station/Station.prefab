@@ -53,6 +53,7 @@ MonoBehaviour:
   stationMoney: {fileID: 4309948644457185749}
   stationRating: {fileID: 5202724586748794096}
   shipManager: {fileID: 3948505909498453564}
+  staffManager: {fileID: 3144336279122102200}
   customerManager: {fileID: 6879815528351363787}
   roomTransform: {fileID: 2602062147614198937}
   placeableObjects: []

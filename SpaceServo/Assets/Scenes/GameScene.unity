@@ -492,14 +492,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
-    - target: {fileID: 9033734819320733074, guid: 0713a8625263a4c49af22b212c026a37, type: 3}
-      propertyPath: spawnPoint.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9033734819320733074, guid: 0713a8625263a4c49af22b212c026a37, type: 3}
-      propertyPath: DeparturePoint.y
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
