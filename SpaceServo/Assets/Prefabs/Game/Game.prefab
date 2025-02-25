@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2280874409225999461}
   - component: {fileID: 4224927295571912372}
   - component: {fileID: 5923553441290665978}
+  - component: {fileID: 5946446062267805235}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -63,6 +64,7 @@ MonoBehaviour:
   roomLayer:
     serializedVersion: 2
     m_Bits: 384
+  selection: {fileID: 5946446062267805235}
 --- !u!114 &5923553441290665978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +82,18 @@ MonoBehaviour:
   <SecondaryButtonDown>k__BackingField: 0
   <CameraMove>k__BackingField: {x: 0, y: 0}
   <CameraZoom>k__BackingField: {x: 0, y: 0}
+--- !u!114 &5946446062267805235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8548087345918562935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8a2e34ee2e6574bbed861b27ed47b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1558756099592416410
 PrefabInstance:
   m_ObjectHideFlags: 0

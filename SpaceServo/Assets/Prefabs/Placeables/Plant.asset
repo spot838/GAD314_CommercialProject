@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282ae53c1cf7c6d43b3aea3b4de603e0, type: 3}
   m_Name: Plant
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 4895182440696372154, guid: a1302f559a374ee4cb95bc0f1431dbb1, type: 3}
+  <Prefab>k__BackingField: {fileID: 4895182440696372154, guid: 640dfada40568fc4294259211dc1e414, type: 3}
   <Name>k__BackingField: Plant
   <Cost>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 0}

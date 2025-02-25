@@ -20,6 +20,7 @@ public class StationFloorBuilder : MonoBehaviour
     [SerializeField] List<FloorTile> currentPlacement = new List<FloorTile>();
 
     RoomObject currentRoom;
+    public bool IsPlacing => currentRoom != null;
 
     private void Update()
     {
@@ -96,6 +97,7 @@ public class StationFloorBuilder : MonoBehaviour
 
         currentRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
         currentRoom.Initialize(config);
+        Game.Selection.SelectRoom(currentRoom);
     }
 
     private Vector3 GroundLocationUnderMouse
@@ -168,6 +170,7 @@ public class StationFloorBuilder : MonoBehaviour
             currentPlacement.Clear();
 
             Station.AddRoom(currentRoom);
+            //Game.Selection.DeselectRoom();
             currentRoom = null;
             //placing = false;
         }
@@ -210,6 +213,8 @@ public class StationFloorBuilder : MonoBehaviour
             Destroy(tile.gameObject);
         currentPlacement.Clear();
 
+        Game.Selection.DeselectRoom();
+        Destroy(currentRoom.gameObject);
         currentRoom = null;
         //placing = false;
     }

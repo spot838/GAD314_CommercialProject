@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     [SerializeField] private LayerMask placeablesLayer;
     [SerializeField] private LayerMask staionFloorLayer;
     [SerializeField] private LayerMask roomLayer;
+    [SerializeField] private Selection selection;
 
     public static InputReader Input => Instance.inputReader;
     public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
@@ -23,6 +24,7 @@ public class Game : MonoBehaviour
     public static LayerMask PlaceableLayer => Instance.placeablesLayer;
     public static LayerMask StationFloorLayer => Instance.staionFloorLayer;
     public static LayerMask RoomLayer => Instance.roomLayer;
+    public static Selection Selection => Instance.selection;
 
     private void Awake()
     {

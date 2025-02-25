@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3714396218241645077}
   - component: {fileID: 4895182440696372154}
-  - component: {fileID: 3395855301911202332}
-  - component: {fileID: 1216801618726897933}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -33,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6273514592105276806}
+  - {fileID: 1717093069769701559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4895182440696372154
@@ -55,13 +54,46 @@ MonoBehaviour:
   - {fileID: 2813461996420197301}
   IsPlaced: 0
   HasValidPlacement: 0
---- !u!114 &3395855301911202332
+--- !u!1 &4753683431873294976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717093069769701559}
+  - component: {fileID: 8758884325618465071}
+  - component: {fileID: 1366697889873399782}
+  m_Layer: 0
+  m_Name: SatisfactionModifer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717093069769701559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753683431873294976}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3714396218241645077}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8758884325618465071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650133122523377263}
+  m_GameObject: {fileID: 4753683431873294976}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f57ecdd85d67f94b9d0ed5a903818f8, type: 3}
@@ -70,13 +102,13 @@ MonoBehaviour:
   modifierValue: 1
   modifierTimerCurrent: 2
   modifierTimerMax: 2
---- !u!135 &1216801618726897933
+--- !u!135 &1366697889873399782
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650133122523377263}
+  m_GameObject: {fileID: 4753683431873294976}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

@@ -45,6 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Placeables>k__BackingField:
-  - {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
-  - {fileID: 11400000, guid: 167894b9be14d7a429ca486c17b8f3e8, type: 2}
   - {fileID: 11400000, guid: db827de129e343a47b3afd5215db11a4, type: 2}

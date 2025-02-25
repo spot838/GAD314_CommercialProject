@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5860884584108551629}
   - component: {fileID: 3944365885299691443}
   - component: {fileID: 7253737163187447}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3092530340237515224}
   - component: {fileID: 1467692972545063701}
   - component: {fileID: 507735691729479819}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BottomLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2507225371552409247}
   - component: {fileID: 5957163521785478502}
   - component: {fileID: 6477213883180594312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 4427257926121220938}
   - component: {fileID: 3271037550975461555}
   - component: {fileID: 6029668780716800075}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 7723227478445363237}
   - component: {fileID: 4242437493858121178}
   - component: {fileID: 164910246789073018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloorTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,7 +5,8 @@ public class RoomObject : MonoBehaviour
 {
     [field: SerializeField] public Room Config {  get; private set; }
 
-    public List<FloorTile> Floor { get; private set; } = new List<FloorTile>(); 
+    public List<FloorTile> Floor { get; private set; } = new List<FloorTile>();
+    public List<PlaceableObject> Placeables { get; private set; } = new List<PlaceableObject>();
 
     public void Initialize(Room config)
     {
@@ -23,6 +24,16 @@ public class RoomObject : MonoBehaviour
     public void RemoveTile(FloorTile tile)
     {
         Floor.Remove(tile);
+    }
+
+    public void AddPlaceable(PlaceableObject placeableObject)
+    {
+        Placeables.Add(placeableObject);
+    }
+
+    public void RemovePlaceable(PlaceableObject placeableObject)
+    {
+        Placeables.Remove(placeableObject);
     }
 
 

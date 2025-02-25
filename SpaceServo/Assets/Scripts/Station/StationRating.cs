@@ -11,7 +11,7 @@ public class StationRating : MonoBehaviour
     {
         get
         {
-            if (values.Count == 0) return 50;
+            if (values.Count == 0) return 0.55f;
 
             float average = 0;
             foreach (float value in values)

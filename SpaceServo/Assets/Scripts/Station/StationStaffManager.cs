@@ -14,6 +14,7 @@ public class StationStaffManager : MonoBehaviour
 
         StaffMember newStaffMember = Instantiate(staffMemberPrefab, spawnTransform);
         Members.Add(newStaffMember);
+        newStaffMember.SetName("StaffMember_" + Members.Count.ToString("D3"));
         return newStaffMember;
     }
 

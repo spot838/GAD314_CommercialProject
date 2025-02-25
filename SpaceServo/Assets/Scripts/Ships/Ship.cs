@@ -28,6 +28,8 @@ public class Ship : MonoBehaviour
 
     private void Update()
     {
+        if (State != EState.Leaving && LandingPad == null) return;
+
         switch (State)
         {
             case EState.Arriving:
@@ -167,6 +169,7 @@ public class Ship : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Customer != null) Destroy(Customer.gameObject);
         Station.ShipManager.ShipDespawn(this);
     }
 

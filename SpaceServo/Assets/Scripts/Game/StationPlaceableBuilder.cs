@@ -7,6 +7,8 @@ public class StationPlaceableBuilder : MonoBehaviour
     Placeable currentPlaceable;
     PlaceableObject currentPlaceableObject;
 
+    public bool IsPlacing => currentPlaceable != null;
+
     private void Update()
     {
         if (UI.MouseOverUI || currentPlaceable == null || currentPlaceable.Prefab == null) return; // don't execute update if we are not placing

@@ -40,7 +40,7 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void UpdateRaitingText()
     {
-        ratingText.text = Station.Rating.Value.ToString();
+        ratingText.text = Station.Rating.Value.ToString("F0");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

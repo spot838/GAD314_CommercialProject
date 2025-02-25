@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Fuel Purchase Room
   <Description>k__BackingField: Where customers pay for fuel
+  <Type>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 0}
   <FloorTilePrefab>k__BackingField: {fileID: 2897276872064168506, guid: a7d3abdd5758b0744aba35c197014720, type: 3}
+  <Placeables>k__BackingField:
+  - {fileID: 11400000, guid: 167894b9be14d7a429ca486c17b8f3e8, type: 2}

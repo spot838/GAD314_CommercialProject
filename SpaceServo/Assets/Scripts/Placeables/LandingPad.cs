@@ -19,4 +19,10 @@ public class LandingPad : PlaceableObject
             return position;
         }
     }
+
+    protected override void OnDestroy()
+    {
+        Destroy(CurrentShip.gameObject);
+        base.OnDestroy();
+    }
 }

@@ -13,6 +13,7 @@ public class PlaceableObject : MonoBehaviour
     public bool IsPlaced;
 
     public bool HasValidPlacement;
+    public RoomObject Room { get; private set; }
 
     protected virtual void Start()
     {
@@ -55,6 +56,27 @@ public class PlaceableObject : MonoBehaviour
         IsPlaced = true;
         Station.AddPlaceable(this);
         Station.NavMeshSurface.BuildNavMesh();
+
+        Vector3 origin = transform.position;
+        origin.y += 5;
+        if (Physics.Raycast(origin, new Vector3(0, -1, 0), out RaycastHit hit , 10, Game.StationFloorLayer))
+        {
+            if (hit.collider.TryGetComponent<FloorTile>(out FloorTile tile))
+            {
+                Room = tile.Room;
+                Room.AddPlaceable(this);
+            }
+            else
+            {
+                Debug.LogWarning("Room detection hit " + hit.collider.name + " instead of floor tile");
+            }
+        }
+        else
+        {
+            Debug.LogWarning(Config.Name + " did not detect what room it was placed in");
+        }
+
+        UI.UpdateRoomInfo();
     }
 
     private bool ValidPlacement
@@ -75,5 +97,10 @@ public class PlaceableObject : MonoBehaviour
             
             return false;
         }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (Room != null) Room.RemovePlaceable(this);
     }
 }

@@ -9,7 +9,7 @@ public class TransactionDesk : PlaceableObject
     [field: SerializeField] public StaffMember StaffMember;
     float timer;
 
-    public bool IsAvailable => CurrentCustomer == null;
+    public bool IsAvailable => StaffMember != null && CurrentCustomer == null;
 
     protected override void Update()
     {
@@ -47,11 +47,14 @@ public class TransactionDesk : PlaceableObject
     public override void SetPlaced()
     {
         base.SetPlaced();
+        //HireStaffMember(); // for now we'll just spawn in the staff member when placement occurs
+    }
 
-        // for now we'll just spawn in the staff member when placement occurs
+    public void HireStaffMember()
+    {
         StaffMember = Station.Staff.SpawnNew(StaffPosition);
-        //StaffMember.transform.parent = StaffPosition;
         StaffMember.SetNewState(new SMS_SittingIdle(StaffMember));
+        UI.UpdateRoomInfo();
     }
 
     public void BeginTransaction()
