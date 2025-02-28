@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0f600c9282f1b42a23fd9a3a2051c7, type: 3}
+  m_Name: Bathroom
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Bathroom
+  <Description>k__BackingField: 'A place to excreet '
+  <Type>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 2800000, guid: 03e00ea88ba55ef43aa87c96142b8774, type: 3}
+  <FloorTilePrefab>k__BackingField: {fileID: 4669393258016042127, guid: 081195ed9dc10c64e80402696162eea7, type: 3}
+  <Placeables>k__BackingField:
+  - {fileID: 11400000, guid: db827de129e343a47b3afd5215db11a4, type: 2}
+  - {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
+  - {fileID: 11400000, guid: 1f7fe4bee06f899478e8dd3a183c1070, type: 2}
+  - {fileID: 11400000, guid: 4d167b7668736694a95908f9a1a8cbae, type: 2}
