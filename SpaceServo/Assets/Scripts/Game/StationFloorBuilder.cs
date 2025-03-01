@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -148,32 +146,20 @@ public class StationFloorBuilder : MonoBehaviour
         {
             Game.Input.OnSecondaryPress -= CancelPlacement;
 
-            if (Station.NavMeshSurface == null)
-            {
-                firstTile.NavMeshSurface.enabled = true;
-                Station.SetNavMeshSurface(firstTile.NavMeshSurface);
-                Station.NavMeshSurface.BuildNavMesh();
-            }
-            else
-                Station.NavMeshSurface.BuildNavMesh();
-
             firstTile.SwitchToBuitMaterial();
-            //firstTile.transform.parent = Station.Instance.transform;
             currentRoom.AddFloorTile(firstTile);
             firstTile = null;
-
             foreach (FloorTile tile in currentPlacement)
             {
                 tile.SwitchToBuitMaterial();
-                //tile.transform.parent = Station.Instance.transform;
                 currentRoom.AddFloorTile(tile);
             }
             currentPlacement.Clear();
 
             Station.AddRoom(currentRoom);
-            //Game.Selection.DeselectRoom();
+            AddWallsToCurrentRoom();
+            BuildNavMesh();
             currentRoom = null;
-            //placing = false;
         }
 
         else
@@ -193,6 +179,19 @@ public class StationFloorBuilder : MonoBehaviour
             Game.Input.OnPrimaryPress += PlaceFirstTile;
         }
         
+    }
+
+    private void BuildNavMesh()
+    {
+        if (Station.NavMeshSurface == null)
+        {
+            //firstTile.NavMeshSurface.enabled = true;
+            currentRoom.Floor[0].NavMeshSurface.enabled = true;
+            Station.SetNavMeshSurface(currentRoom.Floor[0].NavMeshSurface);
+            Station.NavMeshSurface.BuildNavMesh();
+        }
+        else
+            Station.NavMeshSurface.BuildNavMesh();
     }
 
     private void CancelPlacement()
@@ -248,6 +247,23 @@ public class StationFloorBuilder : MonoBehaviour
         if (rightTile != null && rightTile.Room != null)
             list.Add(rightTile.Room);
 
+
+        return list;
+    }
+
+    private List<RoomObject> RoomsTouchingRoom(RoomObject room)
+    {
+        List<RoomObject> list = new List<RoomObject>();
+
+        foreach(FloorTile tile in room.Floor)
+        {
+            foreach (RoomObject otherRoom in RoomsTouchingTile(tile))
+            {
+                if (!list.Contains(room)) list.Add(room);
+            }
+        }
+
+        if (list.Contains(room)) list.Remove(room);
         return list;
     }
 
@@ -343,12 +359,58 @@ public class StationFloorBuilder : MonoBehaviour
         }
     }
 
-    private void AddWallsToPlacement()
+    private void AddWallsToCurrentRoom()
     {
+        foreach (FloorTile tile in currentRoom.Floor)
+        {
+            AddWallsToTile(tile);
+        }
 
+        /*foreach (RoomObject room in RoomsTouchingRoom(currentRoom))
+        {
+            foreach (FloorTile tile in room.Floor)
+            {
+                AddWallsToTile(tile);
+            }
+        }*/
     }
 
     private void AddWallsToTile(FloorTile tile)
+    {
+        tile.RemoveWalls();
+
+        Vector3 up = tile.transform.position;
+        up.z += tileSize.y;
+        FloorTile upTile = Station.TileAtLocation(up);
+        if (upTile == null)
+            tile.AddTopWall();
+        else AddWallsToTileSingle(upTile);
+
+            Vector3 down = tile.transform.position;
+        down.z -= tileSize.y;
+        FloorTile downTile = Station.TileAtLocation(down);
+        if (downTile == null)
+            tile.AddBottomWall();
+        else AddWallsToTileSingle(downTile);
+
+            Vector3 left = tile.transform.position;
+        left.x -= tileSize.x;
+        FloorTile leftTile = Station.TileAtLocation(left);
+        if (leftTile == null)
+            tile.AddLeftWall();
+        else AddWallsToTileSingle(leftTile);
+
+        Vector3 right = tile.transform.position;
+        right.x += tileSize.x;
+        FloorTile rightTile = Station.TileAtLocation(right);
+        if (rightTile == null)
+            tile.AddRightWall();
+        else AddWallsToTileSingle(rightTile);
+
+        tile.ApplyPillers();
+    }
+
+    private void AddWallsToTileSingle(FloorTile tile)
     {
         tile.RemoveWalls();
 

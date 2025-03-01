@@ -53,7 +53,7 @@ public class StationPlaceableBuilder : MonoBehaviour
             }
 
             if (UI.MouseOverUI) Debug.LogWarning("Mouse over UI");
-            else Debug.LogWarning("RayCast fail, no ground position under mouse");
+            //else Debug.LogWarning("RayCast fail, no ground position under mouse");
             return new Vector3(0, 500, 0);
         }
     }

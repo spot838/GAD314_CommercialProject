@@ -64,7 +64,9 @@ public class TransactionDesk : PlaceableObject
     {
         int positionInQue = CuePosition(customer);
 
-        return CustomerPositionTransform.position + (-1 * CustomerPositionTransform.forward * positionInQue);
+        if (positionInQue == 0) return CustomerPositionTransform.position;
+
+        return CustomerPositionTransform.position + (-1 * CustomerPositionTransform.forward) + (-1 * CustomerPositionTransform.forward * positionInQue);
     }
 }
 
