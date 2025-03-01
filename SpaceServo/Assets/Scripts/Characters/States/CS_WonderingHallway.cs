@@ -22,9 +22,22 @@ public class CS_WonderingHallway : CustomerState
             customer.NavMeshAgent.SetDestination(randomHallwayPosition);
         }
 
-        else if (!customer.HasBoughtFuel && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
+        else if (!customer.HasRefueled && !customer.Ship.LandingPad.IsRefueling
+            && Station.TryGetAvialableFuelDesk(out TransactionDesk fuelDesk))
+        {
+            Debug.Log(customer.name + " moving to buy fuel");
+            customer.SetNewState(new CS_MovingToTransactionDesk(customer, fuelDesk));
+        }
+
+        else if (!customer.HasRefueled && customer.Ship.LandingPad.IsRefueling
+            && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
         {
             customer.SetNewState(new CS_MovingToTransactionDesk(customer, desk));
+        }
+
+        else if (customer.HasRefueled)
+        {
+            customer.SetNewState(new CS_ReturningToShip(customer));
         }
     }
 

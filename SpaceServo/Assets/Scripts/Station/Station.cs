@@ -67,7 +67,22 @@ public class Station : MonoBehaviour
     {
         foreach (TransactionDesk desk in Instance.transactionDesks)
         {
-            if (desk.IsAvailable)
+            if (desk.Room.Config.Type != Room.EType.FuelPurchase && desk.IsAvailable)
+            {
+                transactionDesk = desk;
+                return true;
+            }
+        }
+
+        transactionDesk = null;
+        return false;
+    }
+
+    public static bool TryGetAvialableFuelDesk(out TransactionDesk transactionDesk)
+    {
+        foreach (TransactionDesk desk in Instance.transactionDesks)
+        {
+            if (desk.Room.Config.Type == Room.EType.FuelPurchase && desk.IsAvailable)
             {
                 transactionDesk = desk;
                 return true;

@@ -25,14 +25,20 @@ public class CS_Idle : CustomerState
 
     public override void StateTick()
     {
-        if (!customer.HasBoughtFuel && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
+        if (!customer.HasRefueled && !customer.Ship.LandingPad.IsRefueling 
+            && Station.TryGetAvialableFuelDesk(out TransactionDesk fuelDesk))
+        {
+            Debug.Log(customer.name + " moving to buy fuel");
+            customer.SetNewState(new CS_MovingToTransactionDesk(customer, fuelDesk));
+        }
+
+        else if (!customer.HasRefueled && customer.Ship.LandingPad.IsRefueling
+            && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
         {
             customer.SetNewState(new CS_MovingToTransactionDesk(customer, desk));
         }
 
-        // TODO: else if (!shipHasRefuled)
-
-        else if (customer.HasBoughtFuel)
+        else if (customer.HasRefueled)
         {
             customer.SetNewState(new CS_ReturningToShip(customer));
         }

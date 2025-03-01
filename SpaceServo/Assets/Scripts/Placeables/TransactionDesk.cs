@@ -14,40 +14,11 @@ public class TransactionDesk : PlaceableObject
     protected override void Update()
     {
         base.Update();
-
-        /*if (CurrentCustomer != null)
-        {
-            if (!CurrentCustomer.IsMoving && CurrentCustomer.ArrivedAtDestination && !CurrentCustomer.KeepIdle)
-            {
-                //print("begining transaction");
-                CurrentCustomer.KeepIdle = true;
-                timer = TransactionBaseTime;
-                CurrentCustomer.transform.rotation = CustomerPosition.rotation;
-            }
-
-            else if (CurrentCustomer.KeepIdle)
-            {
-                if (timer >= 0)
-                {
-                    timer -= Time.deltaTime;
-                    //print(timer);
-                }
-                else
-                {
-                    CurrentCustomer.CompleteFuelPurchase();
-                    CurrentCustomer = null;
-                    //print("transaction complete");
-                }
-            }
-
-            
-        }*/
     }
 
     public override void SetPlaced()
     {
         base.SetPlaced();
-        //HireStaffMember(); // for now we'll just spawn in the staff member when placement occurs
     }
 
     public void HireStaffMember()
@@ -67,7 +38,7 @@ public class TransactionDesk : PlaceableObject
     {
         // apply customer stat changes here
 
-        CurrentCustomer.HasBoughtFuel = true; // TODO: this will be replaced once fuel system is in
+        if (Room.Config.Type == global::Room.EType.FuelPurchase) CurrentCustomer.Ship.BeginRefueling();
 
         CurrentCustomer.SetNewState(new CS_Idle(CurrentCustomer));
         StaffMember.SetNewState(new SMS_SittingIdle(StaffMember));

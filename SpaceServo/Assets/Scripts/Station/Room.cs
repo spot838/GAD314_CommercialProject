@@ -13,6 +13,7 @@ public class Room : ScriptableObject
     public enum EType
     {
         None,
-        Hallway
+        Hallway,
+        FuelPurchase
     }
 }

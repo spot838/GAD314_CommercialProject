@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258657144187549240}
   - component: {fileID: 3331962439624897126}
+  - component: {fileID: 8922106472960099178}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -49,6 +50,22 @@ MonoBehaviour:
   speed: 10
   verticalSpeed: 5
   rotationSpeed: 100
+  <Fuel>k__BackingField: {fileID: 8922106472960099178}
+--- !u!114 &8922106472960099178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702371815321801987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b30094c662632d47af6a041245f3dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Amount>k__BackingField: 0
+  <MaxAmount>k__BackingField: 1000
+  initialRange: {x: 50, y: 2}
 --- !u!1 &5084942167424934569
 GameObject:
   m_ObjectHideFlags: 0

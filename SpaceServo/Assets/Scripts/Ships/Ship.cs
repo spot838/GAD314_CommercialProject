@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float verticalSpeed;
     [SerializeField] float rotationSpeed = 10;
+    [field: SerializeField] public ShipFuel Fuel { get; private set; } 
 
     public LandingPad LandingPad { get; private set; }
     public Customer Customer { get; private set; }
@@ -179,5 +180,17 @@ public class Ship : MonoBehaviour
         Customer = null;
 
         targetRotation = Quaternion.LookRotation(Station.ShipManager.DeparturePoint - transform.position, transform.up);
+    }
+
+    public void BeginRefueling()
+    {
+        if (Fuel == null)
+        {
+            Debug.LogError(name + " missing refueling system");
+            return;
+        }
+
+        LandingPad.Refueling.BeginRefueling(Fuel);
+        LandingPad.Indicator.gameObject.SetActive(true);
     }
 }

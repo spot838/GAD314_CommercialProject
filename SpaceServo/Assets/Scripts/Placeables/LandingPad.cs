@@ -7,8 +7,11 @@ public class LandingPad : PlaceableObject
     [field: SerializeField] public Transform CustomerSpawnPoint {  get; private set; }
     [field: SerializeField] public float LandingLevel {  get; private set; }
     [field: SerializeField] public Ship CurrentShip;
+    [field: SerializeField] public Refueling Refueling { get; private set; }
+    [field: SerializeField] public UI_LandingPadRefuelIndicator Indicator;
 
     public bool IsAvailable => CurrentShip == null;
+    public bool IsRefueling => Refueling.IsRefueling;
 
     public Vector3 ArivalPosition
     {
