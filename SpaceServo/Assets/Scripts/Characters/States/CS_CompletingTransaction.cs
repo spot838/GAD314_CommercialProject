@@ -16,7 +16,7 @@ public class CS_CompletingTransaction : CustomerState
     public override void StateStart()
     {
         desk.CurrentCustomer = customer;
-        customer.transform.rotation = desk.CustomerPosition.rotation;
+        customer.transform.rotation = desk.CustomerPositionTransform.rotation;
 
         customer.Animator.CrossFade("Idle", crossFadeTime);
         timer = desk.TransactionBaseTime;

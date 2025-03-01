@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -340,5 +341,41 @@ public class StationFloorBuilder : MonoBehaviour
 
             return true;
         }
+    }
+
+    private void AddWallsToPlacement()
+    {
+
+    }
+
+    private void AddWallsToTile(FloorTile tile)
+    {
+        tile.RemoveWalls();
+
+        Vector3 up = tile.transform.position;
+        up.z += tileSize.y;
+        FloorTile upTile = Station.TileAtLocation(up);
+        if (upTile == null)
+            tile.AddTopWall();
+
+        Vector3 down = tile.transform.position;
+        down.z -= tileSize.y;
+        FloorTile downTile = Station.TileAtLocation(down);
+        if (downTile == null)
+            tile.AddBottomWall();
+
+        Vector3 left = tile.transform.position;
+        left.x -= tileSize.x;
+        FloorTile leftTile = Station.TileAtLocation(left);
+        if (leftTile == null)
+            tile.AddLeftWall();
+
+        Vector3 right = tile.transform.position;
+        right.x += tileSize.x;
+        FloorTile rightTile = Station.TileAtLocation(right);
+        if (rightTile == null)
+            tile.AddRightWall();
+
+        tile.ApplyPillers();
     }
 }

@@ -339,10 +339,12 @@ MonoBehaviour:
   - {fileID: 454529820795274919}
   IsPlaced: 0
   HasValidPlacement: 0
-  <CustomerPosition>k__BackingField: {fileID: 4048117120256109910}
+  <CustomerPositionTransform>k__BackingField: {fileID: 4048117120256109910}
   <StaffPosition>k__BackingField: {fileID: 7610563352959350622}
   <TransactionBaseTime>k__BackingField: 1.5
   CurrentCustomer: {fileID: 0}
+  CustomerCue: []
+  MaxCueSize: 3
   StaffMember: {fileID: 0}
 --- !u!65 &3269519378505580967
 BoxCollider:
