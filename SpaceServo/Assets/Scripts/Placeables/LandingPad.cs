@@ -28,4 +28,18 @@ public class LandingPad : PlaceableObject
         Destroy(CurrentShip.gameObject);
         base.OnDestroy();
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
+
+        if (IsPlaced && CurrentShip != null && CurrentShip.Customer != null && other.TryGetComponent<Customer>(out Customer customer))
+        {
+            if (CurrentShip.Customer == customer && customer.HasRefueled)
+            {
+                customer.DestoryCustomer();
+            }
+        }
+    }
 }

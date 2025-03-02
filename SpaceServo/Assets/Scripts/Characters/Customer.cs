@@ -23,16 +23,15 @@ public class Customer : Character
 
     private void OnDestroy()
     {
+        Station.Rating.AddCustomerSatisfaction(Satisfaction.ValueCurrentVisual);
+        Ship.BeginTakeOff();
         Station.CustomerManager.CustomerDespawn(this);
     }
 
     public void DestoryCustomer()
     {
-        Ship.BeginTakeOff();
-
-        // TODO: replace this with adding to station rating
         // apply customer satisfaction to station rating
-        float custStatisfactionDifference = Satisfaction.ValueCurrent - Satisfaction.ValueBase;
+        /*float custStatisfactionDifference = Satisfaction.ValueCurrent - Satisfaction.ValueBase;
         if (custStatisfactionDifference > 0)
         {
             Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Positive by {custStatisfactionDifference}");
@@ -44,8 +43,7 @@ public class Customer : Character
         else
         {
             Debug.Log($"Customer Satisfaction: {Satisfaction.ValueCurrent.ToString()}, Neutral");
-        }
-
+        }*/
         Destroy(this.gameObject);
     }
 }

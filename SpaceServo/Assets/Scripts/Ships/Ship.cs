@@ -12,6 +12,7 @@ public class Ship : MonoBehaviour
     public LandingPad LandingPad { get; private set; }
     public Customer Customer { get; private set; }
     private Quaternion targetRotation;
+    public float RequiredFuel => Fuel.MaxAmount - Fuel.Amount;
 
     public enum EState
     {

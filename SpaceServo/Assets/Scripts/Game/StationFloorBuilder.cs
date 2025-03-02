@@ -142,9 +142,11 @@ public class StationFloorBuilder : MonoBehaviour
         Game.Input.OnPrimaryRelease -= CompletePlacement;
 
 
-        if (PlacementIsValid)
+        if (PlacementIsValid && canAffordPlacement)
         {
             Game.Input.OnSecondaryPress -= CancelPlacement;
+
+            Station.Money.Remove(costOfPlacement);
 
             firstTile.SwitchToBuitMaterial();
             currentRoom.AddFloorTile(firstTile);
@@ -439,5 +441,23 @@ public class StationFloorBuilder : MonoBehaviour
             tile.AddRightWall();
 
         tile.ApplyPillers();
+    }
+
+    private bool canAffordPlacement
+    {
+        get
+        {
+            if (currentRoom == null || firstTile == null) return false;
+            return Station.Money.CanAfford(costOfPlacement);
+        }
+    }
+
+    private int costOfPlacement
+    {
+        get
+        {
+            if (firstTile == null) return 0;
+            return currentRoom.Config.Cost(1 + currentPlacement.Count);
+        }
     }
 }

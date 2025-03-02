@@ -19,7 +19,6 @@ public class CS_ReturningToShip : CustomerState
     {
         if (customer.ArrivedAtDestination)
         {
-            Station.Rating.AddCustomerSatisfaction(customer.Satisfaction.ValueCurrentVisual);
             customer.DestoryCustomer();
         }
     }

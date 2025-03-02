@@ -11,6 +11,8 @@ public class TransactionDesk : PlaceableObject
     [SerializeField] int MaxQueueSize = 3;
     [field: SerializeField] public StaffMember StaffMember;
     float timer;
+    [SerializeField] int unitBuyPrice = 1;
+    [field: SerializeField] public UI_TransactionDeskIndicator Indicator { get; private set; }
 
     public bool IsAvailable => StaffMember != null && CustomerQueue.Count < MaxQueueSize;
 
@@ -46,7 +48,17 @@ public class TransactionDesk : PlaceableObject
     {
         // apply customer stat changes here
 
-        if (Room.Config.Type == global::Room.EType.FuelPurchase) CurrentCustomer.Ship.BeginRefueling();
+        if (Room.Config.Type == global::Room.EType.FuelPurchase)
+        {
+            CurrentCustomer.Ship.BeginRefueling();
+            Station.Money.Add((int)(CurrentCustomer.Ship.RequiredFuel * unitBuyPrice));
+            ShowMoneyIndicator((int)(CurrentCustomer.Ship.RequiredFuel * unitBuyPrice));
+        }
+        else
+        {
+            Station.Money.Add(unitBuyPrice);
+            ShowMoneyIndicator(unitBuyPrice);
+        }
 
         CurrentCustomer.SetNewState(new CS_Idle(CurrentCustomer));
         StaffMember.SetNewState(new SMS_SittingIdle(StaffMember));
@@ -67,6 +79,17 @@ public class TransactionDesk : PlaceableObject
         if (positionInQue == 0) return CustomerPositionTransform.position;
 
         return CustomerPositionTransform.position + (-1 * CustomerPositionTransform.forward) + (-1 * CustomerPositionTransform.forward * positionInQue);
+    }
+
+    public void ShowMoneyIndicator(int moneyAmount)
+    {
+        Indicator.gameObject.SetActive(true);
+        Indicator.Initilize(moneyAmount);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
     }
 }
 

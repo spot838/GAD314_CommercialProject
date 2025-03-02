@@ -214,6 +214,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: AddRoomsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2971452148432917667, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824789368142077116, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711151672583187938, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711151672583187938, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711151672583187938, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548978034953023523, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548978034953023523, guid: 1ef046f3438ff7544a34146d8a107cd4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -25,12 +25,14 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void OnBuildFloorButtonPress()
     {
-        UI.ShowRoomsMenu();
+        Game.Selection.DeselectRoom();
+        UI.ShowRoomsMenu(!UI.IsRoomsMenuShowing);
     }
 
     private void OnPlaceObjectButtonPress()
     {
-        UI.ShowPlaceablesMenu();
+        Game.Selection.DeselectRoom();
+        UI.ShowPlaceablesMenu(!UI.IsPlaceablesMenuShowing);
     }
 
     public void UpdateMoneyText()

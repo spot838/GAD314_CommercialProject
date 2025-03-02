@@ -7,6 +7,7 @@ public class RoomObject : MonoBehaviour
 
     public List<FloorTile> Floor { get; private set; } = new List<FloorTile>();
     public List<PlaceableObject> Placeables { get; private set; } = new List<PlaceableObject>();
+    public int Cost => Config.Cost(Floor.Count);
 
     public void Initialize(Room config)
     {

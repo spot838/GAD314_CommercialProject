@@ -18,7 +18,7 @@ public class UI_AddRoomItem : MonoBehaviour
 
         icon.texture = config.Icon;
         nameText.text = config.Name;
-        costText.text = "$$$";
+        costText.text = "$" + config.BasePrice + " + " + config.CostPerTile + " Per/Tile";
     }
 
     private void OnButtonPress()
