@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [SerializeField] private UI_AddPlaceablesMenu placeablesMenu;
     [SerializeField] private UI_AddRoomMenu roomsMenu;
     [SerializeField] private UI_RoomInfo roomInfo;
+    [SerializeField] private UI_PauseMenu pauseMenu;
 
     public static bool MouseOverUI;
 
@@ -67,5 +68,10 @@ public class UI : MonoBehaviour
     public static void UpdateRoomInfo()
     {
         if (Instance.roomInfo.gameObject.activeSelf) Instance.roomInfo.UpdateUI();
+    }
+
+    public static void ShowPauseMenu(bool show = true)
+    {
+        Instance.pauseMenu.gameObject.SetActive(show);
     }
 }

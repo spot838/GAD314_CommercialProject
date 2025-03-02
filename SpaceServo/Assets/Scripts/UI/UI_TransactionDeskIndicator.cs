@@ -35,9 +35,14 @@ public class UI_TransactionDeskIndicator : MonoBehaviour
                 rectTransform.anchoredPosition3D.z);
 
             Color color = moneyIndicator.color;
-            color.a = 1 - ((height - startingHeight) / (endingHeight - startingHeight));
-            if (color.a < 0) color.a *= -1;
-            moneyIndicator.color = color;
+            float progress = ((height - startingHeight) / (endingHeight - startingHeight));
+            if (progress > 0.5)
+            {
+                color.a = 1 - ((progress - 0.5f)*2);
+                if (color.a < 0) color.a *= -1;
+                moneyIndicator.color = color;
+            }
+            
         }
 
         if (rectTransform.anchoredPosition3D.y >= endingHeight)

@@ -70,4 +70,9 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     {
         CameraZoom = context.ReadValue<Vector2>();
     }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        Game.PauseGame(!Game.IsPaused);
+    }
 }

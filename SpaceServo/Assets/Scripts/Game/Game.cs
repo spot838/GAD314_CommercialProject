@@ -26,6 +26,8 @@ public class Game : MonoBehaviour
     public static LayerMask RoomLayer => Instance.roomLayer;
     public static Selection Selection => Instance.selection;
 
+    public static bool IsPaused => Time.timeScale == 0;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -42,5 +44,11 @@ public class Game : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void PauseGame(bool pause)
+    {
+        UI.ShowPauseMenu(pause);
+        Time.timeScale = pause ? 0 : 1;
     }
 }
