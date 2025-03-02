@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class StationFloorBuilder : MonoBehaviour
 {
-    [SerializeField] Vector2 tileSize = new Vector2(5,5);
+    [field: SerializeField] public Vector2 TileSize = new Vector2(5,5);
     [SerializeField] MeshRenderer plane; // this is something for raycast to hit
     [SerializeField] RoomObject roomPrefab;
     [field: SerializeField] public Room[] RoomConfigs {  get; private set; }
@@ -58,14 +58,14 @@ public class StationFloorBuilder : MonoBehaviour
                 int rows;
 
                 if (botttomRightPoint.x > topLeftPoint.x)
-                    columns = (int)((botttomRightPoint.x - topLeftPoint.x) / tileSize.x);
+                    columns = (int)((botttomRightPoint.x - topLeftPoint.x) / TileSize.x);
                 else
-                    columns = (int)((topLeftPoint.x - botttomRightPoint.x) / tileSize.x);
+                    columns = (int)((topLeftPoint.x - botttomRightPoint.x) / TileSize.x);
 
                 if (botttomRightPoint.z < topLeftPoint.z)
-                    rows = (int)((topLeftPoint.z - botttomRightPoint.z) / tileSize.y);
+                    rows = (int)((topLeftPoint.z - botttomRightPoint.z) / TileSize.y);
                 else
-                    rows = (int)((botttomRightPoint.z - topLeftPoint.z) / tileSize.y);
+                    rows = (int)((botttomRightPoint.z - topLeftPoint.z) / TileSize.y);
 
                 for (int currentCol = 0;  currentCol <= columns; currentCol++)
                 {
@@ -74,10 +74,10 @@ public class StationFloorBuilder : MonoBehaviour
                         if (currentCol == 0 && currentRow == 0) continue;
 
                         Vector3 position = firstTile.transform.position;
-                        if (botttomRightPoint.x > topLeftPoint.x) position.x += tileSize.x * currentCol;
-                        else position.x -= tileSize.x * currentCol;
-                        if (botttomRightPoint.z < topLeftPoint.z) position.z -= tileSize.y * currentRow;
-                        else position.z += tileSize.y * currentRow;
+                        if (botttomRightPoint.x > topLeftPoint.x) position.x += TileSize.x * currentCol;
+                        else position.x -= TileSize.x * currentCol;
+                        if (botttomRightPoint.z < topLeftPoint.z) position.z -= TileSize.y * currentRow;
+                        else position.z += TileSize.y * currentRow;
 
                         FloorTile newTile = Instantiate(currentRoom.Config.FloorTilePrefab, position, Quaternion.identity);
                         newTile.SwitchToBuildingMaterial();
@@ -123,10 +123,17 @@ public class StationFloorBuilder : MonoBehaviour
         }
     }
 
-    private Vector3 RoundToNearestGrid(Vector3 location)
+    public Vector3 RoundToNearestGrid(Vector3 location)
     {
-        float x = Mathf.Round(location.x / tileSize.x) * tileSize.x;
-        float z = Mathf.Round(location.z / tileSize.y) * tileSize.y;
+        float x = Mathf.Round(location.x / TileSize.x) * TileSize.x;
+        float z = Mathf.Round(location.z / TileSize.y) * TileSize.y;
+        return new Vector3(x, location.y, z);
+    }
+
+    public Vector3 RoundToNearestHalfGrid(Vector3 location)
+    {
+        float x = Mathf.Round(location.x / (TileSize.x / 2)) * (TileSize.x/2);
+        float z = Mathf.Round(location.z / (TileSize.y / 2)) * (TileSize.y/2);
         return new Vector3(x, location.y, z);
     }
 
@@ -226,25 +233,25 @@ public class StationFloorBuilder : MonoBehaviour
         List<RoomObject> list = new List<RoomObject>();
 
         Vector3 up = tile.transform.position;
-        up.z += tileSize.y;
+        up.z += TileSize.y;
         FloorTile upTile = Station.TileAtLocation(up);
         if (upTile != null && upTile.Room != null)
             list.Add(upTile.Room);
 
         Vector3 down = tile.transform.position;
-        down.z -= tileSize.y;
+        down.z -= TileSize.y;
         FloorTile downTile = Station.TileAtLocation(down);
         if (downTile != null && downTile.Room != null)
             list.Add(downTile.Room);
 
         Vector3 left = tile.transform.position;
-        left.x -= tileSize.x;
+        left.x -= TileSize.x;
         FloorTile leftTile = Station.TileAtLocation(left);
         if (leftTile != null && leftTile.Room != null)
             list.Add(leftTile.Room);
 
         Vector3 right = tile.transform.position;
-        right.x += tileSize.x;
+        right.x += TileSize.x;
         FloorTile rightTile = Station.TileAtLocation(right);
         if (rightTile != null && rightTile.Room != null)
             list.Add(rightTile.Room);
@@ -382,28 +389,28 @@ public class StationFloorBuilder : MonoBehaviour
         tile.RemoveWalls();
 
         Vector3 up = tile.transform.position;
-        up.z += tileSize.y;
+        up.z += TileSize.y;
         FloorTile upTile = Station.TileAtLocation(up);
         if (upTile == null)
             tile.AddTopWall();
         else AddWallsToTileSingle(upTile);
 
             Vector3 down = tile.transform.position;
-        down.z -= tileSize.y;
+        down.z -= TileSize.y;
         FloorTile downTile = Station.TileAtLocation(down);
         if (downTile == null)
             tile.AddBottomWall();
         else AddWallsToTileSingle(downTile);
 
             Vector3 left = tile.transform.position;
-        left.x -= tileSize.x;
+        left.x -= TileSize.x;
         FloorTile leftTile = Station.TileAtLocation(left);
         if (leftTile == null)
             tile.AddLeftWall();
         else AddWallsToTileSingle(leftTile);
 
         Vector3 right = tile.transform.position;
-        right.x += tileSize.x;
+        right.x += TileSize.x;
         FloorTile rightTile = Station.TileAtLocation(right);
         if (rightTile == null)
             tile.AddRightWall();
@@ -417,25 +424,25 @@ public class StationFloorBuilder : MonoBehaviour
         tile.RemoveWalls();
 
         Vector3 up = tile.transform.position;
-        up.z += tileSize.y;
+        up.z += TileSize.y;
         FloorTile upTile = Station.TileAtLocation(up);
         if (upTile == null)
             tile.AddTopWall();
 
         Vector3 down = tile.transform.position;
-        down.z -= tileSize.y;
+        down.z -= TileSize.y;
         FloorTile downTile = Station.TileAtLocation(down);
         if (downTile == null)
             tile.AddBottomWall();
 
         Vector3 left = tile.transform.position;
-        left.x -= tileSize.x;
+        left.x -= TileSize.x;
         FloorTile leftTile = Station.TileAtLocation(left);
         if (leftTile == null)
             tile.AddLeftWall();
 
         Vector3 right = tile.transform.position;
-        right.x += tileSize.x;
+        right.x += TileSize.x;
         FloorTile rightTile = Station.TileAtLocation(right);
         if (rightTile == null)
             tile.AddRightWall();

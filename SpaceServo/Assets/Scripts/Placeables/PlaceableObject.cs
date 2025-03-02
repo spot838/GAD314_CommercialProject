@@ -104,7 +104,7 @@ public class PlaceableObject : MonoBehaviour
                     if (floorTile != null)
                     {
                         if (Game.Selection.Room == null
-                            || Game.Selection.Room == floorTile.Room)
+                            || (Game.Selection.Room == floorTile.Room && !floorTile.IsEdgePiece))
                             topLeftValid = true;
                     }
                 }
@@ -116,7 +116,7 @@ public class PlaceableObject : MonoBehaviour
                     if (floorTile != null)
                     {
                         if (Game.Selection.Room == null
-                            || Game.Selection.Room == floorTile.Room)
+                            || Game.Selection.Room == (floorTile.Room && !floorTile.IsEdgePiece))
                             topRightValid = true;
                     }
                 }
@@ -128,7 +128,7 @@ public class PlaceableObject : MonoBehaviour
                     if (floorTile != null)
                     {
                         if (Game.Selection.Room == null
-                            || Game.Selection.Room == floorTile.Room)
+                            || Game.Selection.Room == (floorTile.Room && !floorTile.IsEdgePiece))
                             bottomLeftValid = true;
                     }
                 }
@@ -140,7 +140,7 @@ public class PlaceableObject : MonoBehaviour
                     if (floorTile != null)
                     {
                         if (Game.Selection.Room == null
-                            || Game.Selection.Room == floorTile.Room)
+                            || Game.Selection.Room == (floorTile.Room && !floorTile.IsEdgePiece))
                             bottomRightValid = true;
                     }
                 }

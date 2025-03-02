@@ -100,4 +100,13 @@ public class FloorTile : MonoBehaviour
             pillerTopRight.SetActive(true);
         }
     }
+
+    public bool IsEdgePiece
+    {
+        get
+        {
+            if (!Game.PlaceableBuilder.DontPlaceOnEdge) return false;
+            return wallTop.activeSelf || wallBottom.activeSelf || wallRight.activeSelf || wallLeft.activeSelf;
+        }
+    }
 }

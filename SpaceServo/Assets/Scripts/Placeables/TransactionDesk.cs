@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TransactionDesk : PlaceableObject
 {
-    [field: SerializeField] public Transform CustomerPositionTransform {  get; private set; }
+    [field: SerializeField, Header("Transaction Desk Settings")] public Transform CustomerPositionTransform {  get; private set; }
     [field: SerializeField] public Transform StaffPosition { get; private set; }
     [field: SerializeField] public float TransactionBaseTime { get; private set; } = 1.5f;
     [field: SerializeField] public Customer CurrentCustomer;

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Placeables>k__BackingField:
   - {fileID: 11400000, guid: db827de129e343a47b3afd5215db11a4, type: 2}
+  snapToGrid: 1

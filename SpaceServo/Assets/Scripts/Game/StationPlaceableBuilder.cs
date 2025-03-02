@@ -3,6 +3,8 @@ using UnityEngine;
 public class StationPlaceableBuilder : MonoBehaviour
 {
     [field: SerializeField] public Placeable[] Placeables { get; private set; }
+    [SerializeField] private bool snapToGrid;
+    [field: SerializeField] public bool DontPlaceOnEdge { get; private set; }
 
     Placeable currentPlaceable;
     PlaceableObject currentPlaceableObject;
@@ -49,7 +51,12 @@ public class StationPlaceableBuilder : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit, rayCastDistance, Game.StationLayer))
             {
-                return hit.point;
+                if (snapToGrid)
+                {
+                    return Game.FloorBuilder.RoundToNearestHalfGrid(hit.point);
+                }
+
+                else return hit.point;
             }
 
             if (UI.MouseOverUI) Debug.LogWarning("Mouse over UI");
