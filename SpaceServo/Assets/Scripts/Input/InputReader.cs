@@ -11,6 +11,7 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     InputSystem_Actions actions;
 
     [field: SerializeField] public Vector2 MousePosition { get; private set; }
+    [field: SerializeField] public Vector2 MouseDelta { get; private set; }
     [field: SerializeField] public bool PrimaryButtonDown { get; private set; }
     [field: SerializeField] public bool SecondaryButtonDown { get; private set; }
     [field: SerializeField] public Vector2 CameraMove { get; private set; }
@@ -74,5 +75,10 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     public void OnPause(InputAction.CallbackContext context)
     {
         Game.PauseGame(!Game.IsPaused);
+    }
+
+    public void OnMouseDelta(InputAction.CallbackContext context)
+    {
+        MouseDelta = context.ReadValue<Vector2>();
     }
 }

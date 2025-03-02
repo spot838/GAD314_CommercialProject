@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Windows;
 
 // controls the camera
 
@@ -9,25 +11,66 @@ public class CameraController : MonoBehaviour
 {
     [field: SerializeField] public Camera Camera { get; private set; }
     [field: SerializeField] public float DistanceToGround { get; private set; }
-    [SerializeField] float angle;
-    [SerializeField, Tooltip("Units/Second")] float panSpeed;
+    [field: SerializeField] public float Angle { get; private set; } = 75;
 
     [Header("Zoom")]
+    [SerializeField] float minZoom;
+    [SerializeField] float maxZoom;
     [SerializeField] float zoomSpeed;
+    [Header("Right-Click Pan")]
+    [SerializeField, Tooltip("Units/Second")] float panSpeed;
+    [SerializeField] float panDelay = 0.5f;
+    [Header("Edge Pan")]
+    [SerializeField] float edgePanSpeed;
+    [SerializeField] float edgePanDelay = 0.1f;
+    [SerializeField] float edgeSize = 20f;
+
+    InputReader input => Game.Input;
+    bool paning;
+    float deselectStartTime;
+    float deselectDuration => Time.time - deselectStartTime;
+    bool edgePaning;
+    float edgePanStartTime;
+    float edgePanDuration => Time.time - edgePanStartTime;
+
+    private void OnEnable()
+    {
+        input.OnSecondaryPress += Input_OnMouseSecondaryPress;
+        input.OnSecondaryRelease += Input_OnMouseSecondaryRelease;
+    }
+
+    private void OnDisable()
+    {
+        input.OnSecondaryPress -= Input_OnMouseSecondaryPress;
+        input.OnSecondaryRelease -= Input_OnMouseSecondaryRelease;
+    }
 
     void Update()
     {
+        EdgePaning();
+        Paning();
         Zoom();
         KeyboardPan();
         SetCameraPosition();
     }
 
+    private void Input_OnMouseSecondaryRelease()
+    {
+        paning = false;
+    }
+
+    private void Input_OnMouseSecondaryPress()
+    {
+        paning = true;
+        deselectStartTime = Time.time;
+    }
+
     private void SetCameraPosition()
     {
-        float y = Mathf.Cos(angle) * DistanceToGround; 
-        float z = Mathf.Sin(angle) * DistanceToGround;
+        float y = Mathf.Cos(Angle) * DistanceToGround; 
+        float z = Mathf.Sin(Angle) * DistanceToGround;
         Camera.transform.localPosition = new Vector3(0, y, z);
-        Camera.transform.localEulerAngles = new Vector3(angle, 0, 0);
+        Camera.transform.localEulerAngles = new Vector3(Angle, 0, 0);
     }
 
     private void KeyboardPan()
@@ -45,7 +88,68 @@ public class CameraController : MonoBehaviour
     {
         if (Game.Input.CameraZoom.y != 0)
         {
-            DistanceToGround += zoomSpeed * Game.Input.CameraZoom.y * Time.deltaTime;
+            DistanceToGround = Mathf.Clamp(DistanceToGround + (zoomSpeed * Game.Input.CameraZoom.y * Time.deltaTime), minZoom, maxZoom);
+            
+        }
+    }
+
+    private void EdgePaning()
+    {
+        if (!edgePaning && mouseOnEdge)
+        {
+            edgePaning = true;
+            edgePanStartTime = Time.time;
+        }
+        else if (edgePaning && !mouseOnEdge)
+        {
+            edgePaning = false;
+        }
+
+        if (edgePaning && edgePanDuration > edgePanDelay)
+        {
+            Vector3 position = transform.position;
+
+            if (input.MousePosition.x < 0 + edgeSize)
+            {
+                position.x -= edgePanSpeed * Time.deltaTime;
+                //position.z += -input.MouseDelta.y * panSpeed * Time.deltaTime;
+            }
+            else if (input.MousePosition.x > Screen.width - edgeSize)
+            {
+                position.x += edgePanSpeed * Time.deltaTime;
+            }
+
+            if (input.MousePosition.y < 0 + edgeSize)
+            {
+                position.z -= edgePanSpeed * Time.deltaTime;
+            }
+            else if (input.MousePosition.y > Screen.height - edgeSize)
+            {
+                position.z += edgePanSpeed * Time.deltaTime;
+            }
+
+            transform.position = position;
+        }
+
+
+    }
+
+    private void Paning()
+    {
+        if (!paning || deselectDuration < panDelay) return;
+
+        Vector3 position = transform.position;
+        position.x += -input.MouseDelta.x * panSpeed * Time.deltaTime;
+        position.z += -input.MouseDelta.y * panSpeed * Time.deltaTime;
+        transform.position = position;
+    }
+
+    private bool mouseOnEdge
+    {
+        get
+        {
+            return (input.MousePosition.x < 0 + edgeSize) || (input.MousePosition.x > Screen.width - edgeSize)
+                || (input.MousePosition.y < 0 + edgeSize) || (input.MousePosition.y > Screen.height - edgeSize);
         }
     }
 }

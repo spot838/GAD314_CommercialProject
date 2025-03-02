@@ -21,6 +21,7 @@ public class Room : ScriptableObject
     public enum EType
     {
         None,
+        Hanger,
         Hallway,
         FuelPurchase
     }

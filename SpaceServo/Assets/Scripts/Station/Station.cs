@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using UnityEditor;
 using UnityEngine;
 
 public class Station : MonoBehaviour
@@ -120,22 +119,22 @@ public class Station : MonoBehaviour
         return null;
     }
 
-    public static RoomObject RandomHallway
+    public static RoomObject RandomHallwayOrHanger
     {
         get
         {
-            List<RoomObject> hallways = new List<RoomObject>();
+            List<RoomObject> rooms = new List<RoomObject>();
 
             foreach (RoomObject room in Instance.rooms)
             {
-                if (room.Config.Type == Room.EType.Hallway)
+                if (room.Config.Type == Room.EType.Hallway || room.Config.Type == Room.EType.Hanger)
                 {
-                    hallways.Add(room);
+                    rooms.Add(room);
                 }
             }
 
-            if (hallways.Count > 0)
-                return hallways[Random.Range(0, hallways.Count)];
+            if (rooms.Count > 0)
+                return rooms[Random.Range(0, rooms.Count)];
 
             return null;
         }

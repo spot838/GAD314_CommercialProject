@@ -156,8 +156,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Camera>k__BackingField: {fileID: 8059209024477120814}
   <DistanceToGround>k__BackingField: 50
-  angle: 75
+  <Angle>k__BackingField: 75
+  minZoom: 20
+  maxZoom: 100
+  zoomSpeed: 20
   panSpeed: 10
+  panDelay: 0.5
+  edgePanSpeed: 10
+  edgePanDelay: 0.1
+  edgeSize: 20
 --- !u!1 &9126886652360770247
 GameObject:
   m_ObjectHideFlags: 0
