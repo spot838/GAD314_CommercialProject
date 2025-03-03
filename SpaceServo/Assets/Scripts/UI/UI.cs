@@ -39,7 +39,11 @@ public class UI : MonoBehaviour
 
     public static void UpdateRatingText()
     {
-        Instance.topBar.UpdateRaitingText();
+        Instance.topBar.UpdateRatingText();
+    }
+    public static void UpdateRatingVisual()
+    {
+        Instance.topBar.UpdateRatingVisual();
     }
 
     public static void ShowPlaceablesMenu(bool show = true)

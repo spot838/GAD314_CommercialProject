@@ -5467,7 +5467,7 @@ MonoBehaviour:
   <Ship>k__BackingField: {fileID: 0}
   KeepIdle: 0
   <Satisfaction>k__BackingField:
-    ValueBase: 100
+    ValueBase: 0
     ValueCurrentVisual: 0
 --- !u!54 &4754598165708015693
 Rigidbody:

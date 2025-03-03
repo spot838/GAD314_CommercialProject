@@ -11,7 +11,7 @@ public class StationRating : MonoBehaviour
     {
         get
         {
-            if (values.Count == 0) return 0.55f;
+            if (values.Count == 0) return 0.5f;
 
             float average = 0;
             foreach (float value in values)
@@ -19,6 +19,7 @@ public class StationRating : MonoBehaviour
                 average += value;
             }
             average = average / values.Count;
+            Mathf.Clamp(average, 0f, 1.0f);
             return average;
         }
     }
@@ -27,12 +28,14 @@ public class StationRating : MonoBehaviour
 
     void Start()
     {
+        UI.UpdateRatingVisual();
         UI.UpdateRatingText();
     }
 
     public void AddCustomerSatisfaction(float satisfaction)
     {
         values.Add(satisfaction);
+        UI.UpdateRatingVisual();
         UI.UpdateRatingText();
     }
 }

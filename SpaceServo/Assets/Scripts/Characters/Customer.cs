@@ -23,7 +23,7 @@ public class Customer : Character
 
     private void OnDestroy()
     {
-        Station.Rating.AddCustomerSatisfaction(Satisfaction.ValueCurrentVisual);
+        Station.Rating.AddCustomerSatisfaction(Satisfaction.ValueCurrent);
         Ship.BeginTakeOff();
         Station.CustomerManager.CustomerDespawn(this);
     }

@@ -8,6 +8,7 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     [SerializeField] TMP_Text moneyText;
     [SerializeField] TMP_Text ratingText;
+    [SerializeField] Slider ratingSlider;
     [SerializeField] Button buildFloorButton;
     [SerializeField] Button placeObjectButton;
 
@@ -40,9 +41,15 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         moneyText.text = "$" + Station.Money.Amount.ToString();
     }
 
-    public void UpdateRaitingText()
+    public void UpdateRatingText()
     {
         ratingText.text = Station.Rating.Value.ToString("F0");
+    }
+
+    public void UpdateRatingVisual()
+    {
+        ratingSlider.value = Station.Rating.Value;
+        // can add some sort of smoothing when the value changes
     }
 
     public void OnPointerEnter(PointerEventData eventData)
