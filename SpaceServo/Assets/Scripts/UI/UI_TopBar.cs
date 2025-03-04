@@ -48,7 +48,7 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void UpdateRatingVisual()
     {
-        ratingSlider.value = Station.Rating.Value;
+        ratingSlider.value = Station.Rating.Value / Station.Rating.MAX_RATING;
         // can add some sort of smoothing when the value changes
     }
 

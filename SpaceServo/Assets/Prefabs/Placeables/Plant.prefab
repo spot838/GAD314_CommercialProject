@@ -52,6 +52,7 @@ MonoBehaviour:
   placedMat: {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
   meshes:
   - {fileID: 2813461996420197301}
+  boxCollider: {fileID: 0}
   IsPlaced: 0
   HasValidPlacement: 0
 --- !u!1 &4753683431873294976
@@ -99,9 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f57ecdd85d67f94b9d0ed5a903818f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifierValue: 1
-  modifierTimerCurrent: 2
-  modifierTimerMax: 2
+  modifierValue: 2
 --- !u!135 &1366697889873399782
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -24,4 +24,24 @@ public class Character : MonoBehaviour
         State = newState;
         State.StateStart();
     }
+
+    public FloorTile OnTile // the tile the character is currently above.
+    {
+        get
+        {
+            Vector3 origin = transform.position;
+            origin.y += 1f;
+            Vector3 direction = -transform.up;
+
+            if (Physics.Raycast(origin, direction, out RaycastHit hit, 5, Game.StationFloorLayer))
+            {
+                if (hit.collider.TryGetComponent<FloorTile>(out FloorTile floorTile))
+                {
+                    return floorTile;
+                }
+            }
+
+            return null;
+        }
+    }
 }

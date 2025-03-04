@@ -18,6 +18,7 @@ public class Selection : MonoBehaviour
 
     public void SelectRoom(RoomObject room)
     {
+        if (Room == room) return;
         Room = room;
         UI.ShowRoomInfo();
     }

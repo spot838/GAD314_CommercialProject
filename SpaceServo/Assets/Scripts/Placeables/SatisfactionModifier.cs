@@ -2,20 +2,33 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SatisfactionModifier : MonoBehaviour
 {
-    [SerializeField] float modifierValue;
+    [SerializeField] float modifierValue; // how much to change per second
     List<Customer> customersInRange = new(); // list of all customers currently within range
-    List<Customer> customersTotal = new(); // list of all customers that have entered the range at any point
-    [Header("Timer Variables")]
+    
+    //List<Customer> customersTotal = new(); // list of all customers that have entered the range at any point
+    /*[Header("Timer Variables")]
     [SerializeField] float modifierTimerCurrent = 2f;
-    [SerializeField] float modifierTimerMax = 2f;
+    [SerializeField] float modifierTimerMax = 2f;*/
+
+    private void Update()
+    {
+        //ModifierTimer();
+
+        foreach(Customer customer in customersInRange)
+        {
+            customer.ModifySatisfaction(modifierValue * Time.deltaTime);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Customer>(out Customer cust))
         {
-            customersTotal.Add(cust);
+            //customersTotal.Add(cust);
             customersInRange.Add(cust);
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<Customer>(out Customer cust))
@@ -23,7 +36,8 @@ public class SatisfactionModifier : MonoBehaviour
             customersInRange.Remove(cust);
         }
     }
-    void ModifierTimer()
+
+    /*void ModifierTimer()
     {
         // while the timer is above 0, decrease it over time, flooring it at 0
         if (modifierTimerCurrent > 0)
@@ -41,6 +55,7 @@ public class SatisfactionModifier : MonoBehaviour
             modifierTimerCurrent = modifierTimerMax;
         }
     }
+
     void AddSatisfactionModifierToAllCustomers()
     {
         foreach (var customer in customersInRange)
@@ -51,21 +66,19 @@ public class SatisfactionModifier : MonoBehaviour
                 float get = customer.Satisfaction.ValueCurrent; // "getting" the value shows it updated in the inspector
             }
         }
-    }
-    private void Update()
-    {
-        ModifierTimer();
-    }
+    }*/
+    
+
     private void OnDestroy()
     {
         // if this is sold or otherwise destroyed, it shouldnt affect the satisfaction anymore, so we can remove the satisfaction this gameobject has added from all current/valid customers
-        foreach (var customer in customersTotal)
+        /*foreach (var customer in customersTotal)
         {
             if (customer != null)
             {
                 customer.Satisfaction.RemoveAllModifiersFromSource(gameObject);
                 float get = customer.Satisfaction.ValueCurrent; // "getting" the value shows it updated in the inspector
             }
-        }
+        }*/
     }
 }

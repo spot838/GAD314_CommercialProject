@@ -92,6 +92,38 @@ public class Station : MonoBehaviour
         return false;
     }
 
+    public static bool TryGetFuelPurchaseRoom(out RoomObject fuelPurchaseRoom)
+    {
+        foreach (RoomObject room in Rooms)
+        {
+            if (room.Config.Type == Room.EType.FuelPurchase
+                && room.HasFreeSlots)
+            {
+                fuelPurchaseRoom = room;
+                return true;
+            }
+        }
+
+        fuelPurchaseRoom = null;
+        return false;
+    }
+
+    public static bool TryGetInteractableRoom(out RoomObject interactableRoom)
+    {
+        foreach (RoomObject room in Rooms)
+        {
+            if (room.Config.Type == Room.EType.None
+                && room.HasFreeSlots)
+            {
+                interactableRoom = room;
+                return true;
+            }
+        }
+
+        interactableRoom = null;
+        return false;
+    }
+
     public static void AddRoom(RoomObject room)
     {
         Instance.rooms.Add(room);

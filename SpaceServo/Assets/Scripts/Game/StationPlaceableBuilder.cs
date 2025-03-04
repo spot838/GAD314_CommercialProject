@@ -79,6 +79,11 @@ public class StationPlaceableBuilder : MonoBehaviour
         currentPlaceableObject.SetPlaced();
         Station.Money.Remove(currentPlaceable.Cost);
 
+        if (currentPlaceable != currentPlaceableObject.Config)
+        {
+            currentPlaceableObject.CorrectConfig(currentPlaceable);
+        }
+
         currentPlaceable = null;
         currentPlaceableObject = null;
     }

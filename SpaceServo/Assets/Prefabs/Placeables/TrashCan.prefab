@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3571138490818205970}
-  - component: {fileID: 2923675853598695041}
+  - component: {fileID: -5340673530977438873}
   m_Layer: 0
   m_Name: TrashCan
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1455021936422712352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2923675853598695041
+--- !u!114 &-5340673530977438873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4980850972486791548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad92a3148b356547aa4d05656e90455, type: 3}
+  m_Script: {fileID: 11500000, guid: 6344339d312aab94da80cb5fcb0cb754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
@@ -51,8 +51,14 @@ MonoBehaviour:
   placedMat: {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
   meshes:
   - {fileID: 7931258691249984852}
+  boxCollider: {fileID: 0}
   IsPlaced: 0
   HasValidPlacement: 0
+  <InteractionElements>k__BackingField: []
+  <InteractionTime>k__BackingField: 2
+  <Satisfaction>k__BackingField: 2
+  <CustomerAnimationName>k__BackingField: 
+  <ProximityStart>k__BackingField: 1
 --- !u!1 &6745203791536745922
 GameObject:
   m_ObjectHideFlags: 0

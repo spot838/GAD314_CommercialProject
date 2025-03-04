@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,18 +21,54 @@ public class StationFloorBuilder : MonoBehaviour
 
     RoomObject currentRoom;
     public bool IsPlacing => currentRoom != null;
+    private bool placingDoor;
+    private FloorTile possibleDoorTile;
+    private FloorTile possibleOtherDoorTile; // TODO: preview doorway building iteration
 
     private void Update()
     {
 
         if (currentRoom == null || UI.MouseOverUI) return;
 
+        if (placingDoor) PlacingDoorUpdate();
+
+        else PlacingFloorUpdate();
+    }
+
+    private void PlacingDoorUpdate()
+    {
+        FloorTile floorTileUnderMouse = Station.TileAtLocation(RoundToNearestGrid(GroundLocationUnderMouse));
+
+        if (floorTileUnderMouse != null && floorTileUnderMouse.Room == currentRoom)
+        {
+            if (floorTileUnderMouse != possibleDoorTile)
+            {
+                if (possibleDoorTile != null)
+                {
+                    possibleDoorTile.SwitchToBuitMaterial();
+                    possibleDoorTile = null;
+                }
+                possibleDoorTile = floorTileUnderMouse;
+                possibleDoorTile.SwitchToBuildingMaterial();
+            }
+
+            
+        }
+        else if (possibleDoorTile != null)
+        {
+            possibleDoorTile.SwitchToBuitMaterial();
+            possibleDoorTile = null;
+        }
+    }
+
+    private void PlacingFloorUpdate()
+    {
         if (!Game.Input.PrimaryButtonDown) // player is indicating where the floor starts
         {
             topLeftPoint = RoundToNearestGrid(GroundLocationUnderMouse);
             if (topLeftPoint.y >= 500) return;
 
-            if (firstTile == null )
+            if (firstTile == null)
             {
                 firstTile = Instantiate(currentRoom.Config.FloorTilePrefab, topLeftPoint, Quaternion.identity);
                 firstTile.SwitchToBuildingMaterial();
@@ -67,9 +104,9 @@ public class StationFloorBuilder : MonoBehaviour
                 else
                     rows = (int)((botttomRightPoint.z - topLeftPoint.z) / TileSize.y);
 
-                for (int currentCol = 0;  currentCol <= columns; currentCol++)
+                for (int currentCol = 0; currentCol <= columns; currentCol++)
                 {
-                    for (int currentRow = 0;currentRow <= rows; currentRow++)
+                    for (int currentRow = 0; currentRow <= rows; currentRow++)
                     {
                         if (currentCol == 0 && currentRow == 0) continue;
 
@@ -151,7 +188,7 @@ public class StationFloorBuilder : MonoBehaviour
 
         if (PlacementIsValid && canAffordPlacement)
         {
-            Game.Input.OnSecondaryPress -= CancelPlacement;
+            //Game.Input.OnSecondaryPress -= CancelPlacement;
 
             Station.Money.Remove(costOfPlacement);
 
@@ -164,11 +201,22 @@ public class StationFloorBuilder : MonoBehaviour
                 currentRoom.AddFloorTile(tile);
             }
             currentPlacement.Clear();
-
             Station.AddRoom(currentRoom);
-            AddWallsToCurrentRoom();
-            BuildNavMesh();
-            currentRoom = null;
+            currentRoom.AddWalls();
+            if (Station.Rooms.Count > 1)
+            {
+                placingDoor = true;
+                Game.Input.OnPrimaryPress += AddDoorToPlacement;
+            }
+            else
+            {
+                BuildNavMesh();
+                currentRoom = null;
+                Game.Input.OnSecondaryPress -= CancelPlacement;
+            }
+
+            //AddWallsToCurrentRoom();
+
         }
 
         else
@@ -188,6 +236,27 @@ public class StationFloorBuilder : MonoBehaviour
             Game.Input.OnPrimaryPress += PlaceFirstTile;
         }
         
+    }
+
+    private void AddDoorToPlacement()
+    {
+        FloorTile otherRoomTile = possibleDoorTile.OtherRoomTile();
+        if (otherRoomTile != null)
+        {
+            possibleDoorTile.MakeDoorTile();
+            otherRoomTile.MakeDoorTile();
+            possibleDoorTile.AddWalls();
+            possibleDoorTile.SwitchToBuitMaterial();
+            possibleDoorTile = null;
+
+            placingDoor = false;
+            Game.Input.OnPrimaryPress -= AddDoorToPlacement;
+
+            
+            BuildNavMesh();
+            currentRoom = null;
+            Game.Input.OnSecondaryPress -= CancelPlacement;
+        }
     }
 
     private void BuildNavMesh()

@@ -232,4 +232,10 @@ public class PlaceableObject : MonoBehaviour
     }
 
     private bool triggerClear => objectsInColider.Count == 0;
+
+    public void CorrectConfig(Placeable config)
+    {
+        Config = config;
+        Debug.LogWarning("Corrected config on " + name);
+    }
 }

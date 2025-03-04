@@ -13,8 +13,10 @@ public class TransactionDesk : PlaceableObject
     float timer;
     [SerializeField] int unitBuyPrice = 1;
     [field: SerializeField] public UI_TransactionDeskIndicator Indicator { get; private set; }
+    [field: SerializeField] public float SatisfactionChange { get; private set; }
 
     public bool IsAvailable => StaffMember != null && CustomerQueue.Count < MaxQueueSize;
+    public int FreeCustomerSlots => MaxQueueSize - CustomerQueue.Count;
 
     protected override void Update()
     {
@@ -46,7 +48,7 @@ public class TransactionDesk : PlaceableObject
 
     public void CompleteTransaction()
     {
-        // apply customer stat changes here
+        CurrentCustomer.ModifySatisfaction(SatisfactionChange);
 
         if (Room.Config.Type == global::Room.EType.FuelPurchase)
         {
@@ -60,7 +62,7 @@ public class TransactionDesk : PlaceableObject
             ShowMoneyIndicator(unitBuyPrice);
         }
 
-        CurrentCustomer.SetNewState(new CS_Idle(CurrentCustomer));
+        CurrentCustomer.SetNewState(new CS_WonderingInRoom(CurrentCustomer, Room));
         StaffMember.SetNewState(new SMS_SittingIdle(StaffMember));
 
         CurrentCustomer = null;

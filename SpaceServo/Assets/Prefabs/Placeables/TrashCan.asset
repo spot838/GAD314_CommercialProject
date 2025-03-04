@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282ae53c1cf7c6d43b3aea3b4de603e0, type: 3}
   m_Name: TrashCan
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 2923675853598695041, guid: c1a94ed8af21ae544bec0548cb8c59ae, type: 3}
+  <Prefab>k__BackingField: {fileID: -5340673530977438873, guid: c1a94ed8af21ae544bec0548cb8c59ae, type: 3}
   <Name>k__BackingField: Trash can
   <Cost>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 2800000, guid: 58486617c0a4f7d428e3f0ea9e89db83, type: 3}

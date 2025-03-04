@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282ae53c1cf7c6d43b3aea3b4de603e0, type: 3}
-  m_Name: TableSeats2
+  m_Name: FuelPurchaseDesk
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 4762959408302956046, guid: 6f5c413ee4c14554a9bb172a4079353d, type: 3}
-  <Name>k__BackingField: Table two seats
-  <Cost>k__BackingField: 10
-  <Icon>k__BackingField: {fileID: 2800000, guid: 30f8223c002f51d458f17db36c11a6c3, type: 3}
+  <Prefab>k__BackingField: {fileID: 9112365992602133157, guid: e2634e26c8100114087e359f1ad4daef, type: 3}
+  <Name>k__BackingField: Fuel Purchase Desk
+  <Cost>k__BackingField: 200
+  <Icon>k__BackingField: {fileID: 2800000, guid: 32d6f1bddcd641a4cb1449bbaf0fc495, type: 3}

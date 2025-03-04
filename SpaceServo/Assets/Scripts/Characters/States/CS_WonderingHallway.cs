@@ -24,16 +24,17 @@ public class CS_WonderingHallway : CustomerState
         }
 
         else if (!customer.HasRefueled && !customer.Ship.LandingPad.IsRefueling
-            && Station.TryGetAvialableFuelDesk(out TransactionDesk fuelDesk))
+            && Station.TryGetFuelPurchaseRoom(out RoomObject fuelPurchaseRoom)
+            && !customer.RoomsVisited.Contains(fuelPurchaseRoom))
         {
-            Debug.Log(customer.name + " moving to buy fuel");
-            customer.SetNewState(new CS_MovingToTransactionDesk(customer, fuelDesk));
+            customer.SetNewState(new CS_MovingToRoom(customer, fuelPurchaseRoom));
         }
 
         else if (!customer.HasRefueled && customer.Ship.LandingPad.IsRefueling
-            && Station.TryGetAvialableTransactionDesk(out TransactionDesk desk))
+            && Station.TryGetInteractableRoom(out RoomObject interactableRoom)
+            && !customer.RoomsVisited.Contains(interactableRoom))
         {
-            customer.SetNewState(new CS_MovingToTransactionDesk(customer, desk));
+            customer.SetNewState(new CS_MovingToRoom(customer, interactableRoom));
         }
 
         else if (customer.HasRefueled)

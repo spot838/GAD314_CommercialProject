@@ -15,12 +15,15 @@ public class CS_MovingToTransactionDesk : CustomerState
 
     public override void StateStart()
     {
-        //desk.CurrentCustomer = customer;
+        Debug.Log(customer.name + " MovingToTransactionDesk in " + desk.Room.name);
+
+        customer.RemainingInteractions.RemoveAt(0);
         desk.CustomerQueue.Add(customer);
 
         customer.Animator.CrossFade("Walk", crossFadeTime);
         positionInCue = desk.CuePosition(customer);
         customer.NavMeshAgent.SetDestination(desk.CustomerPositionTarget(customer));
+
     }
 
     public override void StateTick()
