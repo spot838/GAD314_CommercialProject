@@ -14,12 +14,16 @@ public class StationMoney : MonoBehaviour
     {
         this.Amount += amount;
         UI.UpdateMoneyText();
+
+        Game.Debug.MoneyEarned += amount;
     }
 
     public void Remove(int amount)
     {
         this.Amount = Mathf.Clamp(this.Amount - amount, 0, int.MaxValue);
         UI.UpdateMoneyText();
+
+        Game.Debug.MoneySpent += amount;
     }
 
     public bool CanAfford(int amount)

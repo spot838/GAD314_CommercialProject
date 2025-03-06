@@ -1251,6 +1251,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 5021086894313499637}
+  copyButton: {fileID: 410971371321826266}
+  saveButton: {fileID: 965566392964564923}
+  outputField: {fileID: 7649268543936211857}
 --- !u!1 &9075447864736720900
 GameObject:
   m_ObjectHideFlags: 0

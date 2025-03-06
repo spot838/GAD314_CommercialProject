@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Amount>k__BackingField: 0
   <MaxAmount>k__BackingField: 1000
-  initialRange: {x: 50, y: 2}
+  initialRange: {x: 50, y: 200}
 --- !u!1 &5084942167424934569
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,6 +86,12 @@ public class StationPlaceableBuilder : MonoBehaviour
         currentPlaceableObject.SetPlaced();
         Station.Money.Remove(currentPlaceable.Cost);
 
+        if (Game.Debug.PlaceablesBuilt.ContainsKey(currentPlaceable))
+            Game.Debug.PlaceablesBuilt[currentPlaceable]++;
+        else
+            Game.Debug.PlaceablesBuilt.Add(currentPlaceable, 1);
+
+
         currentPlaceable = null;
         currentPlaceableObject = null;
     }

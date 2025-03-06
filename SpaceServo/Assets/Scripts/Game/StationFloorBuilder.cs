@@ -191,6 +191,7 @@ public class StationFloorBuilder : MonoBehaviour
             //Game.Input.OnSecondaryPress -= CancelPlacement;
 
             Station.Money.Remove(costOfPlacement);
+            Game.Debug.RoomCosts.Add(currentRoom, costOfPlacement);
 
             firstTile.SwitchToBuitMaterial();
             currentRoom.AddFloorTile(firstTile);
@@ -211,6 +212,10 @@ public class StationFloorBuilder : MonoBehaviour
             else
             {
                 BuildNavMesh();
+                if (Game.Debug.RoomsBuilt.ContainsKey(currentRoom.Config))
+                    Game.Debug.RoomsBuilt[currentRoom.Config]++;
+                else
+                    Game.Debug.RoomsBuilt.Add(currentRoom.Config, 1);
                 currentRoom = null;
                 Game.Input.OnSecondaryPress -= CancelPlacement;
             }
@@ -254,6 +259,10 @@ public class StationFloorBuilder : MonoBehaviour
 
             
             BuildNavMesh();
+            if (Game.Debug.RoomsBuilt.ContainsKey(currentRoom.Config))
+                Game.Debug.RoomsBuilt[currentRoom.Config]++;
+            else
+                Game.Debug.RoomsBuilt.Add(currentRoom.Config, 1);
             currentRoom = null;
             Game.Input.OnSecondaryPress -= CancelPlacement;
         }
