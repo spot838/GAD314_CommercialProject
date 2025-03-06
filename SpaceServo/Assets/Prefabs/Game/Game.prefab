@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MousePosition>k__BackingField: {x: 0, y: 0}
+  <MouseDelta>k__BackingField: {x: 0, y: 0}
   <PrimaryButtonDown>k__BackingField: 0
   <SecondaryButtonDown>k__BackingField: 0
   <CameraMove>k__BackingField: {x: 0, y: 0}
@@ -94,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8a2e34ee2e6574bbed861b27ed47b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Room>k__BackingField: {fileID: 0}
+  <Customer>k__BackingField: {fileID: 0}
+  customerCameraPrefab: {fileID: 4596064443675641406, guid: 6060238ad600fc94eb5f8b7266428c72, type: 3}
 --- !u!1001 &1558756099592416410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,14 +182,6 @@ PrefabInstance:
     - target: {fileID: 3952453714619589425, guid: 462b237daad7a994aac6fff15ca864df, type: 3}
       propertyPath: m_Name
       value: FloorBuilder
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722761263427718724, guid: 462b237daad7a994aac6fff15ca864df, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722761263427718724, guid: 462b237daad7a994aac6fff15ca864df, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7974507245301913370, guid: 462b237daad7a994aac6fff15ca864df, type: 3}
       propertyPath: m_LocalPosition.x

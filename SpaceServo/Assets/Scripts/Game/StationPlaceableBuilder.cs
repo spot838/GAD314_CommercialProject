@@ -1,4 +1,7 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class StationPlaceableBuilder : MonoBehaviour
 {
@@ -18,7 +21,11 @@ public class StationPlaceableBuilder : MonoBehaviour
         if (currentPlaceableObject == null)
         {
             currentPlaceableObject = Instantiate(currentPlaceable.Prefab, GroundLocationUnderMouse, Quaternion.identity);
-            //print("Spawned " + currentPlaceable.Name);
+
+            if (currentPlaceable != currentPlaceableObject.Config)
+            {
+                currentPlaceableObject.CorrectConfig(currentPlaceable);
+            }
         }
         else
         {
@@ -79,11 +86,6 @@ public class StationPlaceableBuilder : MonoBehaviour
         currentPlaceableObject.SetPlaced();
         Station.Money.Remove(currentPlaceable.Cost);
 
-        if (currentPlaceable != currentPlaceableObject.Config)
-        {
-            currentPlaceableObject.CorrectConfig(currentPlaceable);
-        }
-
         currentPlaceable = null;
         currentPlaceableObject = null;
     }
@@ -96,5 +98,28 @@ public class StationPlaceableBuilder : MonoBehaviour
         currentPlaceable = null;
         Destroy(currentPlaceableObject.gameObject);
         currentPlaceableObject = null;
+    }
+
+    public Placeable[] BuildablePlaceables
+    {
+        get
+        {
+            List<Placeable> list = new List<Placeable>();
+
+            foreach (RoomObject room in Station.Rooms)
+            {
+                foreach (Placeable placeable in room.Config.Placeables)
+                {
+                    if (!list.Contains(placeable)) list.Add(placeable);
+                }
+            }
+
+            foreach (Placeable globalPlaceable in Placeables)
+            {
+                if (!list.Contains(globalPlaceable)) list.Add(globalPlaceable);
+            }
+
+            return list.ToArray();
+        }
     }
 }

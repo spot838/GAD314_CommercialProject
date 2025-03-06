@@ -52,4 +52,8 @@ public class CS_MovingToTransactionDesk : CustomerState
 
     }
 
+    public override string Status()
+    {
+        return "Waiting in line";
+    }
 }

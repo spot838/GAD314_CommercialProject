@@ -39,4 +39,9 @@ public class CS_CompletingTransaction : CustomerState
         //desk.CurrentCustomer = null;
         //customer.HasBoughtFuel = true;
     }
+
+    public override string Status()
+    {
+        return "Completing transaction in " + desk.Room.Config.Name;
+    }
 }

@@ -72,6 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d99d9b2d65c544cac2a7a15d4f1e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MIN_RATING>k__BackingField: 0
+  <MAX_RATING>k__BackingField: 50
 --- !u!114 &4309948644457185749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staffMemberPrefab: {fileID: 2161654742729978140, guid: 90dc9589cf4434a429486b0c7b73c435, type: 3}
+  <Members>k__BackingField: []
 --- !u!1 &8461847238580088704
 GameObject:
   m_ObjectHideFlags: 0

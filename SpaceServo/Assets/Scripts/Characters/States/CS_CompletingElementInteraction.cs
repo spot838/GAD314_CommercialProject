@@ -38,4 +38,9 @@ public class CS_CompletingElementInteraction : CustomerState
         interactionElement.CurrentCustomer = null;
         customer.ModifySatisfaction(interactionElement.InteractablePlaceable.Satisfaction);
     }
+
+    public override string Status()
+    {
+        return "Doing something"; // add variable to interactables eg "eating" "doing whatever"
+    }
 }

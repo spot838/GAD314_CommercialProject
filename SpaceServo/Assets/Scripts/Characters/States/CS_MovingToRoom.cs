@@ -39,4 +39,9 @@ public class CS_MovingToRoom : CustomerState
         
         
     }
+
+    public override string Status()
+    {
+        return "Walking to " + room.Config.Name;
+    }
 }

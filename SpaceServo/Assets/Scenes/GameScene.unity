@@ -427,14 +427,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5202724586748794096, guid: a0cce702c4e03e448bfc3c35faa73002, type: 3}
-      propertyPath: ValueMax
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5202724586748794096, guid: a0cce702c4e03e448bfc3c35faa73002, type: 3}
-      propertyPath: ValueMin
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 6309288076341566005, guid: a0cce702c4e03e448bfc3c35faa73002, type: 3}
       propertyPath: m_Name
       value: Station
@@ -513,25 +505,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 718606493150447006, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
-      propertyPath: m_Name
-      value: RatingText
-      objectReference: {fileID: 0}
-    - target: {fileID: 718606493150447006, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4199157448485969492, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967775863823412338, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
-      propertyPath: m_HandleRect
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967775863823412338, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7515389113212948789, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
       propertyPath: m_AnchorMax.x
@@ -622,8 +598,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3856958390265989510, guid: 52a63882bb920ed4780d2a638045c492, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52a63882bb920ed4780d2a638045c492, type: 3}

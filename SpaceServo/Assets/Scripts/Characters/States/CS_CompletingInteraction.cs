@@ -35,4 +35,9 @@ public class CS_CompletingInteraction : CustomerState
     public override void StateTick()
     {
     }
+
+    public override string Status()
+    {
+        return "Doing something"; // TODO: replace with a verb veriable on the interactable
+    }
 }

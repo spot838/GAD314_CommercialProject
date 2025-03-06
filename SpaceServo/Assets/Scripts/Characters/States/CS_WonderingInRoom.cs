@@ -56,6 +56,11 @@ public class CS_WonderingInRoom : CustomerState
         if (room.IncomingCustomers.Contains(customer)) room.IncomingCustomers.Remove(customer);
     }
 
+    public override string Status()
+    {
+        return "Waiting in " + room.Config.Name;
+    }
+
     private Vector3 randomPosition
     {
         get

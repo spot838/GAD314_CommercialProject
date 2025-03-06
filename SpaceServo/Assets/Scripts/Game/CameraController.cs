@@ -86,6 +86,8 @@ public class CameraController : MonoBehaviour
 
     private void Zoom()
     {
+        if (UI.MouseOverUI) return;
+
         if (Game.Input.CameraZoom.y != 0)
         {
             DistanceToGround = Mathf.Clamp(DistanceToGround + (zoomSpeed * Game.Input.CameraZoom.y * Time.deltaTime), minZoom, maxZoom);

@@ -27,4 +27,9 @@ public class CS_ReturningToShip : CustomerState
     {
         
     }
+
+    public override string Status()
+    {
+        return "Returning to ship";
+    }
 }

@@ -31,4 +31,9 @@ public class CS_MoveToInteractable : CustomerState
     public override void StateEnd()
     {
     }
+
+    public override string Status()
+    {
+        return "Walking to " + interactable.Config.Name;
+    }
 }

@@ -54,4 +54,10 @@ public class CS_Idle : CustomerState
     {
 
     }
+
+    public override string Status()
+    {
+        return "Idle";
+
+    }
 }

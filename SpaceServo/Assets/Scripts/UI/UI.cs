@@ -12,6 +12,10 @@ public class UI : MonoBehaviour
     [SerializeField] private UI_AddRoomMenu roomsMenu;
     [SerializeField] private UI_RoomInfo roomInfo;
     [SerializeField] private UI_PauseMenu pauseMenu;
+    [SerializeField] private UI_CustomerInfo customerInfo;
+    [SerializeField] private UI_Tutorial tutorial;
+    [SerializeField] private UI_DebugOutput debugOutput;
+    [SerializeField] private UI_Settings settings;
 
     public static bool MouseOverUI;
 
@@ -67,6 +71,26 @@ public class UI : MonoBehaviour
     public static void ShowRoomInfo(bool show = true)
     {
         Instance.roomInfo.gameObject.SetActive(show);
+    }
+
+    public static void ShowCustomerInfo(bool show = true)
+    {
+        Instance.customerInfo.gameObject.SetActive(show);
+    }
+
+    public static void ShowTutorial(bool show = true)
+    {
+        Instance.tutorial.gameObject.SetActive(show);
+    }
+
+    public static void ShowDebugInfo(bool show = true)
+    {
+        Instance.debugOutput.gameObject.SetActive(show);
+    }
+
+    public static void ShowSettings(bool show = true)
+    {
+        Instance.settings.gameObject.SetActive(show);
     }
 
     public static void UpdateRoomInfo()

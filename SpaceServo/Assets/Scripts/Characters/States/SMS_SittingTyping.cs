@@ -25,4 +25,9 @@ public class SMS_SittingTyping : StaffMemberState
     public override void StateEnd()
     {
     }
+
+    public override string Status()
+    {
+        return "Working";
+    }
 }

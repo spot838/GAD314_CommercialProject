@@ -33,4 +33,9 @@ public class CS_MoveToInteractableElement : CustomerState
     {
         interactionElement.IncomingCustomer = null;
     }
+
+    public override string Status()
+    {
+        return "Walking to " + interactionElement.InteractablePlaceable.Config.Name;
+    }
 }

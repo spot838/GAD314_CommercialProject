@@ -47,6 +47,11 @@ public class CS_WonderingHallway : CustomerState
     {
     }
 
+    public override string Status()
+    {
+        return "Wondering around";
+    }
+
     private Vector3 randomHPosition // a position in the hallway or hanger
     {
         get

@@ -3,6 +3,10 @@ using UnityEngine;
 public class Selection : MonoBehaviour
 {
     [field: SerializeField] public RoomObject Room { get; private set; }
+    [field: SerializeField] public Customer Customer { get; private set; }
+    [SerializeField] Camera customerCameraPrefab;
+
+    Camera customerCamera;
 
     private bool selectionOverride => Game.FloorBuilder.IsPlacing || UI.IsRoomsMenuShowing || UI.IsPlaceablesMenuShowing || Game.PlaceableBuilder.IsPlacing;
 
@@ -18,15 +22,36 @@ public class Selection : MonoBehaviour
 
     public void SelectRoom(RoomObject room)
     {
+        DeselectCustomer();
         if (Room == room) return;
+        DeselectRoom();
         Room = room;
         UI.ShowRoomInfo();
     }
 
     public void DeselectRoom()
     {
+        if (Room == null) return;
         UI.ShowRoomInfo(false);
         Room = null;
+    }
+
+    public void SelectCustomer(Customer customer)
+    {
+        DeselectRoom();
+        if (Customer == customer) return;
+        DeselectCustomer();
+        Customer = customer;
+        customerCamera = Instantiate(customerCameraPrefab, Customer.transform);
+        UI.ShowCustomerInfo();
+    }
+
+    public void DeselectCustomer()
+    {
+        if (Customer == null) return;
+        UI.ShowCustomerInfo(false);
+        Destroy(customerCamera.gameObject);
+        Customer = null;
     }
 
     private void OnPrimaryPress()
@@ -48,7 +73,7 @@ public class Selection : MonoBehaviour
         Ray ray = Game.CameraController.Camera.ScreenPointToRay(Game.Input.MousePosition);
         float rayCastDistance = Game.CameraController.DistanceToGround + 50;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, rayCastDistance, Game.RoomLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, rayCastDistance))
         {
             //print("hit " + hit.collider.name);
 
@@ -58,9 +83,27 @@ public class Selection : MonoBehaviour
                 if (room != null) SelectRoom(room);
             }
 
-            if (hit.collider.TryGetComponent<FloorTile>(out FloorTile tile))
+            else if (hit.collider.TryGetComponent<FloorTile>(out FloorTile tile))
             {
                 SelectRoom(tile.Room);
+            }
+
+            else if (hit.collider.TryGetComponent<Customer>(out Customer customer))
+            {
+                SelectCustomer(customer);
+            }
+
+            else
+            {
+                if (Room != null)
+                {
+                    DeselectRoom();
+                }
+
+                if (Customer != null)
+                {
+                    DeselectCustomer();
+                }
             }
         }
         else
@@ -69,6 +112,11 @@ public class Selection : MonoBehaviour
             if (Room != null)
             {
                 DeselectRoom();
+            }
+
+            if (Customer != null)
+            {
+                DeselectCustomer();
             }
         }
     }

@@ -25,4 +25,9 @@ public class SMS_SittingIdle : StaffMemberState
     public override void StateEnd()
     {
     }
+
+    public override string Status()
+    {
+        return "Idle";
+    }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Hallway
   <Description>k__BackingField: Connects rooms together
   <Type>k__BackingField: 2
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 2800000, guid: 7fa4cc03b7cd5d14982b6660df9b3efd, type: 3}
   <FloorTilePrefab>k__BackingField: {fileID: 2897276872064168506, guid: 622d9cd4e8473414b9d5b56808615ba4, type: 3}
   <Placeables>k__BackingField: []
   <BasePrice>k__BackingField: 100

@@ -21,16 +21,28 @@ public class UI_AddPlaceablesMenu : MonoBehaviour, IPointerEnterHandler, IPointe
                 placeablesItem.Initilize(roomPlaceable);
                 AddPlaceablesItems.Add(placeablesItem);
             }
+
+            foreach (Placeable placeable in Game.PlaceableBuilder.Placeables)
+            {
+                if (placeable.Prefab == null) continue;
+                UI_AddPlaceablesItem placeablesItem = Instantiate(addPlaceablesItemPrefab, contentWindow);
+                placeablesItem.Initilize(placeable);
+                AddPlaceablesItems.Add(placeablesItem);
+            }
         }
 
-
-        foreach(Placeable placeable in Game.PlaceableBuilder.Placeables)
+        else
         {
-            if (placeable.Prefab == null) continue;
-            UI_AddPlaceablesItem placeablesItem = Instantiate(addPlaceablesItemPrefab, contentWindow);
-            placeablesItem.Initilize(placeable);
-            AddPlaceablesItems.Add(placeablesItem);
+            foreach (Placeable placeable in Game.PlaceableBuilder.BuildablePlaceables)
+            {
+                if (placeable.Prefab == null) continue;
+                UI_AddPlaceablesItem placeablesItem = Instantiate(addPlaceablesItemPrefab, contentWindow);
+                placeablesItem.Initilize(placeable);
+                AddPlaceablesItems.Add(placeablesItem);
+            }
         }
+
+            
 
         Game.Input.OnPrimaryPress += NoItemClicked;
     }
