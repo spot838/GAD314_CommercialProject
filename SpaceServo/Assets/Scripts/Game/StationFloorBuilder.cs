@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // controlls placing floors in the station
@@ -11,19 +12,22 @@ public class StationFloorBuilder : MonoBehaviour
     [field: SerializeField] public Vector2 TileSize = new Vector2(5,5);
     [SerializeField] MeshRenderer plane; // this is something for raycast to hit
     [SerializeField] RoomObject roomPrefab;
+    [SerializeField] bool autoDoorwayPlacement;
     [field: SerializeField] public Room[] RoomConfigs {  get; private set; }
 
+    
     //bool placing;
     Vector3 topLeftPoint;
     Vector3 botttomRightPoint;
-    FloorTile firstTile;
+    [SerializeField, Header("DEBUG")] FloorTile firstTile;
     [SerializeField] List<FloorTile> currentPlacement = new List<FloorTile>();
 
-    RoomObject currentRoom;
+    [SerializeField] RoomObject currentRoom;
     public bool IsPlacing => currentRoom != null;
     private bool placingDoor;
     private FloorTile possibleDoorTile;
     private FloorTile possibleOtherDoorTile; // TODO: preview doorway building iteration
+    [SerializeField] private Vector2 currentRoomSize;
 
     private void Update()
     {
@@ -49,7 +53,7 @@ public class StationFloorBuilder : MonoBehaviour
                     possibleDoorTile = null;
                 }
                 possibleDoorTile = floorTileUnderMouse;
-                possibleDoorTile.SwitchToBuildingMaterial();
+                possibleDoorTile.SwitchToBuildingValidMaterial();
             }
 
             
@@ -71,7 +75,7 @@ public class StationFloorBuilder : MonoBehaviour
             if (firstTile == null)
             {
                 firstTile = Instantiate(currentRoom.Config.FloorTilePrefab, topLeftPoint, Quaternion.identity);
-                firstTile.SwitchToBuildingMaterial();
+                firstTile.SwitchToBuildingValidMaterial();
             }
 
             firstTile.transform.position = topLeftPoint;
@@ -104,6 +108,8 @@ public class StationFloorBuilder : MonoBehaviour
                 else
                     rows = (int)((botttomRightPoint.z - topLeftPoint.z) / TileSize.y);
 
+                currentRoomSize = new Vector2(columns + 1 , rows + 1);
+
                 for (int currentCol = 0; currentCol <= columns; currentCol++)
                 {
                     for (int currentRow = 0; currentRow <= rows; currentRow++)
@@ -117,8 +123,25 @@ public class StationFloorBuilder : MonoBehaviour
                         else position.z += TileSize.y * currentRow;
 
                         FloorTile newTile = Instantiate(currentRoom.Config.FloorTilePrefab, position, Quaternion.identity);
-                        newTile.SwitchToBuildingMaterial();
+                        newTile.SwitchToBuildingValidMaterial();
                         currentPlacement.Add(newTile);
+                    }
+                }
+
+                if (PlacementIsValid)
+                {
+                    firstTile.SwitchToBuildingValidMaterial();
+                    foreach (FloorTile tile in currentPlacement)
+                    {
+                        tile.SwitchToBuildingValidMaterial();
+                    }
+                }
+                else
+                {
+                    firstTile.SwitchToBuildingInvalidMaterial();
+                    foreach (FloorTile tile in currentPlacement)
+                    {
+                        tile.SwitchToBuildingInvalidMaterial();
                     }
                 }
             }
@@ -127,7 +150,7 @@ public class StationFloorBuilder : MonoBehaviour
 
     public void StartPlacingFloor(Room config)
     {
-        //placing = true;
+        if (Game.PlaceableBuilder.IsPlacing) return;
         Game.Input.OnPrimaryPress += PlaceFirstTile;
         Game.Input.OnSecondaryPress += CancelPlacement;
 
@@ -176,6 +199,7 @@ public class StationFloorBuilder : MonoBehaviour
 
     private void PlaceFirstTile()
     {
+        currentRoomSize = new Vector2(1, 1);
         Game.Input.OnPrimaryPress -= PlaceFirstTile;
         Game.Input.OnPrimaryRelease += CompletePlacement;
         botttomRightPoint = topLeftPoint;
@@ -193,21 +217,37 @@ public class StationFloorBuilder : MonoBehaviour
             Station.Money.Remove(costOfPlacement);
             Game.Debug.RoomCosts.Add(currentRoom, costOfPlacement);
 
-            firstTile.SwitchToBuitMaterial();
+            //firstTile.SwitchToBuitMaterial();
             currentRoom.AddFloorTile(firstTile);
             firstTile = null;
             foreach (FloorTile tile in currentPlacement)
             {
-                tile.SwitchToBuitMaterial();
+                //tile.SwitchToBuitMaterial();
                 currentRoom.AddFloorTile(tile);
             }
             currentPlacement.Clear();
+
             Station.AddRoom(currentRoom);
+            currentRoom.ShowSelectedMaterial(true);
             currentRoom.AddWalls();
             if (Station.Rooms.Count > 1)
             {
-                placingDoor = true;
-                Game.Input.OnPrimaryPress += AddDoorToPlacement;
+                if (autoDoorwayPlacement)
+                {
+                    AutoDoorwayPlacement();
+                    BuildNavMesh();
+                    if (Game.Debug.RoomsBuilt.ContainsKey(currentRoom.Config))
+                        Game.Debug.RoomsBuilt[currentRoom.Config]++;
+                    else
+                        Game.Debug.RoomsBuilt.Add(currentRoom.Config, 1);
+                    currentRoom = null;
+                    Game.Input.OnSecondaryPress -= CancelPlacement;
+                }
+                else
+                {
+                    placingDoor = true;
+                    Game.Input.OnPrimaryPress += AddDoorToPlacement;
+                }
             }
             else
             {
@@ -241,6 +281,29 @@ public class StationFloorBuilder : MonoBehaviour
             Game.Input.OnPrimaryPress += PlaceFirstTile;
         }
         
+    }
+
+    private void AutoDoorwayPlacement()
+    {
+        List<RoomObject> roomsToConnect = new List<RoomObject>();
+
+        if (currentRoom.Config.Type == Room.EType.Hallway)
+        {
+            roomsToConnect = RoomsTouchingRoom(currentRoom);
+        }
+        else
+        {
+            roomsToConnect = RoomsTouchingRoom(currentRoom);
+
+            foreach(RoomObject roomObject in roomsToConnect.ToArray())
+                if (roomObject.Config.Type != Room.EType.Hallway)
+                    roomsToConnect.Remove(roomObject);
+        }
+
+        foreach(RoomObject room in roomsToConnect)
+        {
+            ConnectRooms(currentRoom, room);
+        }
     }
 
     private void AddDoorToPlacement()
@@ -346,7 +409,7 @@ public class StationFloorBuilder : MonoBehaviour
         {
             foreach (RoomObject otherRoom in RoomsTouchingTile(tile))
             {
-                if (!list.Contains(room)) list.Add(room);
+                if (!list.Contains(otherRoom)) list.Add(otherRoom);
             }
         }
 
@@ -383,7 +446,17 @@ public class StationFloorBuilder : MonoBehaviour
         {
             if (firstTile == null || currentPlacement.Count == 0) return false;
 
-            // TODO: add size requirement
+            if (currentRoomSize.x < currentRoom.Config.MinimumSize.x)
+            {
+                Debug.LogWarning("Room width too small");
+                return false;
+            }
+
+            if (currentRoomSize.y < currentRoom.Config.MinimumSize.y)
+            {
+                Debug.LogWarning("Room height too small");
+                return false;
+            }
 
             // check current Placement is not overlapping
             if (Station.TileAtLocation(firstTile.transform.position))
@@ -543,6 +616,95 @@ public class StationFloorBuilder : MonoBehaviour
         {
             if (firstTile == null) return 0;
             return currentRoom.Config.Cost(1 + currentPlacement.Count);
+        }
+    }
+
+    public void ConnectRooms(RoomObject room1, RoomObject room2)
+    {
+        List<FloorTile> tileWhichConnect = new List<FloorTile>();
+
+        foreach (FloorTile tile in room1.Floor)
+        {
+            if (tile.TouchingRooms.Contains(room2)) tileWhichConnect.Add(tile);
+        }
+
+        if (tileWhichConnect.Count == 1)
+        {
+            tileWhichConnect[0].MakeDoorTile();
+        }
+
+        else
+        {
+            FloorTile lowestTile = null;
+            FloorTile hightestTile = null;
+
+            if (tileWhichConnect[0].x == tileWhichConnect[tileWhichConnect.Count-1].x)
+            {
+                float highest = float.NegativeInfinity;
+                float lowest = float.PositiveInfinity;
+                
+
+                foreach (FloorTile tile in tileWhichConnect)
+                {
+                    if (tile.z > highest)
+                    {
+                        highest = tile.z;
+                        hightestTile = tile;
+                    }
+
+                    if (tile.z < lowest)
+                    {
+                        lowest = tile.z;
+                        lowestTile = tile;
+                    }
+                }
+            }
+
+            else if (tileWhichConnect[0].z == tileWhichConnect[tileWhichConnect.Count - 1].z)
+            {
+                float highest = float.NegativeInfinity;
+                float lowest = float.PositiveInfinity;
+
+                foreach (FloorTile tile in tileWhichConnect)
+                {
+                    if (tile.x > highest)
+                    {
+                        highest = tile.x;
+                        hightestTile = tile;
+                    }
+
+                    if (tile.x < lowest)
+                    {
+                        lowest = tile.x;
+                        lowestTile = tile;
+                    }
+                }
+            }
+
+            if (hightestTile != null && lowestTile != null)
+            {
+                float xDif = hightestTile.x - lowestTile.x;
+                float zDif = hightestTile.z - lowestTile.z;
+                Vector3 centerPoint = new Vector3(lowestTile.x + (xDif/2), lowestTile.transform.position.y, lowestTile.z + (zDif/2));
+
+                float closestDistance = float.PositiveInfinity;
+                FloorTile closestTile = null;
+
+                foreach (FloorTile tile in tileWhichConnect)
+                {
+                    float distance = Vector3.Distance(tile.transform.position, centerPoint);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestTile = tile;
+                    }
+                }
+
+                if (closestTile != null)
+                {
+                    closestTile.MakeDoorTile();
+                }
+            }
         }
     }
 }

@@ -16,11 +16,13 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     [field: SerializeField] public bool SecondaryButtonDown { get; private set; }
     [field: SerializeField] public Vector2 CameraMove { get; private set; }
     [field: SerializeField] public Vector2 CameraZoom { get; private set; }
+    [field: SerializeField] public bool ContinueProcedure { get; private set; }
 
     public event Action OnPrimaryPress;
     public event Action OnPrimaryRelease;
     public event Action OnSecondaryPress;
     public event Action OnSecondaryRelease;
+    public event Action OnRotatePress;
 
     private void Awake()
     {
@@ -80,5 +82,28 @@ public class InputReader : MonoBehaviour, InputSystem_Actions.IPlayerActions
     public void OnMouseDelta(InputAction.CallbackContext context)
     {
         MouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnRotate(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnRotatePress?.Invoke();
+        }
+        else if (context.canceled)
+        {
+        }
+    }
+
+    public void OnContinueProcedure(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ContinueProcedure = true;
+        }
+        else if (context.canceled)
+        {
+            ContinueProcedure = false;
+        }
     }
 }

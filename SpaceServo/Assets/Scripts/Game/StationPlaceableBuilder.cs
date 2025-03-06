@@ -35,12 +35,14 @@ public class StationPlaceableBuilder : MonoBehaviour
 
     public void BeginPlacement(Placeable newPlaceable)
     {
+        if (Game.FloorBuilder.IsPlacing) return;
+
         currentPlaceable = newPlaceable;
 
         Game.Input.OnPrimaryPress += CompletePlacement;
         Game.Input.OnSecondaryPress += CancelPlacement;
 
-        //print("starting placement");
+        Game.Input.OnRotatePress += RotatePlacement;
     }
 
     private Vector3 GroundLocationUnderMouse
@@ -82,6 +84,7 @@ public class StationPlaceableBuilder : MonoBehaviour
 
         Game.Input.OnPrimaryPress -= CompletePlacement;
         Game.Input.OnSecondaryPress -= CancelPlacement;
+        Game.Input.OnRotatePress -= RotatePlacement;
 
         currentPlaceableObject.SetPlaced();
         Station.Money.Remove(currentPlaceable.Cost);
@@ -92,14 +95,18 @@ public class StationPlaceableBuilder : MonoBehaviour
             Game.Debug.PlaceablesBuilt.Add(currentPlaceable, 1);
 
 
-        currentPlaceable = null;
+        
         currentPlaceableObject = null;
+
+        if (Game.Input.ContinueProcedure) BeginPlacement(currentPlaceable);
+        else currentPlaceable = null;
     }
 
     private void CancelPlacement()
     {
         Game.Input.OnPrimaryPress -= CompletePlacement;
         Game.Input.OnSecondaryPress -= CancelPlacement;
+        Game.Input.OnRotatePress -= RotatePlacement;
 
         currentPlaceable = null;
         Destroy(currentPlaceableObject.gameObject);
@@ -127,5 +134,13 @@ public class StationPlaceableBuilder : MonoBehaviour
 
             return list.ToArray();
         }
+    }
+
+    private void RotatePlacement()
+    {
+        Vector3 rotation = currentPlaceableObject.transform.eulerAngles;
+        if (rotation.y == 270) rotation.y = 0;
+        else rotation.y += 90;
+        currentPlaceableObject.transform.eulerAngles = rotation;
     }
 }

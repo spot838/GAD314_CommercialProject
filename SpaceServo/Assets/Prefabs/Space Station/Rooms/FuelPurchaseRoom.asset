@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd3232423cba33e4fb43780d3846f1ba, type: 2}
   <BasePrice>k__BackingField: 100
   <CostPerTile>k__BackingField: 10
+  <MinimumSize>k__BackingField: {x: 2, y: 2}

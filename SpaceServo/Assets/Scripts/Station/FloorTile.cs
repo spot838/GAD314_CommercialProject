@@ -1,11 +1,16 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class FloorTile : MonoBehaviour
 {
-    [SerializeField] Material building; // the material used while the player is placing the floor
+    [SerializeField] Material buildingValid; // the material used while the player is placing the floor
+    [SerializeField] Material buildingInvalid;
     [SerializeField] Material built; // the material once the player has confirmed placement, what it normally looks like
+    [SerializeField] Material selected;
     [SerializeField] MeshRenderer[] meshes;
     [SerializeField] GameObject wallTop;
     [SerializeField] GameObject wallBottom;
@@ -24,6 +29,10 @@ public class FloorTile : MonoBehaviour
     public RoomObject Room {  get; private set; }
 
     public bool IsDoorTile => Room.DoorTiles.Contains(this);
+    public bool IsSelectedRoom => Game.Selection.Room == Room;
+
+    public float x => transform.position.x;
+    public float z => transform.position.z;
 
     public void SetRoom(RoomObject room)
     {
@@ -31,11 +40,18 @@ public class FloorTile : MonoBehaviour
     }
 
 
-    public void SwitchToBuildingMaterial()
+    public void SwitchToBuildingValidMaterial()
     {
         foreach (MeshRenderer meshRenderer in meshes)
         {
-            meshRenderer.material = building;
+            meshRenderer.material = buildingValid;
+        }
+    }
+    public void SwitchToBuildingInvalidMaterial()
+    {
+        foreach (MeshRenderer meshRenderer in meshes)
+        {
+            meshRenderer.material = buildingInvalid;
         }
     }
 
@@ -44,6 +60,13 @@ public class FloorTile : MonoBehaviour
         foreach (MeshRenderer meshRenderer in meshes)
         {
             meshRenderer.material = built;
+        }
+    }
+    public void SwitchToSelectedMaterial()
+    {
+        foreach (MeshRenderer meshRenderer in meshes)
+        {
+            meshRenderer.material = selected;
         }
     }
 
@@ -151,7 +174,7 @@ public class FloorTile : MonoBehaviour
         Vector3 up = transform.position;
         up.z += Game.FloorBuilder.TileSize.y;
         FloorTile upTile = Station.TileAtLocation(up);
-        if (upTile == null || (upTile.Room != Room && !isDoor))
+        if (upTile == null || (upTile.Room != Room && !upTile.IsDoorTile))
             AddTopWall();
         else if (upTile != null && upTile.Room != Room && isDoor && upTile.IsDoorTile)
             AddTopDoorway();
@@ -159,7 +182,7 @@ public class FloorTile : MonoBehaviour
         Vector3 down = transform.position;
         down.z -= Game.FloorBuilder.TileSize.y;
         FloorTile downTile = Station.TileAtLocation(down);
-        if (downTile == null || (downTile.Room != Room && !isDoor))
+        if (downTile == null || (downTile.Room != Room && !downTile.IsDoorTile))
             AddBottomWall();
         else if (downTile != null && downTile.Room != Room && isDoor && downTile.IsDoorTile) 
             AddDownDoorway();
@@ -167,7 +190,7 @@ public class FloorTile : MonoBehaviour
         Vector3 left = transform.position;
         left.x -= Game.FloorBuilder.TileSize.x;
         FloorTile leftTile = Station.TileAtLocation(left);
-        if (leftTile == null || (leftTile.Room != Room && !isDoor))
+        if (leftTile == null || (leftTile.Room != Room && !leftTile.IsDoorTile))
             AddLeftWall();
         else if (leftTile != null && leftTile.Room != Room && isDoor && leftTile.IsDoorTile) 
             AddLeftDoorway();
@@ -175,7 +198,7 @@ public class FloorTile : MonoBehaviour
         Vector3 right = transform.position;
         right.x += Game.FloorBuilder.TileSize.x;
         FloorTile rightTile = Station.TileAtLocation(right);
-        if (rightTile == null || (rightTile.Room != Room && !isDoor))
+        if (rightTile == null || (rightTile.Room != Room && !rightTile.IsDoorTile))
             AddRightWall();
         else if (rightTile != null && rightTile.Room != Room && isDoor && rightTile.IsDoorTile) 
             AddRightDoorway();
@@ -213,9 +236,44 @@ public class FloorTile : MonoBehaviour
         return null;
     }
 
-    public void MakeDoorTile()
+    public List<RoomObject> TouchingRooms
+    {
+        get
+        {
+            List<RoomObject> otherTiles = new List<RoomObject>();
+
+            Vector3 up = transform.position;
+            up.z += Game.FloorBuilder.TileSize.y;
+            FloorTile upTile = Station.TileAtLocation(up);
+            if (upTile != null && upTile.Room != Room && !otherTiles.Contains(upTile.Room))
+                otherTiles.Add(upTile.Room);
+
+            Vector3 down = transform.position;
+            down.z -= Game.FloorBuilder.TileSize.y;
+            FloorTile downTile = Station.TileAtLocation(down);
+            if (downTile != null && downTile.Room != Room && !otherTiles.Contains(downTile.Room))
+                otherTiles.Add(downTile.Room);
+
+            Vector3 left = transform.position;
+            left.x -= Game.FloorBuilder.TileSize.x;
+            FloorTile leftTile = Station.TileAtLocation(left);
+            if (leftTile != null && leftTile.Room != Room && !otherTiles.Contains(leftTile.Room))
+                otherTiles.Add(leftTile.Room);
+
+            Vector3 right = transform.position;
+            right.x += Game.FloorBuilder.TileSize.x;
+            FloorTile rightTile = Station.TileAtLocation(right);
+            if (rightTile != null && rightTile.Room != Room && !otherTiles.Contains(rightTile.Room))
+                otherTiles.Add(rightTile.Room);
+
+            return otherTiles;
+        }
+    }
+
+    public void MakeDoorTile(bool isOtherTile = false)
     {
         Room.AddDoorTile(this);
+        if (!isOtherTile) OtherRoomTile().MakeDoorTile(true);
         AddWalls();
     }
 }

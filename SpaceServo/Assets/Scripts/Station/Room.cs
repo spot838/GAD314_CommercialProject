@@ -12,6 +12,7 @@ public class Room : ScriptableObject
     [field: SerializeField] public Placeable[] Placeables { get; private set; }
     [field: SerializeField] public int BasePrice { get; private set; } = 100;
     [field: SerializeField] public int CostPerTile { get; private set; } = 10;
+    [field: SerializeField] public Vector2 MinimumSize { get; private set; } = new Vector2(1, 1);
 
     public int Cost(int size)
     {
@@ -25,4 +26,5 @@ public class Room : ScriptableObject
         Hallway,
         FuelPurchase
     }
+
 }

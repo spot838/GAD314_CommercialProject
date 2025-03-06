@@ -488,6 +488,7 @@ MonoBehaviour:
   StaffMember: {fileID: 0}
   unitBuyPrice: 1
   <Indicator>k__BackingField: {fileID: 5576014417310890762}
+  <SatisfactionChange>k__BackingField: 0
 --- !u!65 &3269519378505580967
 BoxCollider:
   m_ObjectHideFlags: 0

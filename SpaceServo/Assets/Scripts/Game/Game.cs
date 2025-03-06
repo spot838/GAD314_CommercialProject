@@ -29,7 +29,7 @@ public class Game : MonoBehaviour
     public static Selection Selection => Instance.selection;
     public static DebugModule Debug => Instance.debugModule;
     public static Tutorial Tutorial => Instance.tutorial;
-
+    public static bool IsPlacing => Instance.floorBuilder.IsPlacing || Instance.placeableBuilder.IsPlacing;
     public static bool IsPaused => Time.timeScale == 0;
 
     private void Awake()

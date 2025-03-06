@@ -2133,8 +2133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a46229b26281d74abd2697b60ca4f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building: {fileID: 2100000, guid: 6b1e14151c625384398a47f886a500ef, type: 2}
+  buildingValid: {fileID: 2100000, guid: 6b1e14151c625384398a47f886a500ef, type: 2}
+  buildingInvalid: {fileID: 2100000, guid: f7b979c24c3c6e744b8643ef8e65d546, type: 2}
   built: {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
+  selected: {fileID: 2100000, guid: 8f7355f3b6a13fb4cade5ae383c1c578, type: 2}
   meshes:
   - {fileID: 7253737163187447}
   - {fileID: 507735691729479819}

@@ -26,6 +26,7 @@ public class Selection : MonoBehaviour
         if (Room == room) return;
         DeselectRoom();
         Room = room;
+        Room.ShowSelectedMaterial(true);
         UI.ShowRoomInfo();
     }
 
@@ -33,6 +34,7 @@ public class Selection : MonoBehaviour
     {
         if (Room == null) return;
         UI.ShowRoomInfo(false);
+        Room.ShowSelectedMaterial(false);
         Room = null;
     }
 

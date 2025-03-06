@@ -172,4 +172,23 @@ public class RoomObject : MonoBehaviour
     {
         Station.RemoveRoom(this);
     }
+
+    public void ShowSelectedMaterial(bool selected)
+    {
+        if (selected)
+        {
+            foreach (FloorTile tile in Floor)
+            {
+                tile.SwitchToSelectedMaterial();
+            }
+        }
+        else
+        {
+            foreach (FloorTile tile in Floor)
+            {
+                tile.SwitchToBuitMaterial();
+            }
+        }
+            
+    }
 }
