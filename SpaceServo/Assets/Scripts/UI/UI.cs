@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     [SerializeField] private UI_Tutorial tutorial;
     [SerializeField] private UI_DebugOutput debugOutput;
     [SerializeField] private UI_Settings settings;
+    [SerializeField] private UI_Objectives objectives;
 
     public static bool MouseOverUI;
 
@@ -101,5 +102,10 @@ public class UI : MonoBehaviour
     public static void ShowPauseMenu(bool show = true)
     {
         Instance.pauseMenu.gameObject.SetActive(show);
+    }
+
+    public static void UpdateObjectives()
+    {
+        Instance.objectives.UpdateObjectiveUI();
     }
 }

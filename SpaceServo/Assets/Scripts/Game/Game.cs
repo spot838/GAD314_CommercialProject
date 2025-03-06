@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
     [SerializeField] private LayerMask staionFloorLayer;
     [SerializeField] private LayerMask roomLayer;
     [SerializeField] private Selection selection;
+    [SerializeField] private DebugModule debugModule;
+    [SerializeField] private Tutorial tutorial;
 
     public static InputReader Input => Instance.inputReader;
     public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
@@ -25,6 +27,8 @@ public class Game : MonoBehaviour
     public static LayerMask StationFloorLayer => Instance.staionFloorLayer;
     public static LayerMask RoomLayer => Instance.roomLayer;
     public static Selection Selection => Instance.selection;
+    public static DebugModule Debug => Instance.debugModule;
+    public static Tutorial Tutorial => Instance.tutorial;
 
     public static bool IsPaused => Time.timeScale == 0;
 
@@ -32,18 +36,6 @@ public class Game : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(this);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        if (inputReader == null) Debug.LogError("Game is missing input system reference");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public static void PauseGame(bool pause)

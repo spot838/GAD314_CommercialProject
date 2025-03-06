@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4224927295571912372}
   - component: {fileID: 5923553441290665978}
   - component: {fileID: 5946446062267805235}
+  - component: {fileID: 2699452323143224508}
+  - component: {fileID: 321775266797346642}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -65,6 +67,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   selection: {fileID: 5946446062267805235}
+  debugModule: {fileID: 2699452323143224508}
+  tutorial: {fileID: 321775266797346642}
 --- !u!114 &5923553441290665978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,9 +99,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8a2e34ee2e6574bbed861b27ed47b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerCameraPrefab: {fileID: 4596064443675641406, guid: 6060238ad600fc94eb5f8b7266428c72, type: 3}
   <Room>k__BackingField: {fileID: 0}
   <Customer>k__BackingField: {fileID: 0}
-  customerCameraPrefab: {fileID: 4596064443675641406, guid: 6060238ad600fc94eb5f8b7266428c72, type: 3}
+--- !u!114 &2699452323143224508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8548087345918562935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b124a5cd30d7cf947b2f85c08aa65763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &321775266797346642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8548087345918562935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac5c00e4aaf47844af3241552680e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1558756099592416410
 PrefabInstance:
   m_ObjectHideFlags: 0

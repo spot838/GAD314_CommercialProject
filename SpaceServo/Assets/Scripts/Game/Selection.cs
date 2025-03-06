@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Selection : MonoBehaviour
 {
-    [field: SerializeField] public RoomObject Room { get; private set; }
-    [field: SerializeField] public Customer Customer { get; private set; }
     [SerializeField] Camera customerCameraPrefab;
+    [field: SerializeField, Header("DEBUG")] public RoomObject Room { get; private set; }
+    [field: SerializeField] public Customer Customer { get; private set; }
 
     Camera customerCamera;
 
