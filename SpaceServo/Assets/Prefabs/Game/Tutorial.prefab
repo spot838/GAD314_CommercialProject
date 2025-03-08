@@ -129,4 +129,172 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Click Build a Floor
+    <Type>k__BackingField: 2
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 1
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Select Hallway
+    <Type>k__BackingField: 3
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 11400000, guid: 442e93dfaf513b7429e5450890e87b1f, type: 2}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Build Hallway
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 442e93dfaf513b7429e5450890e87b1f, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Click Build Floor
+    <Type>k__BackingField: 2
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 442e93dfaf513b7429e5450890e87b1f, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 1
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Select Fuel Purchase Room
+    <Type>k__BackingField: 3
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 442e93dfaf513b7429e5450890e87b1f, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 1
+    <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Build Fuel Purchase Room
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Click Place Object
+    <Type>k__BackingField: 2
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 2
+    <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Select Transaction Desk
+    <Type>k__BackingField: 4
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 11400000, guid: dd3232423cba33e4fb43780d3846f1ba, type: 2}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Place Transaction Desk
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: dd3232423cba33e4fb43780d3846f1ba, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 2
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Hire Staff Member
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 2
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: dd3232423cba33e4fb43780d3846f1ba, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 2
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Build Food Area
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 0
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: bfcb12dd48304ed48a90f22ffbed8145, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 2
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Place Transaction Desk
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 7319bbd2d6de66e4caa6f6a444434dfe, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Place Table
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: db2ae7db24149d04b844018500c70e02, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
+  - <TutorialText>k__BackingField: Place Trash Can
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 1
+      <Value>k__BackingField: 0
+      <Config>k__BackingField: {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 0
   index: -1
