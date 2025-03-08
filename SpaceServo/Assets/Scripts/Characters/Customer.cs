@@ -27,8 +27,6 @@ public class Customer : Character
 
     private void OnDestroy()
     {
-        Game.Debug.Customers++;
-        Station.Rating.AddCustomerSatisfaction(Satisfaction);
         Ship.BeginTakeOff();
         Station.CustomerManager.CustomerDespawn(this);
     }

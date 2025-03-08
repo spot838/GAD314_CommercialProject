@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Selection selection;
     [SerializeField] private DebugModule debugModule;
     [SerializeField] private Tutorial tutorial;
+    [SerializeField] private ObjectiveSystem objectiveSystem;
 
     public static InputReader Input => Instance.inputReader;
     public static StationFloorBuilder FloorBuilder => Instance.floorBuilder;
@@ -31,6 +32,7 @@ public class Game : MonoBehaviour
     public static Tutorial Tutorial => Instance.tutorial;
     public static bool IsPlacing => Instance.floorBuilder.IsPlacing || Instance.placeableBuilder.IsPlacing;
     public static bool IsPaused => Time.timeScale == 0;
+    public static ObjectiveSystem ObjectiveSystem => Instance.objectiveSystem;
 
     private void Awake()
     {

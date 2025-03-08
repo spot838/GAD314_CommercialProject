@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class Station : MonoBehaviour
     [SerializeField] List<RoomObject> rooms = new List<RoomObject>();
     
     NavMeshSurface navMeshSurface;
+
+    public static event Action<RoomObject> OnRoomAdded;
+    public static event Action<PlaceableObject> OnPlaceableAdded;
 
     public static GameObject Object => Instance.gameObject;
     public static StationMoney Money => Instance.stationMoney;
@@ -55,6 +59,8 @@ public class Station : MonoBehaviour
         }
 
         newobject.transform.parent = Instance.transform;
+
+        OnPlaceableAdded?.Invoke(newobject);
     }
 
     public static void SetNavMeshSurface(NavMeshSurface navMesh)
@@ -128,6 +134,7 @@ public class Station : MonoBehaviour
     {
         Instance.rooms.Add(room);
         room.transform.parent = Instance.roomTransform.transform;
+        OnRoomAdded?.Invoke(room);
     }
 
     public static void RemoveRoom(RoomObject room)
@@ -166,7 +173,7 @@ public class Station : MonoBehaviour
             }
 
             if (rooms.Count > 0)
-                return rooms[Random.Range(0, rooms.Count)];
+                return rooms[UnityEngine.Random.Range(0, rooms.Count)];
 
             return null;
         }

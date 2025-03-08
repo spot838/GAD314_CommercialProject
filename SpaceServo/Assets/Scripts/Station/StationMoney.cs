@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 // this manages the player's station money supply
 public class StationMoney : MonoBehaviour
 {
     [field: SerializeField] public int Amount { get; private set; } = 5000;
+
+    public event Action OnAmountChange;
 
     private void Start()
     {
@@ -13,16 +16,14 @@ public class StationMoney : MonoBehaviour
     public void Add(int amount)
     {
         this.Amount += amount;
-        UI.UpdateMoneyText();
-
+        OnAmountChange?.Invoke();
         Game.Debug.MoneyEarned += amount;
     }
 
     public void Remove(int amount)
     {
         this.Amount = Mathf.Clamp(this.Amount - amount, 0, int.MaxValue);
-        UI.UpdateMoneyText();
-
+        OnAmountChange?.Invoke();
         Game.Debug.MoneySpent += amount;
     }
 

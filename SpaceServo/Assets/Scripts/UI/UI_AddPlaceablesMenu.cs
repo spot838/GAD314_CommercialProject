@@ -42,7 +42,7 @@ public class UI_AddPlaceablesMenu : MonoBehaviour, IPointerEnterHandler, IPointe
             }
         }
 
-            
+        if (Game.Tutorial.ListentingForPlacablesMenu) Game.Tutorial.PartComplete();
 
         Game.Input.OnPrimaryPress += NoItemClicked;
     }

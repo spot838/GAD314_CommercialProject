@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 8557418677380500918, guid: 0713a8625263a4c49af22b212c026a37, type: 3}
+      propertyPath: <Parts>k__BackingField.Array.data[6].<ShowNextObjective>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

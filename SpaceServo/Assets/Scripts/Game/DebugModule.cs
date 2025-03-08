@@ -5,10 +5,25 @@ public class DebugModule : MonoBehaviour
 {
     public int MoneySpent = 0;
     public int MoneyEarned = 0;
-    public int Customers = 0;
-    public Dictionary<Placeable, int> PlaceablesBuilt = new Dictionary<Placeable, int>();
-    public Dictionary<Room, int> RoomsBuilt = new Dictionary<Room, int>();
-    public Dictionary<RoomObject, int> RoomCosts = new Dictionary<RoomObject, int>();
+    public int Customers { get; private set; } = 0;
+    public Dictionary<Placeable, int> PlaceablesBuilt { get; set; } = new Dictionary<Placeable, int>();
+    public Dictionary<Room, int> RoomsBuilt { get; set; } = new Dictionary<Room, int>();
+    public Dictionary<RoomObject, int> RoomCosts { get; set; } = new Dictionary<RoomObject, int>();
+
+    private void OnEnable()
+    {
+        Station.CustomerManager.OnCustomerDeparted += IncrementCustomers;
+    }
+
+    private void OnDisable()
+    {
+        Station.CustomerManager.OnCustomerDeparted -= IncrementCustomers;
+    }
+
+    private void IncrementCustomers(Customer customer)
+    {
+        Customers++;
+    }
 
     public string[] Output
     {

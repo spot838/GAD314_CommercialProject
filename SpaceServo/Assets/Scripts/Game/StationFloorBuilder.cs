@@ -156,6 +156,8 @@ public class StationFloorBuilder : MonoBehaviour
 
         currentRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
         currentRoom.Initialize(config);
+        if (Game.Tutorial.ListentingForFloorBuildStart) Game.Tutorial.RoomBuiltStarted(config);
+
         Game.Selection.SelectRoom(currentRoom);
     }
 

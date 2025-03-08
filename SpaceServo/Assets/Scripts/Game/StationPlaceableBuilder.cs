@@ -38,10 +38,10 @@ public class StationPlaceableBuilder : MonoBehaviour
         if (Game.FloorBuilder.IsPlacing) return;
 
         currentPlaceable = newPlaceable;
+        if (Game.Tutorial.ListentingForPlacementStart) Game.Tutorial.PlacementStarted(currentPlaceable);
 
         Game.Input.OnPrimaryPress += CompletePlacement;
         Game.Input.OnSecondaryPress += CancelPlacement;
-
         Game.Input.OnRotatePress += RotatePlacement;
     }
 

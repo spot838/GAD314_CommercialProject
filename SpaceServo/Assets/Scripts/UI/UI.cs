@@ -35,6 +35,20 @@ public class UI : MonoBehaviour
         if (topBar == null) Debug.LogError("UI is missing referance to top bar");
 
         ShowPlaceablesMenu(false);
+
+        
+    }
+
+    private void OnEnable()
+    {
+        Station.Money.OnAmountChange += UpdateMoneyText;
+        Station.Rating.OnRatingChange += UpdateRatingVisual;
+    }
+
+    private void OnDisable()
+    {
+        Station.Money.OnAmountChange -= UpdateMoneyText;
+        Station.Rating.OnRatingChange -= UpdateRatingVisual;
     }
 
     public static void UpdateMoneyText()
@@ -46,6 +60,7 @@ public class UI : MonoBehaviour
     {
         Instance.topBar.UpdateRatingText();
     }
+
     public static void UpdateRatingVisual()
     {
         Instance.topBar.UpdateRatingVisual();
@@ -107,5 +122,10 @@ public class UI : MonoBehaviour
     public static void UpdateObjectives()
     {
         Instance.objectives.UpdateObjectiveUI();
+    }
+
+    public static void UpdateTutorial()
+    {
+        Instance.tutorial.UpdateTutorialUI();
     }
 }

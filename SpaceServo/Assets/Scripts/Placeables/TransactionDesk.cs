@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class TransactionDesk : PlaceableObject
     public bool IsAvailable => StaffMember != null && CustomerQueue.Count < MaxQueueSize;
     public int FreeCustomerSlots => MaxQueueSize - CustomerQueue.Count;
 
+    public event Action<StaffMember> OnHireStaff;
+
     protected override void Update()
     {
         base.Update();
@@ -35,8 +38,9 @@ public class TransactionDesk : PlaceableObject
 
     public void HireStaffMember()
     {
-        StaffMember = Station.Staff.SpawnNew(StaffPosition);
+        StaffMember = Station.Staff.SpawnNew(this, StaffPosition);
         StaffMember.SetNewState(new SMS_SittingIdle(StaffMember));
+        OnHireStaff?.Invoke(StaffMember);
         UI.UpdateRoomInfo();
     }
 

@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,18 @@ public class StationRating : MonoBehaviour
     // treat these as const's
     [field: SerializeField] public float MIN_RATING { get; private set; } = 0f;
     [field: SerializeField] public float MAX_RATING { get; private set; } = 50f;
+
+    public event Action OnRatingChange;
+
+    private void OnEnable()
+    {
+        Station.CustomerManager.OnCustomerDeparted += AddCustomerSatisfaction;
+    }
+
+    private void OnDisable()
+    {
+        Station.CustomerManager.OnCustomerDeparted -= AddCustomerSatisfaction;
+    }
 
 
     public float Value // a number between 0 and 50, each 10 represents a full star
@@ -37,11 +49,9 @@ public class StationRating : MonoBehaviour
         //UI.UpdateRatingText();
     }
 
-    public void AddCustomerSatisfaction(float satisfaction)
+    public void AddCustomerSatisfaction(Customer customer)
     {
-        satisfaction = Mathf.Clamp(satisfaction, MIN_RATING, MAX_RATING);
-        values.Add(satisfaction);
-        UI.UpdateRatingVisual();
-        //UI.UpdateRatingText();
+        values.Add(Mathf.Clamp(customer.Satisfaction, MIN_RATING, MAX_RATING));
+        OnRatingChange?.Invoke();
     }
 }

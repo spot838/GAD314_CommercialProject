@@ -4,11 +4,14 @@ using UnityEngine.UI;
 
 public class UI_ObjectivesItem : MonoBehaviour
 {
-    [SerializeField] TMP_Text objective;
+    [SerializeField] TMP_Text objectiveText;
     [SerializeField] RawImage objectiveIcon;
 
-    public void Initilize()
-    {
+    Objective objective;
 
+    public void Initilize(Objective objective)
+    {
+        this.objective = objective;
+        objectiveText.text = objective.ObjectiveText;
     }
 }

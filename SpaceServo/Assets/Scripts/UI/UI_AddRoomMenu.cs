@@ -18,6 +18,8 @@ public class UI_AddRoomMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             AddRoomItems.Add(roomItem);
         }
 
+        if (Game.Tutorial.ListeningForRoomMenu) Game.Tutorial.PartComplete();
+
         Game.Input.OnPrimaryPress += NoItemClicked;
     }
 
