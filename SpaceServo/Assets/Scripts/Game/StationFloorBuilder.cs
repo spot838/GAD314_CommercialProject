@@ -450,20 +450,20 @@ public class StationFloorBuilder : MonoBehaviour
 
             if (currentRoomSize.x < currentRoom.Config.MinimumSize.x)
             {
-                Debug.LogWarning("Room width too small");
+                //Debug.LogWarning("Room width too small");
                 return false;
             }
 
             if (currentRoomSize.y < currentRoom.Config.MinimumSize.y)
             {
-                Debug.LogWarning("Room height too small");
+                //Debug.LogWarning("Room height too small");
                 return false;
             }
 
             // check current Placement is not overlapping
             if (Station.TileAtLocation(firstTile.transform.position))
             {
-                Debug.LogWarning("First tile overlapping");
+                //Debug.LogWarning("First tile overlapping");
                 return false;
             }
 
@@ -471,7 +471,7 @@ public class StationFloorBuilder : MonoBehaviour
             {
                 if (Station.TileAtLocation(tile.transform.position))
                 {
-                    Debug.LogWarning("Placement overlapping");
+                    //Debug.LogWarning("Placement overlapping");
                     return false;
                 }
                     
