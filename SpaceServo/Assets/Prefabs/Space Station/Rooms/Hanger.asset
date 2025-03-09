@@ -20,5 +20,5 @@ MonoBehaviour:
   <Placeables>k__BackingField:
   - {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
   <BasePrice>k__BackingField: 100
-  <CostPerTile>k__BackingField: 10
+  <CostPerTile>k__BackingField: 20
   <MinimumSize>k__BackingField: {x: 5, y: 5}

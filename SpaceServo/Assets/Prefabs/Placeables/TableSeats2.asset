@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 4762959408302956046, guid: 6f5c413ee4c14554a9bb172a4079353d, type: 3}
   <Name>k__BackingField: Table two seats
-  <Cost>k__BackingField: 10
+  <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 2800000, guid: 30f8223c002f51d458f17db36c11a6c3, type: 3}

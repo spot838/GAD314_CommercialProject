@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3045559741827428133, guid: 0a02ec9c68a4f0c43b8f91c1075289f5, type: 3}
   <Name>k__BackingField: Sink
-  <Cost>k__BackingField: 10
+  <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 2800000, guid: 2ff833a809d697441915ade9e47215c1, type: 3}

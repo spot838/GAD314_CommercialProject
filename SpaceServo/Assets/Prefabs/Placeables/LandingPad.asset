@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 7687651398825135949, guid: c129a01d554290c4a824ab79fbe59600, type: 3}
   <Name>k__BackingField: Landing Pad
-  <Cost>k__BackingField: 100
+  <Cost>k__BackingField: 500
   <Icon>k__BackingField: {fileID: 2800000, guid: e0a6b248750439a47bc219177005daa0, type: 3}
