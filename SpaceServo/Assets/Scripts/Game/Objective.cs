@@ -41,9 +41,9 @@ public class Objective
                     break;
 
                 case EType.HireEmployee:
-                    PlaceableObject placeableObject = TargetObject.GetComponent<PlaceableObject>();
-                    if (placeableObject != null)
-                        output += "Hire a staff member for " + placeableObject.Config.Name + " in " + placeableObject.Room.Config.Name;
+                    Placeable placeableEmployeeConfig = (Placeable)Config;
+                    if (placeableEmployeeConfig != null)
+                        output += "Hire a staff member for " + placeableEmployeeConfig.Name;
                     break;
 
                 case EType.Rating:

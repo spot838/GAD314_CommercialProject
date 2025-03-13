@@ -16,39 +16,53 @@ public class StationRating : MonoBehaviour
 
     private void OnEnable()
     {
-        //Station.CustomerManager.OnCustomerDeparted += AddCustomerSatisfaction;
+        Station.CustomerManager.OnCustomerDeparted += AddCustomerSatisfaction;
     }
 
     private void OnDisable()
     {
-        //Station.CustomerManager.OnCustomerDeparted -= AddCustomerSatisfaction;
+        Station.CustomerManager.OnCustomerDeparted -= AddCustomerSatisfaction;
     }
 
 
-    /*public float Value // a number between 0 and 50, each 10 represents a full star
+    public float Value // a number between 0 and 50, each 10 represents a full star
     {
         get
         {
             if (values.Count == 0) return 0;
 
             float average = 0;
-            foreach (float value in values)
+
+            if (values.Count > 10)
             {
-                average += value;
+                for (int i = values.Count - LastCustomers; i < values.Count; i++)
+                {
+                    average += values[i];
+                }
+                average = average / LastCustomers;
             }
-            average = average / values.Count;
+            else
+            {
+                foreach (float value in values)
+                {
+                    average += value;
+                }
+                average = average / values.Count;
+            }
+
+                
             //Mathf.Clamp(average, 0f, 1.0f); // the value should already be clamed before it even gets here
             return average;
         }
-    }*/
+    }
 
-    public float Value // a number between 0 and 50, each 10 represents a full star
+    /*public float Value // a number between 0 and 50, each 10 represents a full star
     {
         get
         {
             return Station.CustomerManager.AverageLastDepartedRating(LastCustomers);
         }
-    }
+    }*/
 
     private List<float> values = new List<float>();
 
@@ -58,9 +72,10 @@ public class StationRating : MonoBehaviour
         //UI.UpdateRatingText();
     }
 
-    /*public void AddCustomerSatisfaction(Customer customer)
+    public void AddCustomerSatisfaction(Customer customer)
     {
         values.Add(Mathf.Clamp(customer.Info.Satisfaction, MIN_RATING, MAX_RATING));
-        OnRatingChange?.Invoke();
-    }*/
+        //OnRatingChange?.Invoke();
+        UI.UpdateRatingVisual();
+    }
 }
