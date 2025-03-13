@@ -9,6 +9,7 @@ public class UI_AddPlaceablesItem : MonoBehaviour
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text costText;
     [SerializeField] RawImage icon;
+    [SerializeField] UI_FlashingButton flashingButton;
 
     Placeable config;
 
@@ -22,6 +23,18 @@ public class UI_AddPlaceablesItem : MonoBehaviour
         costText.text = "$" + config.Cost;
 
         button.interactable = Station.Money.CanAfford(config.Cost);
+
+        if (Game.Tutorial.IsRunning)
+        {
+            if (Game.Tutorial.CurrentPart.Type == Tutorial.TutorialPart.EType.StartPlacement &&
+                config == (Placeable)Game.Tutorial.CurrentPart.Config &&
+                flashingButton != null)
+                flashingButton.StartFlashing();
+
+            if (Game.Tutorial.HasNextPart && Game.Tutorial.NextPart.Type == Tutorial.TutorialPart.EType.StartPlacement &&
+                config == (Placeable)Game.Tutorial.NextPart.Config && flashingButton != null)
+                flashingButton.StartFlashing();
+        }
     }
 
     private void OnButtonPress()

@@ -4,16 +4,22 @@ using UnityEngine.Rendering;
 
 public class Customer : Character
 {
+    [System.Serializable]
+    public class CustomerInfo
+    {
+        [field: SerializeField] public string Name;
+        [field: SerializeField] public float Satisfaction;
+        [field: SerializeField] public List<RoomObject> RoomsVisited = new List<RoomObject>();
+    }
+
+    //[field: SerializeField] public EntityStat Satisfaction { get; private set; } = new();
     [field: SerializeField] public Ship Ship { get; private set; }
+    [field: SerializeField] public CustomerInfo Info { get; private set; } = new CustomerInfo();
+    [field: SerializeField] public List<Placeable> RemainingInteractions = new List<Placeable>();
 
     public bool HasRefueled => Ship.Fuel.HasRefueled;
     Transform target;
-    public bool KeepIdle;
-    //[field: SerializeField] public EntityStat Satisfaction { get; private set; } = new();
-    [field: SerializeField] public float Satisfaction { get; private set; } = 0;
-    [field: SerializeField] public List<Placeable> RemainingInteractions = new List<Placeable>();
-    [field: SerializeField] public List<RoomObject> RoomsVisited = new List<RoomObject>();
-
+    
     protected override void Update()
     {
         base.Update();
@@ -22,6 +28,8 @@ public class Customer : Character
     public void Initilize(Ship ship)
     {
         Ship = ship;
+        Info.Name = name;
+        Info.Satisfaction = Station.Rating.MIN_RATING;
         SetNewState(new CS_Idle(this));
     }
 
@@ -38,6 +46,6 @@ public class Customer : Character
 
     public void ModifySatisfaction(float amount)
     {
-        Satisfaction = Mathf.Clamp(Satisfaction + amount, Station.Rating.MIN_RATING, Station.Rating.MAX_RATING);
+        Info.Satisfaction = Mathf.Clamp(Info.Satisfaction + amount, Station.Rating.MIN_RATING, Station.Rating.MAX_RATING);
     }
 }

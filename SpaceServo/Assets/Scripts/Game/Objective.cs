@@ -16,7 +16,8 @@ public class Objective
         BuildPlaceable,
         HireEmployee,
         Rating,
-        MoneyTotal
+        MoneyTotal,
+        CustomerTotal
     }
 
     public string ObjectiveText
@@ -51,6 +52,10 @@ public class Objective
 
                 case EType.MoneyTotal:
                     output += "Have $" + Value;
+                    break;
+
+                case EType.CustomerTotal:
+                    output += "Serve " + Value.ToString("f0") + " customers";
                     break;
             }
 

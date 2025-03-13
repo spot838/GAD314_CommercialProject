@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 1079113447553855764}
   - component: {fileID: 1555171341328068051}
   - component: {fileID: 4346609612749711747}
+  - component: {fileID: 4699903302859761442}
   m_Layer: 5
   m_Name: AddPlaceablesItem
   m_TagString: Untagged
@@ -278,6 +279,21 @@ MonoBehaviour:
   nameText: {fileID: 8790986814872884042}
   costText: {fileID: 2084524251473360025}
   icon: {fileID: 6680038176945760687}
+  flashingButton: {fileID: 4699903302859761442}
+--- !u!114 &4699903302859761442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835518247328001198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3867d287a6a02743aa478cb50bbfb63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flashLength: 0.4
 --- !u!1 &2647149858618939031
 GameObject:
   m_ObjectHideFlags: 0

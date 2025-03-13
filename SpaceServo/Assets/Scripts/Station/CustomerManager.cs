@@ -10,6 +10,7 @@ public class CustomerManager : MonoBehaviour
 
     [Header("DEBUG")]
     [field: SerializeField] public List<Customer> Customers { get; private set; } = new List<Customer>();
+    [field: SerializeField] public List<Customer.CustomerInfo> DepartedCustomers { get; private set; } = new List<Customer.CustomerInfo>();
 
     public event Action<Customer> OnCustomerArrived;
     public event Action<Customer> OnCustomerDeparted;
@@ -19,19 +20,40 @@ public class CustomerManager : MonoBehaviour
         if (customerPrefabs.Length == 0) return null;
 
         Customer customer = Instantiate(customerPrefab, customerSpawn.position, customerSpawn.rotation);
+        customer.name = "Customer" + ++customerCount;
         customer.transform.parent = transform;
         customer.Initilize(ship);
         Customers.Add(customer);
-        customer.name = "Customer" + ++customerCount;
         OnCustomerArrived?.Invoke(customer);
         return customer;
     }
 
     public void CustomerDespawn(Customer customer)
     {
+        DepartedCustomers.Add(customer.Info);
         Customers.Remove(customer);
         OnCustomerDeparted?.Invoke(customer);
     }
 
     Customer customerPrefab => customerPrefabs[UnityEngine.Random.Range(0, customerPrefabs.Length)];
+
+    public float AverageLastDepartedRating(int numberOfCustomers)
+    {
+        if (numberOfCustomers <= 0 || numberOfCustomers > DepartedCustomers.Count) 
+            numberOfCustomers = DepartedCustomers.Count;
+
+        float average = 0;
+
+        int count = 0;
+        float total = 0;
+
+        for (int i = DepartedCustomers.Count - 1; i > DepartedCustomers.Count - numberOfCustomers && i >= 0; i--)
+        {
+            total += DepartedCustomers[i].Satisfaction;
+            count ++;
+        }
+        average = total / count;
+
+        return average;
+    }
 }

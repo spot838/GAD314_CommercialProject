@@ -12,6 +12,9 @@ public class UI_TopBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] Button buildFloorButton;
     [SerializeField] Button placeObjectButton;
 
+    public UI_FlashingButton BuildFloorButton => buildFloorButton.GetComponent<UI_FlashingButton>();
+    public UI_FlashingButton BuildPlaceableButton => placeObjectButton.GetComponent<UI_FlashingButton>();
+
     private void OnEnable()
     {
         buildFloorButton.onClick.AddListener(OnBuildFloorButtonPress);

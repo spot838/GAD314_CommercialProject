@@ -27,14 +27,14 @@ public class CS_Idle : CustomerState
     {
         if (!customer.HasRefueled && !customer.Ship.LandingPad.IsRefueling
             && Station.TryGetFuelPurchaseRoom(out RoomObject fuelPurchaseRoom)
-            && !customer.RoomsVisited.Contains(fuelPurchaseRoom))
+            && !customer.Info.RoomsVisited.Contains(fuelPurchaseRoom))
         {
             customer.SetNewState(new CS_MovingToRoom(customer, fuelPurchaseRoom));
         }
 
         else if (!customer.HasRefueled && customer.Ship.LandingPad.IsRefueling
             && Station.TryGetInteractableRoom(out RoomObject interactableRoom)
-            && !customer.RoomsVisited.Contains(interactableRoom))
+            && !customer.Info.RoomsVisited.Contains(interactableRoom))
         {
             customer.SetNewState(new CS_MovingToRoom(customer, interactableRoom));
         }

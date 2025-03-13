@@ -23,7 +23,7 @@ public class CS_WonderingInRoom : CustomerState
     {
         if (customer.RemainingInteractions.Count == 0)
         {
-            customer.RoomsVisited.Add(room);
+            customer.Info.RoomsVisited.Add(room);
             customer.SetNewState(new CS_WonderingHallway(customer));
         }
 

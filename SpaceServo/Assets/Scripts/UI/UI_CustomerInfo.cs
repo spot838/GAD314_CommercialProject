@@ -48,7 +48,7 @@ public class UI_CustomerInfo : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void UpdateRating()
     {
-        ratingSlider.value = customer.Satisfaction / Station.Rating.MAX_RATING;
+        ratingSlider.value = customer.Info.Satisfaction / Station.Rating.MAX_RATING;
     }
 
     private void UpdateCustomerStatus()

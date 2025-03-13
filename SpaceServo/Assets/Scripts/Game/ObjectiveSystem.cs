@@ -15,8 +15,9 @@ public class ObjectiveSystem : MonoBehaviour
         Station.OnRoomAdded += RoomBuilt;
         Station.OnPlaceableAdded += PlaceablBuilt;
         Station.Money.OnAmountChange += MoneyAmountChanged;
-        Station.Rating.OnRatingChange += RatingChanged;
+        //Station.Rating.OnRatingChange += RatingChanged;
         Station.Staff.OnNewHire += OnHireStaff;
+        Station.CustomerManager.OnCustomerDeparted += CustomerDeparted;
     }
 
     private void OnDisable()
@@ -24,7 +25,7 @@ public class ObjectiveSystem : MonoBehaviour
         Station.OnRoomAdded -= RoomBuilt;
         Station.OnPlaceableAdded -= PlaceablBuilt;
         Station.Money.OnAmountChange -= MoneyAmountChanged;
-        Station.Rating.OnRatingChange -= RatingChanged;
+        //Station.Rating.OnRatingChange -= RatingChanged;
         Station.Staff.OnNewHire -= OnHireStaff;
     }
 
@@ -158,6 +159,46 @@ public class ObjectiveSystem : MonoBehaviour
                 updated = previous == objective.Complete;
             }
         }
+        if (updated) UI.UpdateObjectives();
+    }
+
+    private void CustomerDeparted(Customer customer)
+    {
+        bool updated = false;
+
+        if (Game.Tutorial.IsRunning)
+        {
+            if (Game.Tutorial.CurrentPart.Type == Tutorial.TutorialPart.EType.Objective &&
+                Game.Tutorial.CurrentPart.Objective.Type == Objective.EType.Rating &&
+                Station.Rating.Value >= Game.Tutorial.CurrentPart.Objective.Value)
+            {
+                Game.Tutorial.PartComplete();
+            }
+
+            else if (Game.Tutorial.CurrentPart.Type == Tutorial.TutorialPart.EType.Objective &&
+                Game.Tutorial.CurrentPart.Objective.Type == Objective.EType.CustomerTotal &&
+                Station.CustomerManager.DepartedCustomers.Count >= Game.Tutorial.CurrentPart.Objective.Value)
+            {
+                Game.Tutorial.PartComplete();
+            }
+        }
+        else
+        {
+            foreach (Objective objective in Objectives)
+            {
+                bool previous = objective.Complete;
+
+                if (objective.Type == Objective.EType.CustomerTotal)
+                    objective.Complete = Station.CustomerManager.DepartedCustomers.Count >= objective.Value;
+
+                else if (objective.Type == Objective.EType.Rating)
+                    objective.Complete = Station.Rating.Value >= objective.Value;
+                    
+                updated = previous == objective.Complete;
+            }
+        }
+
+
         if (updated) UI.UpdateObjectives();
     }
 }

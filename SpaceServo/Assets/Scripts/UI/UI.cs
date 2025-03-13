@@ -23,6 +23,7 @@ public class UI : MonoBehaviour
 
     public static bool IsPlaceablesMenuShowing => Instance.placeablesMenu.gameObject.activeSelf;
     public static bool IsRoomsMenuShowing => Instance.roomsMenu.gameObject.activeSelf;
+    public static UI_TopBar TopBar => Instance.topBar;
 
     private void Awake()
     {
@@ -42,13 +43,15 @@ public class UI : MonoBehaviour
     private void OnEnable()
     {
         Station.Money.OnAmountChange += UpdateMoneyText;
-        Station.Rating.OnRatingChange += UpdateRatingVisual;
+        //Station.Rating.OnRatingChange += UpdateRatingVisual;
+        Station.CustomerManager.OnCustomerDeparted += UpdateRatingVisual;
     }
 
     private void OnDisable()
     {
         Station.Money.OnAmountChange -= UpdateMoneyText;
-        Station.Rating.OnRatingChange -= UpdateRatingVisual;
+        //Station.Rating.OnRatingChange -= UpdateRatingVisual;
+        Station.CustomerManager.OnCustomerDeparted -= UpdateRatingVisual;
     }
 
     public static void UpdateMoneyText()
@@ -61,7 +64,7 @@ public class UI : MonoBehaviour
         Instance.topBar.UpdateRatingText();
     }
 
-    public static void UpdateRatingVisual()
+    public static void UpdateRatingVisual(Customer departingCustomer = null)
     {
         Instance.topBar.UpdateRatingVisual();
     }

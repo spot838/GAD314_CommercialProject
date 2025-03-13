@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public CharacterState State { get; private set; }
+    [field: SerializeField] public float ArivalProximityMultiplier { get; private set; } = 0.5f;
 
     protected virtual void Update()
     {
@@ -16,7 +17,7 @@ public class Character : MonoBehaviour
 
     public bool IsMoving => NavMeshAgent.velocity.magnitude > 0;
 
-    public bool ArrivedAtDestination => Vector3.Distance(transform.position, NavMeshAgent.destination) <= NavMeshAgent.stoppingDistance + 0.001;
+    public bool ArrivedAtDestination => Vector3.Distance(transform.position, NavMeshAgent.destination) <= NavMeshAgent.stoppingDistance + ((NavMeshAgent.radius*2)*ArivalProximityMultiplier);
 
     public void SetNewState(CharacterState newState)
     {

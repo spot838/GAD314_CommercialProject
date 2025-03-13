@@ -10,21 +10,22 @@ public class StationRating : MonoBehaviour
     // treat these as const's
     [field: SerializeField] public float MIN_RATING { get; private set; } = 0f;
     [field: SerializeField] public float MAX_RATING { get; private set; } = 50f;
+    [field: SerializeField] public int LastCustomers { get; private set; } = 10; // numbers of customers to look at to get raiting
 
-    public event Action OnRatingChange;
+    //public event Action OnRatingChange;
 
     private void OnEnable()
     {
-        Station.CustomerManager.OnCustomerDeparted += AddCustomerSatisfaction;
+        //Station.CustomerManager.OnCustomerDeparted += AddCustomerSatisfaction;
     }
 
     private void OnDisable()
     {
-        Station.CustomerManager.OnCustomerDeparted -= AddCustomerSatisfaction;
+        //Station.CustomerManager.OnCustomerDeparted -= AddCustomerSatisfaction;
     }
 
 
-    public float Value // a number between 0 and 50, each 10 represents a full star
+    /*public float Value // a number between 0 and 50, each 10 represents a full star
     {
         get
         {
@@ -39,6 +40,14 @@ public class StationRating : MonoBehaviour
             //Mathf.Clamp(average, 0f, 1.0f); // the value should already be clamed before it even gets here
             return average;
         }
+    }*/
+
+    public float Value // a number between 0 and 50, each 10 represents a full star
+    {
+        get
+        {
+            return Station.CustomerManager.AverageLastDepartedRating(LastCustomers);
+        }
     }
 
     private List<float> values = new List<float>();
@@ -49,9 +58,9 @@ public class StationRating : MonoBehaviour
         //UI.UpdateRatingText();
     }
 
-    public void AddCustomerSatisfaction(Customer customer)
+    /*public void AddCustomerSatisfaction(Customer customer)
     {
-        values.Add(Mathf.Clamp(customer.Satisfaction, MIN_RATING, MAX_RATING));
+        values.Add(Mathf.Clamp(customer.Info.Satisfaction, MIN_RATING, MAX_RATING));
         OnRatingChange?.Invoke();
-    }
+    }*/
 }

@@ -8,6 +8,7 @@ public class UI_AddRoomItem : MonoBehaviour
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text costText;
     [SerializeField] RawImage icon;
+    [SerializeField] UI_FlashingButton flashingButton;
 
     Room config;
 
@@ -19,6 +20,18 @@ public class UI_AddRoomItem : MonoBehaviour
         icon.texture = config.Icon;
         nameText.text = config.Name;
         costText.text = "$" + config.BasePrice + " + " + config.CostPerTile + " Per/Tile";
+
+        if (Game.Tutorial.IsRunning)
+        {
+            if (Game.Tutorial.CurrentPart.Type == Tutorial.TutorialPart.EType.StartRoomBuild &&
+                config == (Room)Game.Tutorial.CurrentPart.Config &&
+                flashingButton != null)
+                    flashingButton.StartFlashing();
+
+            if (Game.Tutorial.HasNextPart && Game.Tutorial.NextPart.Type == Tutorial.TutorialPart.EType.StartRoomBuild &&
+                config == (Room)Game.Tutorial.NextPart.Config && flashingButton != null)
+                    flashingButton.StartFlashing();
+        }
     }
 
     private void OnButtonPress()

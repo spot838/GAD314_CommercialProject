@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2638223580639407218}
   - component: {fileID: 8247043624218162691}
+  - component: {fileID: 2590731885352590992}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click the Build Floor Button
     <Type>k__BackingField: 2
     <Objective>k__BackingField:
@@ -69,6 +71,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 1
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click Hanger
     <Type>k__BackingField: 3
     <Objective>k__BackingField:
@@ -81,6 +84,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 11400000, guid: 8f7f654ba36790f43a11330ddb098aa4, type: 2}
     <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Hanger
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -93,6 +97,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 11400000, guid: 8f7f654ba36790f43a11330ddb098aa4, type: 2}
     <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click Place Object
     <Type>k__BackingField: 2
     <Objective>k__BackingField:
@@ -105,6 +110,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Select Landing Pad
     <Type>k__BackingField: 4
     <Objective>k__BackingField:
@@ -117,6 +123,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 11400000, guid: 278fd72cbb2ca7845ae288a5014c7746, type: 2}
     <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Landing Pad
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -129,6 +136,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click Build a Floor
     <Type>k__BackingField: 2
     <Objective>k__BackingField:
@@ -141,6 +149,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 1
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Select Hallway
     <Type>k__BackingField: 3
     <Objective>k__BackingField:
@@ -153,6 +162,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 11400000, guid: 442e93dfaf513b7429e5450890e87b1f, type: 2}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Build Hallway
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -165,6 +175,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click Build Floor
     <Type>k__BackingField: 2
     <Objective>k__BackingField:
@@ -177,6 +188,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 1
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Select Fuel Purchase Room
     <Type>k__BackingField: 3
     <Objective>k__BackingField:
@@ -189,6 +201,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 1
     <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Build Fuel Purchase Room
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -201,6 +214,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Click Place Object
     <Type>k__BackingField: 2
     <Objective>k__BackingField:
@@ -213,6 +227,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 11400000, guid: 9228fd544f50f2e4c85868a38e420161, type: 2}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Select Transaction Desk
     <Type>k__BackingField: 4
     <Objective>k__BackingField:
@@ -225,6 +240,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 11400000, guid: dd3232423cba33e4fb43780d3846f1ba, type: 2}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Transaction Desk
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -237,6 +253,7 @@ MonoBehaviour:
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Hire Staff Member
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -249,6 +266,20 @@ MonoBehaviour:
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 0}
     <ShowNextObjective>k__BackingField: 0
+    <VoiceOver>k__BackingField: {fileID: 0}
+  - <TutorialText>k__BackingField: Serve a customer
+    <Type>k__BackingField: 1
+    <Objective>k__BackingField:
+      <Type>k__BackingField: 5
+      <Value>k__BackingField: 1
+      <Config>k__BackingField: {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
+      <TargetObject>k__BackingField: {fileID: 0}
+      <Complete>k__BackingField: 0
+      <Hidded>k__BackingField: 0
+    <MenuType>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 0}
+    <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Build Food Area
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -260,7 +291,8 @@ MonoBehaviour:
       <Hidded>k__BackingField: 0
     <MenuType>k__BackingField: 2
     <Config>k__BackingField: {fileID: 0}
-    <ShowNextObjective>k__BackingField: 0
+    <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Transaction Desk
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -272,7 +304,8 @@ MonoBehaviour:
       <Hidded>k__BackingField: 0
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
-    <ShowNextObjective>k__BackingField: 0
+    <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Table
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -284,7 +317,8 @@ MonoBehaviour:
       <Hidded>k__BackingField: 0
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
-    <ShowNextObjective>k__BackingField: 0
+    <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
   - <TutorialText>k__BackingField: Place Trash Can
     <Type>k__BackingField: 1
     <Objective>k__BackingField:
@@ -296,5 +330,104 @@ MonoBehaviour:
       <Hidded>k__BackingField: 0
     <MenuType>k__BackingField: 0
     <Config>k__BackingField: {fileID: 0}
-    <ShowNextObjective>k__BackingField: 0
+    <ShowNextObjective>k__BackingField: 1
+    <VoiceOver>k__BackingField: {fileID: 0}
+  audioSource: {fileID: 2590731885352590992}
   index: -1
+--- !u!82 &2590731885352590992
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865963122693394936}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5865031753002521681, guid: 83aeea3e78e6956438d67dd97c84855e, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

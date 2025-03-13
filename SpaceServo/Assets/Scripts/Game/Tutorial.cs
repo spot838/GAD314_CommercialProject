@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour
@@ -11,6 +12,7 @@ public class Tutorial : MonoBehaviour
         [field: SerializeField] public EMenuType MenuType { get; private set; }
         [field: SerializeField] public ScriptableObject Config { get; private set; }
         [field: SerializeField] public bool ShowNextObjective { get; private set; }
+        [field: SerializeField] public AudioClip VoiceOver { get; private set; }
 
         public enum EType
         {
@@ -30,23 +32,42 @@ public class Tutorial : MonoBehaviour
     }
 
     [field: SerializeField] public TutorialPart[] Parts { get; private set; }
+    [SerializeField] AudioSource audioSource;
 
     public TutorialPart CurrentPart => Parts[index];
+    public TutorialPart NextPart => Parts[index+1];
 
     [SerializeField] int index = -1;
     public bool IsRunning => index >= 0 && index < Parts.Length;
+    public bool HasNextPart => index + 1 < Parts.Length;
 
     private void Start()
     {
-        if (Parts.Length > 0) index = 0;
-        UI.ShowTutorial(true);
+        if (Parts.Length > 0)
+        {
+            PartComplete();
+            UI.ShowTutorial(true);
+        }
     }
 
     public void PartComplete()
     {
+        if (index >= 0) TurnOffButtonFlashing();
         index++;
+        TurnOnButtonFlashing();
+        PlayVoiceOver();
         UI.UpdateTutorial();
         UI.UpdateObjectives();
+    }
+
+    private void PlayVoiceOver()
+    {
+        if (CurrentPart.VoiceOver != null && audioSource != null)
+        {
+            if (audioSource.isPlaying && audioSource.clip != CurrentPart.VoiceOver) audioSource.Stop();
+            audioSource.clip = CurrentPart.VoiceOver;
+            audioSource.Play();
+        }
     }
 
     public void ExitTutorial()
@@ -90,5 +111,29 @@ public class Tutorial : MonoBehaviour
     public void PlacementStarted(Placeable placeable)
     {
         if ((Placeable)CurrentPart.Config == placeable) PartComplete();
+    }
+
+    private void TurnOnButtonFlashing()
+    {
+        if (CurrentPart.Type == TutorialPart.EType.OpenMenu)
+        {
+            if (CurrentPart.MenuType == TutorialPart.EMenuType.RoomMenu)
+                UI.TopBar.BuildFloorButton.StartFlashing();
+
+            if (CurrentPart.MenuType == TutorialPart.EMenuType.PlaceablesMenu)
+                UI.TopBar.BuildPlaceableButton.StartFlashing();
+        }
+    }
+
+    private void TurnOffButtonFlashing()
+    {
+        if (CurrentPart.Type == TutorialPart.EType.OpenMenu)
+        {
+            if (CurrentPart.MenuType == TutorialPart.EMenuType.RoomMenu)
+                UI.TopBar.BuildFloorButton.StopFlashing();
+
+            if (CurrentPart.MenuType == TutorialPart.EMenuType.PlaceablesMenu)
+                UI.TopBar.BuildPlaceableButton.StopFlashing();
+        }
     }
 }
