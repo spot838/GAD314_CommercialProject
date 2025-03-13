@@ -54,8 +54,12 @@ public class Tutorial : MonoBehaviour
     {
         if (index >= 0) TurnOffButtonFlashing();
         index++;
-        TurnOnButtonFlashing();
-        PlayVoiceOver();
+        if (index < Parts.Length)
+        {
+            TurnOnButtonFlashing();
+            PlayVoiceOver();
+        }
+        
         UI.UpdateTutorial();
         UI.UpdateObjectives();
     }
