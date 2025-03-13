@@ -481,10 +481,10 @@ MonoBehaviour:
   HasValidPlacement: 0
   <CustomerPositionTransform>k__BackingField: {fileID: 4048117120256109910}
   <StaffPosition>k__BackingField: {fileID: 7610563352959350622}
-  <TransactionBaseTime>k__BackingField: 1.5
+  <TransactionBaseTime>k__BackingField: 2.5
   CurrentCustomer: {fileID: 0}
   CustomerQueue: []
-  MaxQueueSize: 3
+  MaxQueueSize: 4
   StaffMember: {fileID: 0}
   unitBuyPrice: 1
   <Indicator>k__BackingField: {fileID: 5576014417310890762}

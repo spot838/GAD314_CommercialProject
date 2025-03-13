@@ -25,7 +25,7 @@ public class LandingPad : PlaceableObject
 
     protected override void OnDestroy()
     {
-        Destroy(CurrentShip.gameObject);
+        if (CurrentShip != null) Destroy(CurrentShip.gameObject);
         base.OnDestroy();
     }
 

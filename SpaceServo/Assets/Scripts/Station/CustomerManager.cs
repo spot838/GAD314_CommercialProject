@@ -39,18 +39,15 @@ public class CustomerManager : MonoBehaviour
 
     public float AverageLastDepartedRating(int numberOfCustomers)
     {
-        if (numberOfCustomers <= 0 || numberOfCustomers > DepartedCustomers.Count) 
-            numberOfCustomers = DepartedCustomers.Count;
-
         float average = 0;
-
         int count = 0;
         float total = 0;
+        int startingI = Mathf.Clamp(DepartedCustomers.Count - numberOfCustomers, 0, DepartedCustomers.Count - 1);
 
-        for (int i = DepartedCustomers.Count - 1; i > DepartedCustomers.Count - numberOfCustomers && i >= 0; i--)
+        for (int i = startingI; i < DepartedCustomers.Count; i++)
         {
+            count++;
             total += DepartedCustomers[i].Satisfaction;
-            count ++;
         }
         average = total / count;
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Selection : MonoBehaviour
@@ -13,11 +14,13 @@ public class Selection : MonoBehaviour
     private void OnEnable()
     {
         Game.Input.OnPrimaryPress += OnPrimaryPress;
+        Station.CustomerManager.OnCustomerDeparted += CustomerDeparted;
     }
 
     private void OnDisable()
     {
         Game.Input.OnPrimaryPress -= OnPrimaryPress;
+        Station.CustomerManager.OnCustomerDeparted -= CustomerDeparted;
     }
 
     public void SelectRoom(RoomObject room)
@@ -120,6 +123,14 @@ public class Selection : MonoBehaviour
             {
                 DeselectCustomer();
             }
+        }
+    }
+
+    private void CustomerDeparted(Customer departedCustomer)
+    {
+        if (departedCustomer == Customer)
+        {
+            DeselectCustomer();
         }
     }
 }
