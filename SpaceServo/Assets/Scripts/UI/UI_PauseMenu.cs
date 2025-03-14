@@ -48,7 +48,7 @@ public class UI_PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void OnSurveyButtonPress()
     {
-        // open survey URL
+        Application.OpenURL(Game.SurveyURL);
     }
 
     private void OnDebugButtonPress()

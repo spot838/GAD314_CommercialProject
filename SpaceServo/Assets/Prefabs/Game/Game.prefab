@@ -72,6 +72,7 @@ MonoBehaviour:
   debugModule: {fileID: 2699452323143224508}
   tutorial: {fileID: 8557418677380500918}
   objectiveSystem: {fileID: 8177900966112172772}
+  surveyURL: https://forms.gle/kW6ybhCPH8oVn1gS8
 --- !u!114 &5923553441290665978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,13 +135,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Objectives>k__BackingField:
   - <Type>k__BackingField: 3
-    <Value>k__BackingField: 50
+    <Value>k__BackingField: 20
     <Config>k__BackingField: {fileID: 0}
     <TargetObject>k__BackingField: {fileID: 0}
     <Complete>k__BackingField: 0
     <Hidded>k__BackingField: 0
   - <Type>k__BackingField: 4
-    <Value>k__BackingField: 100000
+    <Value>k__BackingField: 10000
     <Config>k__BackingField: {fileID: 0}
     <TargetObject>k__BackingField: {fileID: 0}
     <Complete>k__BackingField: 0

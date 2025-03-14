@@ -17,6 +17,7 @@ public class UI : MonoBehaviour
     [SerializeField] private UI_DebugOutput debugOutput;
     [SerializeField] private UI_Settings settings;
     [SerializeField] private UI_Objectives objectives;
+    [SerializeField] private UI_WinScreen winScreen;
 
     public static bool MouseOverUI;
 
@@ -125,10 +126,17 @@ public class UI : MonoBehaviour
     public static void UpdateObjectives()
     {
         Instance.objectives.UpdateObjectiveUI();
+
+        if (Game.ObjectiveSystem.AllObjectivesComplete) Instance.winScreen.gameObject.SetActive(true);
     }
 
     public static void UpdateTutorial()
     {
         Instance.tutorial.UpdateTutorialUI();
+    }
+
+    public static void ShowWinScreen(bool show = true)
+    {
+        Instance.winScreen.gameObject.SetActive(show);
     }
 }

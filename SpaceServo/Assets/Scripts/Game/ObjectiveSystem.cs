@@ -201,4 +201,16 @@ public class ObjectiveSystem : MonoBehaviour
 
         if (updated) UI.UpdateObjectives();
     }
+
+    public bool AllObjectivesComplete
+    {
+        get
+        {
+            foreach (Objective objective in Objectives)
+            {
+                if (!objective.Complete) return false;
+            }
+            return true;
+        }
+    }
 }

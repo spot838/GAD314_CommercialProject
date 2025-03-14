@@ -21,6 +21,8 @@ public class UI_DebugOutput : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             outputField.text += outputString + "\n";
         }
+
+        saveButton.gameObject.SetActive(false);
     }
 
     private void OnDisable()
