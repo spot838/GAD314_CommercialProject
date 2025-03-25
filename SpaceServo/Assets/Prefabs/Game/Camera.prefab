@@ -157,9 +157,12 @@ MonoBehaviour:
   <Camera>k__BackingField: {fileID: 8059209024477120814}
   <DistanceToGround>k__BackingField: 50
   <Angle>k__BackingField: 75
-  minZoom: 20
+  minZoom: 5
+  zoomThreshhold: 20
   maxZoom: 100
-  zoomSpeed: 20
+  zoomSpeed: 600
+  zoomedAngle: 25
+  normalAngle: 75
   panSpeed: 10
   panDelay: 0.5
   edgePanSpeed: 10

@@ -15,8 +15,11 @@ public class CameraController : MonoBehaviour
 
     [Header("Zoom")]
     [SerializeField] float minZoom;
+    [SerializeField] float zoomThreshhold; // for angle change
     [SerializeField] float maxZoom;
     [SerializeField] float zoomSpeed;
+    [SerializeField] float zoomedAngle; 
+    [SerializeField] float normalAngle = 75;
     [Header("Right-Click Pan")]
     [SerializeField, Tooltip("Units/Second")] float panSpeed;
     [SerializeField] float panDelay = 0.5f;
@@ -67,7 +70,14 @@ public class CameraController : MonoBehaviour
 
     private void SetCameraPosition()
     {
-        float y = Mathf.Cos(Angle) * DistanceToGround; 
+        if (DistanceToGround < zoomThreshhold)
+        {
+            float progress = (DistanceToGround - minZoom) / (zoomThreshhold - minZoom);
+            Angle = Mathf.Lerp(zoomedAngle, normalAngle, progress);
+        }
+        else Angle = normalAngle;
+
+            float y = Mathf.Cos(Angle) * DistanceToGround; 
         float z = Mathf.Sin(Angle) * DistanceToGround;
         Camera.transform.localPosition = new Vector3(0, y, z);
         Camera.transform.localEulerAngles = new Vector3(Angle, 0, 0);
@@ -90,7 +100,7 @@ public class CameraController : MonoBehaviour
 
         if (Game.Input.CameraZoom.y != 0)
         {
-            DistanceToGround = Mathf.Clamp(DistanceToGround + (zoomSpeed * Game.Input.CameraZoom.y * Time.deltaTime), minZoom, maxZoom);
+            DistanceToGround = Mathf.Clamp(DistanceToGround + (zoomSpeed * -Game.Input.CameraZoom.y * Time.deltaTime), minZoom, maxZoom);
             
         }
     }

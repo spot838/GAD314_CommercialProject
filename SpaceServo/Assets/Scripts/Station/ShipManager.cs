@@ -5,8 +5,7 @@ public class ShipManager : MonoBehaviour
 {
     [field: SerializeField] public float FlightLevel { get; private set; } = 10;
     [SerializeField] Ship[] shipPrefabs;
-    [SerializeField] Vector3 spawnPoint;
-    [field: SerializeField] public Vector3 DeparturePoint;
+    [SerializeField] float spawnDepartureDistance = 500.0f;
 
     List<Ship> ships = new List<Ship>();
 
@@ -37,7 +36,7 @@ public class ShipManager : MonoBehaviour
     {
         if (shipPrefabs.Length == 0) return;
 
-        Ship newShip = Instantiate(shipPrefab, spawnPoint, Quaternion.identity);
+        Ship newShip = Instantiate(shipPrefab, RandomPoint(targetLandingPad.transform.position), Quaternion.identity);
         newShip.Initilize(targetLandingPad);
         ships.Add(newShip);
         newShip.transform.parent = transform;
@@ -48,5 +47,14 @@ public class ShipManager : MonoBehaviour
     public void ShipDespawn(Ship ship)
     {
         ships.Remove(ship);
+    }
+
+    public Vector3 RandomPoint(Vector3 origin)
+    {
+        float angle = Random.Range(0.0f, 360.0f);
+        float x = origin.x + spawnDepartureDistance * Mathf.Cos(angle * Mathf.Deg2Rad);
+        float z = origin.z + spawnDepartureDistance * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+        return new Vector3( x, 20.0f, z);
     }
 }

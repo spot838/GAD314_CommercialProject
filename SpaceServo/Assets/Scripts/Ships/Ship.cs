@@ -14,6 +14,8 @@ public class Ship : MonoBehaviour
     private Quaternion targetRotation;
     public float RequiredFuel => Fuel.MaxAmount - Fuel.Amount;
 
+    private Vector3 departurePoint;
+
     public enum EState
     {
         Idle,
@@ -159,7 +161,7 @@ public class Ship : MonoBehaviour
     private void LeavingUpdate()
     {
         Vector3 step = transform.forward * speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, Station.ShipManager.DeparturePoint) > Vector3.Distance(transform.position, transform.position + step))
+        if (Vector3.Distance(transform.position, departurePoint) > Vector3.Distance(transform.position, transform.position + step))
         {
             transform.position += step;
         }
@@ -179,8 +181,9 @@ public class Ship : MonoBehaviour
     {
         State = EState.TakingOff;
         Customer = null;
+        departurePoint = Station.ShipManager.RandomPoint(LandingPad.transform.position);
 
-        targetRotation = Quaternion.LookRotation(Station.ShipManager.DeparturePoint - transform.position, transform.up);
+        targetRotation = Quaternion.LookRotation(departurePoint - transform.position, transform.up);
     }
 
     public void BeginRefueling()
