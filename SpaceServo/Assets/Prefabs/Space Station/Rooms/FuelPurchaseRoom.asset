@@ -22,3 +22,7 @@ MonoBehaviour:
   <BasePrice>k__BackingField: 100
   <CostPerTile>k__BackingField: 10
   <MinimumSize>k__BackingField: {x: 2, y: 2}
+  <UsesSupplies>k__BackingField: 1
+  <BaseCostPerSupply>k__BackingField: 15
+  <BaseSuppliesCurrent>k__BackingField: 5
+  <BaseSuppliesMaximum>k__BackingField: 100

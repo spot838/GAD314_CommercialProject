@@ -11,10 +11,35 @@ public class RoomObject : MonoBehaviour
     public int Cost => Config.Cost(Floor.Count);
     public List<Customer> IncomingCustomers = new List<Customer>();
 
+    public bool RoomUsesSupplies = false;
+    public int CostPerSupply = 10;
+    public int RoomSuppliesCurrent = 0;
+    public int RoomSuppliesMaximum = 100;
+    public void BuySupplies(int initialSuppliesToBuy)
+    {
+        int amountToPurchase = 0;
+        int roomLeftForSupplies = RoomSuppliesMaximum - RoomSuppliesCurrent;
+
+        amountToPurchase = initialSuppliesToBuy;
+        if (initialSuppliesToBuy > roomLeftForSupplies)
+        {
+            amountToPurchase = roomLeftForSupplies;
+        }
+        if (Station.Money.CanAfford(amountToPurchase * CostPerSupply))
+        {
+            Station.Money.Remove(amountToPurchase * CostPerSupply);
+            RoomSuppliesCurrent += amountToPurchase;
+        }
+    }
     public void Initialize(Room config)
     {
         Config = config;
         name = config.Name;
+
+        RoomUsesSupplies = config.UsesSupplies;
+        CostPerSupply = config.BaseCostPerSupply;
+        RoomSuppliesCurrent = config.BaseSuppliesCurrent;
+        RoomSuppliesMaximum = config.BaseSuppliesMaximum;
     }
 
     public void AddFloorTile(FloorTile tile)

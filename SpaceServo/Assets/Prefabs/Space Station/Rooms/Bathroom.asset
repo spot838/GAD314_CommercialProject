@@ -22,3 +22,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
   - {fileID: 11400000, guid: 1f7fe4bee06f899478e8dd3a183c1070, type: 2}
   - {fileID: 11400000, guid: 4d167b7668736694a95908f9a1a8cbae, type: 2}
+  <BasePrice>k__BackingField: 100
+  <CostPerTile>k__BackingField: 10
+  <MinimumSize>k__BackingField: {x: 1, y: 1}
+  <UsesSupplies>k__BackingField: 0
+  <BaseCostPerSupply>k__BackingField: 0
+  <BaseSuppliesCurrent>k__BackingField: 0
+  <BaseSuppliesMaximum>k__BackingField: 0
