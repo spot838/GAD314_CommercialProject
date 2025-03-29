@@ -13,6 +13,10 @@ public class Room : ScriptableObject
     [field: SerializeField] public int BasePrice { get; private set; } = 100;
     [field: SerializeField] public int CostPerTile { get; private set; } = 10;
     [field: SerializeField] public Vector2 MinimumSize { get; private set; } = new Vector2(1, 1);
+    [field: SerializeField] public bool UsesSupplies { get; private set; }
+    [field: SerializeField] public int BaseCostPerSupply { get; private set; }
+    [field: SerializeField] public int BaseSuppliesCurrent { get; private set; }
+    [field: SerializeField] public int BaseSuppliesMaximum { get; private set; }
 
     public int Cost(int size)
     {

@@ -14,6 +14,16 @@ public class UI_RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] Transform content;
     [SerializeField] UI_RoomInfo_Placeable placeablePrefab;
 
+    [SerializeField] GameObject supplies;
+    [SerializeField] Slider suppliesBar;
+    [SerializeField] TextMeshProUGUI suppliesText;
+    [SerializeField] Button add5SuppliesButton;
+    [SerializeField] Button add50SuppliesButton;
+    [SerializeField] Button addSuppliesToFillButton;
+    [SerializeField] TextMeshProUGUI add5SuppliesButtonText;
+    [SerializeField] TextMeshProUGUI add50SuppliesButtonText;
+    [SerializeField] TextMeshProUGUI addSuppliesToFillButtonText;
+
     RoomObject room => Game.Selection.Room;
     List<GameObject> listItems = new List<GameObject>();
 
@@ -24,6 +34,7 @@ public class UI_RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             UI.ShowRoomInfo(false);
             return;
         }
+        supplies.SetActive(room.RoomUsesSupplies);
 
         closeButton.onClick.AddListener(OnCloseButtonPress);
         UpdateUI();
@@ -31,6 +42,11 @@ public class UI_RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         addFloorButton.interactable = false;
         destroyRoomButton.interactable = false;
         addPlaceableButton.onClick.AddListener(OnAddPlaceableButtonPress);
+
+        add5SuppliesButton.onClick.AddListener(() => room.BuySupplies(5));
+        add50SuppliesButton.onClick.AddListener(() => room.BuySupplies(50));
+        addSuppliesToFillButton.onClick.AddListener(() => room.BuySupplies(room.RoomSuppliesMaximum - room.RoomSuppliesCurrent));
+        UpdateSuppliesUI();
     }
 
     public void UpdateUI()
@@ -53,11 +69,26 @@ public class UI_RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             placeableInfoItem.Initilize(placeable);
         }
     }
+    public void UpdateSuppliesUI()
+    {
+        if (room.RoomUsesSupplies)
+        {
+            suppliesBar.value = room.RoomSuppliesCurrent / room.RoomSuppliesMaximum;
+            suppliesText.text = $"{room.RoomSuppliesCurrent:0}/{room.RoomSuppliesMaximum:0}";
+            add5SuppliesButtonText.text = $"+5 Supplies (${room.CostPerSupply * 5})";
+            add50SuppliesButtonText.text = $"+50 Supplies (${room.CostPerSupply * 50})";
+            addSuppliesToFillButtonText.text = $"+{room.RoomSuppliesMaximum - room.RoomSuppliesCurrent} Supplies (${room.CostPerSupply * room.RoomSuppliesMaximum - room.RoomSuppliesCurrent})";
+        }
+    }
 
     private void OnDisable()
     {
         closeButton.onClick.RemoveAllListeners();
         addPlaceableButton.onClick.RemoveAllListeners();
+
+        add5SuppliesButton.onClick.RemoveAllListeners();
+        add50SuppliesButton.onClick.RemoveAllListeners();
+        addSuppliesToFillButton.onClick.RemoveAllListeners();
     }
 
 

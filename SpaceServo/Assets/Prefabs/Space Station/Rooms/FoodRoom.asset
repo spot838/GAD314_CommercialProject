@@ -23,3 +23,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9084fb09a7ee6e54e8d4b3a0a53b6caf, type: 2}
   <BasePrice>k__BackingField: 100
   <CostPerTile>k__BackingField: 10
+  <MinimumSize>k__BackingField: {x: 1, y: 1}
+  <UsesSupplies>k__BackingField: 1
+  <BaseCostPerSupply>k__BackingField: 10
+  <BaseSuppliesCurrent>k__BackingField: 5
+  <BaseSuppliesMaximum>k__BackingField: 100
